@@ -134,7 +134,7 @@
                     Aplikasi & Source Code Kelas Dunia
                 </h2>
                 <p class="text-slate-400 text-sm sm:text-base leading-relaxed mb-6">
-                    Pilih aplikasi, buat Username & Password akun kustom Anda, bayar via QRIS instan, dan terima aktivasi langsung melalui WhatsApp!
+                    Pilih aplikasi, isi Username & Password kustom Anda, bayar via QRIS instan, dan konfirmasi langsung ke WhatsApp!
                 </p>
                 <div class="flex flex-wrap items-center gap-6 text-xs text-slate-400 font-medium border-t border-slate-800/80 pt-4">
                     <span class="flex items-center gap-1.5"><i class="fa-solid fa-user-lock text-amber-400"></i> Akun Kustom</span>
@@ -158,25 +158,6 @@
             </div>
         </div>
 
-        <!-- Category Filters -->
-        <div class="flex items-center gap-2 overflow-x-auto pb-4 mb-6 scrollbar-none">
-            <button onclick="setCategory('ALL')" id="catBtn_ALL" class="category-btn active px-4 py-2 rounded-xl text-xs font-bold transition bg-amber-500 text-slate-950 shadow-lg shadow-amber-500/20">
-                Semua App
-            </button>
-            <button onclick="setCategory('FBZ')" id="catBtn_FBZ" class="category-btn px-4 py-2 rounded-xl text-xs font-bold transition bg-slate-900 text-slate-400 hover:text-slate-200 border border-slate-800">
-                FBZ Series
-            </button>
-            <button onclick="setCategory('VILLAIN')" id="catBtn_VILLAIN" class="category-btn px-4 py-2 rounded-xl text-xs font-bold transition bg-slate-900 text-slate-400 hover:text-slate-200 border border-slate-800">
-                VILLAIN Series
-            </button>
-            <button onclick="setCategory('SYAM')" id="catBtn_SYAM" class="category-btn px-4 py-2 rounded-xl text-xs font-bold transition bg-slate-900 text-slate-400 hover:text-slate-200 border border-slate-800">
-                SYAM Series
-            </button>
-            <button onclick="setCategory('LENNOX')" id="catBtn_LENNOX" class="category-btn px-4 py-2 rounded-xl text-xs font-bold transition bg-slate-900 text-slate-400 hover:text-slate-200 border border-slate-800">
-                LENNOX Series
-            </button>
-        </div>
-
         <!-- Product Grid -->
         <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-7">
             <!-- Products rendered dynamically -->
@@ -188,7 +169,7 @@
                 <i class="fa-solid fa-laptop-code text-3xl"></i>
             </div>
             <h3 class="text-slate-200 font-serif-luxury font-bold text-xl">Belum Ada Produk Tersedia</h3>
-            <p class="text-slate-500 text-sm mt-1">Produk dan kategori aplikasi akan segera ditambahkan.</p>
+            <p class="text-slate-500 text-sm mt-1">Produk dan aplikasi akan segera ditambahkan.</p>
         </div>
     </main>
 
@@ -283,7 +264,7 @@
                 </div>
             </div>
             <button id="checkoutBtn" onclick="openCheckoutModal()" disabled class="w-full py-4 gold-gradient-bg hover:opacity-95 disabled:opacity-30 disabled:cursor-not-allowed text-slate-950 font-black rounded-2xl transition duration-300 shadow-xl shadow-amber-500/20 flex items-center justify-center gap-3 text-sm uppercase tracking-wider group">
-                <span>Lanjut Ke Form Credential & QRIS</span>
+                <span>Lanjut Ke Pengisian Form</span>
                 <i class="fa-solid fa-arrow-right text-xs group-hover:translate-x-1 transition"></i>
             </button>
         </div>
@@ -304,8 +285,8 @@
                         <i class="fa-solid fa-shield-halved"></i>
                     </div>
                     <div>
-                        <h3 class="font-serif-luxury font-bold text-slate-100 text-xl tracking-wide">Pemesanan & QRIS VIP</h3>
-                        <p class="text-xs text-amber-400/80">Langkah 2 & 3: Isi Akun & Lakukan Pembayaran QRIS</p>
+                        <h3 id="checkoutTitle" class="font-serif-luxury font-bold text-slate-100 text-xl tracking-wide">Langkah 1: Pengisian Form</h3>
+                        <p id="checkoutSubtitle" class="text-xs text-amber-400/80">Masukkan Username & Password Akun Anda</p>
                     </div>
                 </div>
                 <button onclick="closeCheckoutModal()" class="w-9 h-9 rounded-xl bg-slate-800/80 border border-slate-700/80 flex items-center justify-center text-slate-400 hover:text-white hover:bg-slate-700 transition">
@@ -313,70 +294,86 @@
                 </button>
             </div>
 
-            <!-- Modal Form Body -->
-            <form id="orderForm" onsubmit="submitOrder(event)" class="p-6 overflow-y-auto space-y-5 relative z-10">
+            <!-- Modal Content Body -->
+            <div class="p-6 overflow-y-auto space-y-5 relative z-10">
                 
-                <!-- LANGKAH 2: FORM CREDENTIAL -->
-                <div class="bg-slate-900/60 p-4 rounded-2xl border border-amber-500/20 space-y-4">
-                    <div class="text-xs font-black text-amber-400 uppercase tracking-wider flex items-center gap-2 border-b border-slate-800 pb-2">
-                        <i class="fa-solid fa-user-gear text-amber-400"></i>
-                        <span>Langkah 2: Akun Kustom</span>
+                <!-- LANGKAH 1: FORMULIR AKUN KUSTOM -->
+                <div id="checkoutStep1" class="space-y-5">
+                    <div class="bg-slate-900/60 p-4 rounded-2xl border border-amber-500/20 space-y-4">
+                        <div class="text-xs font-black text-amber-400 uppercase tracking-wider flex items-center gap-2 border-b border-slate-800 pb-2">
+                            <i class="fa-solid fa-user-gear text-amber-400"></i>
+                            <span>Formulir Credential Akun</span>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                            <div>
+                                <label class="block text-[10px] font-extrabold text-amber-400 uppercase tracking-widest mb-1.5 flex items-center gap-1">
+                                    <i class="fa-solid fa-user text-[10px]"></i> Username Diinginkan *
+                                </label>
+                                <input type="text" id="customUsername" required placeholder="Contoh: febzz_pro" class="w-full px-3.5 py-2.5 bg-slate-950/80 border border-amber-500/30 rounded-xl text-xs text-slate-100 placeholder-slate-600 focus:border-amber-500 focus:ring-1 focus:ring-amber-500 focus:outline-none transition shadow-inner">
+                            </div>
+
+                            <div>
+                                <label class="block text-[10px] font-extrabold text-amber-400 uppercase tracking-widest mb-1.5 flex items-center gap-1">
+                                    <i class="fa-solid fa-key text-[10px]"></i> Password Diinginkan *
+                                </label>
+                                <input type="password" id="customPassword" required placeholder="••••••••" class="w-full px-3.5 py-2.5 bg-slate-950/80 border border-amber-500/30 rounded-xl text-xs text-slate-100 placeholder-slate-600 focus:border-amber-500 focus:ring-1 focus:ring-amber-500 focus:outline-none transition shadow-inner">
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
-                        <div>
-                            <label class="block text-[10px] font-extrabold text-amber-400 uppercase tracking-widest mb-1.5 flex items-center gap-1">
-                                <i class="fa-solid fa-user text-[10px]"></i> Username Diinginkan *
-                            </label>
-                            <input type="text" id="customUsername" required placeholder="Contoh: febzz_pro" class="w-full px-3.5 py-2.5 bg-slate-950/80 border border-amber-500/30 rounded-xl text-xs text-slate-100 placeholder-slate-600 focus:border-amber-500 focus:ring-1 focus:ring-amber-500 focus:outline-none transition shadow-inner">
+                    <!-- RINGKASAN ORDER -->
+                    <div class="bg-slate-950/90 p-4 rounded-2xl border border-amber-500/20 space-y-2.5 shadow-inner">
+                        <div class="text-[10px] font-black text-amber-400/90 uppercase tracking-widest flex items-center justify-between">
+                            <span>Rincian Item Lisensi</span>
+                            <span class="text-[9px] text-slate-500 font-normal">febzzbug Store</span>
+                        </div>
+                        <div id="modalSummaryItemsStep1" class="text-xs space-y-2 text-slate-300 max-h-28 overflow-y-auto pr-1"></div>
+                        <div class="border-t border-slate-800 pt-2.5 flex justify-between items-baseline font-bold text-sm text-slate-100">
+                            <span>Total Pembayaran:</span>
+                            <span id="modalTotalAmountStep1" class="gold-gradient-text text-xl font-black">Rp 0</span>
+                        </div>
+                    </div>
+
+                    <button type="button" onclick="goToStep2QRIS()" class="w-full py-4 gold-gradient-bg hover:opacity-95 text-slate-950 font-black rounded-2xl transition duration-300 shadow-xl shadow-amber-500/20 flex items-center justify-center gap-3 text-sm uppercase tracking-wider group">
+                        <span>Lanjut Ke Pembayaran QRIS</span>
+                        <i class="fa-solid fa-arrow-right text-xs group-hover:translate-x-1 transition"></i>
+                    </button>
+                </div>
+
+                <!-- LANGKAH 2: HALAMAN PEMBAYARAN QRIS & WHATSAPP -->
+                <div id="checkoutStep2" class="hidden space-y-5">
+                    <div class="bg-slate-900/60 p-4 rounded-2xl border border-amber-500/30 space-y-4">
+                        <div class="text-xs font-black text-amber-400 uppercase tracking-wider flex items-center justify-between border-b border-slate-800 pb-2">
+                            <span class="flex items-center gap-2">
+                                <i class="fa-solid fa-qrcode text-amber-400"></i>
+                                <span>Scan Kode QRIS Di Bawah Ini</span>
+                            </span>
+                            <span class="text-[10px] bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full border border-emerald-500/30 font-bold">All E-Wallet & Bank</span>
                         </div>
 
-                        <div>
-                            <label class="block text-[10px] font-extrabold text-amber-400 uppercase tracking-widest mb-1.5 flex items-center gap-1">
-                                <i class="fa-solid fa-key text-[10px]"></i> Password Diinginkan *
-                            </label>
-                            <input type="password" id="customPassword" required placeholder="••••••••" class="w-full px-3.5 py-2.5 bg-slate-950/80 border border-amber-500/30 rounded-xl text-xs text-slate-100 placeholder-slate-600 focus:border-amber-500 focus:ring-1 focus:ring-amber-500 focus:outline-none transition shadow-inner">
+                        <div class="flex flex-col items-center justify-center p-4 bg-slate-950 rounded-2xl border border-slate-800 text-center">
+                            <div class="p-3 bg-white rounded-2xl shadow-xl mb-3">
+                                <img id="qrisImage" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=FEBZZBUG_PAYMENT" alt="QRIS Code" class="w-40 h-40 object-contain mx-auto" onerror="this.src='https://placehold.co/200x200/ffffff/000000?text=QRIS+FEBZZBUG'">
+                            </div>
+                            <p class="text-xs font-bold text-slate-200">Scan QRIS Di Atas Pakai Gopay, Dana, OVO, ShopeePay, atau Mobile Banking</p>
+                            <p class="text-[11px] text-amber-400 font-black mt-1">Total Tagihan: <span id="qrisTotalDisplay" class="text-sm underline">Rp 0</span></p>
                         </div>
+                    </div>
+
+                    <div class="flex gap-3">
+                        <button type="button" onclick="backToStep1Form()" class="w-1/3 py-3.5 bg-slate-900 border border-slate-800 hover:bg-slate-800 text-slate-300 font-bold rounded-2xl text-xs transition flex items-center justify-center gap-1.5">
+                            <i class="fa-solid fa-arrow-left text-xs"></i>
+                            <span>Kembali</span>
+                        </button>
+                        <button type="button" onclick="submitOrderWhatsApp()" class="w-2/3 py-3.5 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black rounded-2xl transition duration-300 shadow-xl shadow-emerald-950/50 flex items-center justify-center gap-2 text-xs sm:text-sm uppercase tracking-wider">
+                            <i class="fa-brands fa-whatsapp text-base"></i>
+                            <span>Konfirmasi ke WA</span>
+                        </button>
                     </div>
                 </div>
 
-                <!-- LANGKAH 3: DISPLAY PEMBAYARAN QRIS -->
-                <div class="bg-slate-900/60 p-4 rounded-2xl border border-amber-500/30 space-y-4">
-                    <div class="text-xs font-black text-amber-400 uppercase tracking-wider flex items-center justify-between border-b border-slate-800 pb-2">
-                        <span class="flex items-center gap-2">
-                            <i class="fa-solid fa-qrcode text-amber-400"></i>
-                            <span>Langkah 3: Scan QRIS Untuk Membayar</span>
-                        </span>
-                        <span class="text-[10px] bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full border border-emerald-500/30 font-bold">All E-Wallet & Bank</span>
-                    </div>
-
-                    <div class="flex flex-col items-center justify-center p-4 bg-slate-950 rounded-2xl border border-slate-800 text-center">
-                        <div class="p-3 bg-white rounded-2xl shadow-xl mb-3">
-                            <img id="qrisImage" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=FEBZZBUG_PAYMENT" alt="QRIS Code" class="w-40 h-40 object-contain mx-auto" onerror="this.src='https://placehold.co/200x200/ffffff/000000?text=QRIS+FEBZZBUG'">
-                        </div>
-                        <p class="text-xs font-bold text-slate-200">Scan QRIS Di Atas Pakai Gopay, Dana, OVO, ShopeePay, atau Mobile Banking</p>
-                        <p class="text-[11px] text-amber-400 font-black mt-1">Total yang harus dibayar: <span id="qrisTotalDisplay" class="text-sm underline">Rp 0</span></p>
-                    </div>
-                </div>
-
-                <!-- LANGKAH 4: RINGKASAN & KONFIRMASI WHATSAPP -->
-                <div class="bg-slate-950/90 p-4 rounded-2xl border border-amber-500/20 space-y-2.5 shadow-inner">
-                    <div class="text-[10px] font-black text-amber-400/90 uppercase tracking-widest flex items-center justify-between">
-                        <span>Langkah 4: Rincian Order</span>
-                        <span class="text-[9px] text-slate-500 font-normal">Sistem Otomatis febzzbug</span>
-                    </div>
-                    <div id="modalSummaryItems" class="text-xs space-y-2 text-slate-300 max-h-28 overflow-y-auto pr-1"></div>
-                    <div class="border-t border-slate-800 pt-2.5 flex justify-between items-baseline font-bold text-sm text-slate-100">
-                        <span>Total Pembayaran:</span>
-                        <span id="modalTotalAmount" class="gold-gradient-text text-xl font-black">Rp 0</span>
-                    </div>
-                </div>
-
-                <button type="submit" class="w-full py-4 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black rounded-2xl transition duration-300 shadow-xl shadow-emerald-950/50 flex items-center justify-center gap-2.5 text-sm uppercase tracking-wider transform hover:-translate-y-0.5">
-                    <i class="fa-brands fa-whatsapp text-lg"></i>
-                    <span>Konfirmasi & Kirim Bukti Transfer ke WhatsApp</span>
-                </button>
-            </form>
+            </div>
         </div>
     </div>
 
@@ -391,7 +388,7 @@
     <!-- JAVASCRIPT LOGIC -->
     <script>
         // --- ADMIN CONFIGURATION ---
-        let DEFAULT_QRIS_URL = "https://cdn.phototourl.com/member/2026-10-25-b0571492-8679-4b0f-b1e5-f22afb3f6602.jpg"; // Dynamic QRIS or custom image URL
+        let DEFAULT_QRIS_URL = "https://c.termai.cc/i147/uvqy.jpg"; // Dynamic QRIS or custom image URL
         const WHATSAPP_NUMBER = "6285789797426"; // Seller WA number
 
         // Check for QRIS URL passed via link parameter: ?qris_url=https://...
@@ -509,9 +506,8 @@
 
         // --- GLOBAL STATE ---
         let cart = [];
-        let currentCategory = 'ALL';
         let activePickerProductId = null;
-        let activePickerType = null; // 'ROLE', 'DURATION', or 'PACKAGE'
+        let activePickerType = null;
         let tempSelectedRole = null;
         let tempSelectedDuration = null;
         let tempSelectedPackage = null;
@@ -527,29 +523,12 @@
             updateCartUI();
         });
 
-        // Category Filter
-        function setCategory(cat) {
-            currentCategory = cat;
-            document.querySelectorAll('.category-btn').forEach(btn => {
-                btn.classList.remove('bg-amber-500', 'text-slate-950', 'shadow-lg', 'shadow-amber-500/20');
-                btn.classList.add('bg-slate-900', 'text-slate-400');
-            });
-            const activeBtn = document.getElementById(`catBtn_${cat}`);
-            if (activeBtn) {
-                activeBtn.classList.remove('bg-slate-900', 'text-slate-400');
-                activeBtn.classList.add('bg-amber-500', 'text-slate-950', 'shadow-lg', 'shadow-amber-500/20');
-            }
-            filterProducts();
-        }
-
         // Search Filter
         function filterProducts() {
             const searchTerm = document.getElementById('searchInput').value.toLowerCase();
             const filtered = products.filter(product => {
-                const matchesSearch = product.name.toLowerCase().includes(searchTerm) || 
-                                     product.description.toLowerCase().includes(searchTerm);
-                const matchesCategory = currentCategory === 'ALL' || product.category === currentCategory;
-                return matchesSearch && matchesCategory;
+                return product.name.toLowerCase().includes(searchTerm) || 
+                       product.description.toLowerCase().includes(searchTerm);
             });
             renderProducts(filtered);
         }
@@ -986,14 +965,16 @@
             }
         }
 
-        // --- CHECKOUT & QRIS MODAL LOGIC ---
+        // --- CHECKOUT FLOW (2 STEPS) ---
         function openCheckoutModal() {
             toggleCart(false);
             const modal = document.getElementById('checkoutModal');
-            const summaryContainer = document.getElementById('modalSummaryItems');
-            const totalContainer = document.getElementById('modalTotalAmount');
-            const qrisTotalDisplay = document.getElementById('qrisTotalDisplay');
+            
+            // Show Step 1 initially
+            showStep1();
 
+            const summaryContainer = document.getElementById('modalSummaryItemsStep1');
+            const totalContainer = document.getElementById('modalTotalAmountStep1');
             const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
             
             summaryContainer.innerHTML = cart.map(item => `
@@ -1004,9 +985,33 @@
             `).join('');
 
             totalContainer.textContent = formatRupiah(totalPrice);
-            qrisTotalDisplay.textContent = formatRupiah(totalPrice);
-            
-            // Set QRIS Image Source
+            modal.classList.remove('hidden');
+        }
+
+        function showStep1() {
+            document.getElementById('checkoutTitle').textContent = "Langkah 1: Pengisian Form";
+            document.getElementById('checkoutSubtitle').textContent = "Masukkan Username & Password Akun Anda";
+            document.getElementById('checkoutStep1').classList.remove('hidden');
+            document.getElementById('checkoutStep2').classList.add('hidden');
+        }
+
+        function goToStep2QRIS() {
+            const username = document.getElementById('customUsername').value.trim();
+            const password = document.getElementById('customPassword').value.trim();
+
+            if (!username || !password) {
+                showToast("Harap isi Username dan Password terlebih dahulu!");
+                return;
+            }
+
+            document.getElementById('checkoutTitle').textContent = "Langkah 2: Pembayaran QRIS";
+            document.getElementById('checkoutSubtitle').textContent = "Scan QRIS & Konfirmasi Pembayaran";
+            document.getElementById('checkoutStep1').classList.add('hidden');
+            document.getElementById('checkoutStep2').classList.remove('hidden');
+
+            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            document.getElementById('qrisTotalDisplay').textContent = formatRupiah(totalPrice);
+
             const qrisImgElem = document.getElementById('qrisImage');
             if (DEFAULT_QRIS_URL && DEFAULT_QRIS_URL.trim() !== "") {
                 qrisImgElem.src = DEFAULT_QRIS_URL;
@@ -1014,8 +1019,10 @@
                 const qrData = encodeURIComponent(`FEBZZBUG_PAYMENT_TOTAL_${totalPrice}`);
                 qrisImgElem.src = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${qrData}`;
             }
+        }
 
-            modal.classList.remove('hidden');
+        function backToStep1Form() {
+            showStep1();
         }
 
         function closeCheckoutModal() {
@@ -1023,11 +1030,15 @@
         }
 
         // --- SUBMIT ORDER TO WHATSAPP ---
-        function submitOrder(e) {
-            e.preventDefault();
+        function submitOrderWhatsApp() {
+            const username = document.getElementById('customUsername').value.trim();
+            const password = document.getElementById('customPassword').value.trim();
 
-            const username = document.getElementById('customUsername').value;
-            const password = document.getElementById('customPassword').value;
+            if (!username || !password) {
+                showToast("Harap lengkapi Username & Password di Langkah 1!");
+                showStep1();
+                return;
+            }
 
             const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
 
@@ -1056,7 +1067,8 @@
             closeCheckoutModal();
             cart = [];
             updateCartUI();
-            document.getElementById('orderForm').reset();
+            document.getElementById('customUsername').value = '';
+            document.getElementById('customPassword').value = '';
             showToast("Pesanan & bukti transfer dialihkan ke WhatsApp VIP!");
         }
 
