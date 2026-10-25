@@ -38,10 +38,10 @@
 
         /* Glassmorphism & Luxury Glow Classes */
         .glass-panel {
-            background: rgba(15, 23, 42, 0.78);
+            background: rgba(15, 23, 42, 0.85);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(245, 158, 11, 0.15);
+            border-bottom: 1px solid rgba(245, 158, 11, 0.2);
         }
         .glass-card {
             background: linear-gradient(145deg, rgba(30, 41, 59, 0.5) 0%, rgba(15, 23, 42, 0.8) 100%);
@@ -388,15 +388,28 @@
     <!-- JAVASCRIPT LOGIC -->
     <script>
         // --- ADMIN CONFIGURATION ---
-        let DEFAULT_QRIS_URL = "https://c.termai.cc/i147/uvqy.jpg"; // Dynamic QRIS or custom image URL
+        let DEFAULT_QRIS_URL = "https://c.termai.cc/i147/uvqy.jpg"; // Dynamic QRIS image URL
         const WHATSAPP_NUMBER = "6285789797426"; // Seller WA number
 
-        // Check for QRIS URL passed via link parameter: ?qris_url=https://...
+        // DEFAULT PRODUCT IMAGES - Paste your image URLs here directly if desired
+        const PRODUCT_IMAGES = {
+            fbz: "https://c.termai.cc/i150/PZOA.jpg",
+            villain: "https://c.termai.cc/i177/wdH5.jpg",
+            syam: "https://c.termai.cc/i113/nqa.jpg",
+            lennox: "https://c.termai.cc/i120/b5PB.jpg"
+        };
+
+        // Check for Image & QRIS URLs passed via link parameters:
+        // Example: ?qris=https://...&fbz_img=https://...&villain_img=https://...&syam_img=https://...&lennox_img=https://...
         const urlParams = new URLSearchParams(window.location.search);
+
         const customQrisParam = urlParams.get('qris_url') || urlParams.get('qris');
-        if (customQrisParam) {
-            DEFAULT_QRIS_URL = decodeURIComponent(customQrisParam);
-        }
+        if (customQrisParam) DEFAULT_QRIS_URL = decodeURIComponent(customQrisParam);
+
+        if (urlParams.get('fbz_img')) PRODUCT_IMAGES.fbz = decodeURIComponent(urlParams.get('fbz_img'));
+        if (urlParams.get('villain_img')) PRODUCT_IMAGES.villain = decodeURIComponent(urlParams.get('villain_img'));
+        if (urlParams.get('syam_img')) PRODUCT_IMAGES.syam = decodeURIComponent(urlParams.get('syam_img'));
+        if (urlParams.get('lennox_img')) PRODUCT_IMAGES.lennox = decodeURIComponent(urlParams.get('lennox_img'));
 
         // --- MASTER PRODUCT DATA ---
         const products = [
@@ -405,7 +418,7 @@
                 name: "FBZ PROJECT",
                 category: "FBZ",
                 description: "Aplikasi Premium FBZ PROJECT dengan akses role kustom, fitur lengkap, dan jaminan update lisensi.",
-                image: "https://placehold.co/600x400/0f172a/f59e0b?text=FBZ+PROJECT+APK",
+                image: PRODUCT_IMAGES.fbz,
                 badge: "OFFICIAL APK",
                 rating: "5.0",
                 price: 10000,
@@ -457,7 +470,7 @@
                 name: "VILLAIN",
                 category: "VILLAIN",
                 description: "Aplikasi Eksklusif VILLAIN dengan performa maksimal dan berbagai pilihan paket lisensi fleksibel.",
-                image: "https://placehold.co/600x400/0f172a/f59e0b?text=VILLAIN+APK",
+                image: PRODUCT_IMAGES.villain,
                 badge: "VIP APK",
                 rating: "4.9",
                 price: 1000,
@@ -476,7 +489,7 @@
                 name: "SYAM",
                 category: "SYAM",
                 description: "Aplikasi & Script SYAM dengan trial hemat hingga pilihan role Full Update untuk kebutuhan maksimal.",
-                image: "https://placehold.co/600x400/0f172a/f59e0b?text=SYAM+APK+%26+SCRIPT",
+                image: PRODUCT_IMAGES.syam,
                 badge: "PREMIUM APK",
                 rating: "4.8",
                 price: 2000,
@@ -493,7 +506,7 @@
                 name: "LENNOX",
                 category: "LENNOX",
                 description: "Aplikasi Premium LENNOX dengan performa tinggi, fitur canggih, dan lisensi permanen.",
-                image: "https://placehold.co/600x400/0f172a/f59e0b?text=LENNOX+APK",
+                image: PRODUCT_IMAGES.lennox,
                 badge: "EXCLUSIVE APK",
                 rating: "5.0",
                 price: 50000,
@@ -571,7 +584,7 @@
                         <div class="relative h-52 overflow-hidden bg-slate-900">
                             <img src="${product.image}" alt="${product.name}" 
                                  class="w-full h-full object-cover group-hover:scale-110 transition duration-500 opacity-90 group-hover:opacity-100"
-                                 onerror="this.src='https://placehold.co/500x300/0f172a/f59e0b?text=febzzbug+Software'">
+                                 onerror="this.src='https://placehold.co/500x300/0f172a/f59e0b?text=${encodeURIComponent(product.name)}'">
                             <span class="absolute top-3.5 left-3.5 gold-gradient-bg text-slate-950 text-[10px] font-black px-2.5 py-1 rounded-full uppercase tracking-wider shadow-md">
                                 ${product.badge}
                             </span>
@@ -927,7 +940,7 @@
 
             cartItemsContainer.innerHTML = cart.map(item => `
                 <div class="flex items-center gap-3.5 bg-slate-950/70 p-3.5 rounded-2xl border border-amber-500/20 shadow-md relative overflow-hidden">
-                    <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded-xl bg-slate-900 border border-slate-800">
+                    <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded-xl bg-slate-900 border border-slate-800" onerror="this.src='https://placehold.co/100x100/0f172a/f59e0b?text=App'">
                     <div class="flex-grow min-w-0">
                         <h4 class="font-serif-luxury font-bold text-slate-100 text-xs truncate">${item.name}</h4>
                         <p class="text-xs font-extrabold gold-gradient-text mt-1">${formatRupiah(item.price)}</p>
