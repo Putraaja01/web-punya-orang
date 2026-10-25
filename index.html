@@ -99,24 +99,23 @@
 
     <!-- NAVIGATION / HEADER -->
     <header class="sticky top-0 z-30 glass-panel shadow-2xl">
-        <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-2">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-2">
             <!-- Logo & Brand Title -->
-            <div class="flex items-center gap-2.5 sm:gap-3.5 min-w-0">
-                <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-xl sm:rounded-2xl gold-gradient-bg text-slate-950 flex items-center justify-center font-bold text-base sm:text-xl shadow-lg shadow-amber-500/20 shrink-0">
+            <div class="flex items-center gap-3 min-w-0">
+                <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl gold-gradient-bg text-slate-950 flex items-center justify-center font-bold text-lg sm:text-xl shadow-lg shadow-amber-500/20 shrink-0">
                     <i class="fa-solid fa-code text-slate-950"></i>
                 </div>
-                <div class="min-w-0 flex-1">
-                    <h1 class="font-serif-luxury font-extrabold text-base sm:text-2xl tracking-wide gold-gradient-text truncate leading-tight">febzzbug</h1>
-                    <p class="text-[8px] sm:text-xs text-amber-400/80 uppercase tracking-wider font-semibold truncate">Software & Digital Solutions</p>
+                <div class="min-w-0">
+                    <h1 class="font-serif-luxury font-extrabold text-lg sm:text-2xl tracking-wide gold-gradient-text truncate leading-tight">febzzbug</h1>
+                    <p class="text-[9px] sm:text-xs text-amber-400/80 uppercase tracking-wider font-semibold truncate">Software & Digital Solutions</p>
                 </div>
             </div>
 
-            <!-- Cart Trigger Button -->
-            <button id="cartBtn" onclick="toggleCart(true)" class="relative flex items-center gap-2 bg-slate-900/90 hover:bg-slate-800 text-amber-400 border border-amber-500/30 px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl sm:rounded-2xl transition duration-300 font-medium text-xs sm:text-sm shadow-lg group shrink-0">
-                <i class="fa-solid fa-cart-shopping text-sm group-hover:scale-110 transition duration-300"></i>
-                <span class="hidden sm:inline font-semibold">Keranjang Lisensi</span>
-                <span id="cartCountBadge" class="gold-gradient-bg text-slate-950 text-[10px] sm:text-xs font-black px-1.5 sm:px-2 py-0.5 rounded-full shadow-sm">0</span>
-            </button>
+            <!-- Header Badge -->
+            <div class="hidden sm:flex items-center gap-2 bg-slate-900/80 border border-amber-500/30 px-3 py-1.5 rounded-full text-xs text-amber-400 font-semibold">
+                <i class="fa-solid fa-shield-halved text-amber-400"></i>
+                <span>Toko Lisensi Resmi</span>
+            </div>
         </div>
     </header>
 
@@ -144,7 +143,7 @@
             </div>
         </div>
 
-        <!-- Hero & Search Section -->
+        <!-- Search Bar Section -->
         <div class="mb-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div>
                 <h3 class="text-2xl font-serif-luxury font-bold text-slate-100">Katalog Aplikasi Premium</h3>
@@ -221,56 +220,7 @@
         </div>
     </div>
 
-    <!-- CART SIDEBAR DRAWER -->
-    <div id="cartOverlay" onclick="toggleCart(false)" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-40 hidden transition-opacity opacity-0"></div>
-    
-    <aside id="cartDrawer" class="fixed top-0 right-0 h-full w-full max-w-md bg-slate-950/95 border-l border-amber-500/20 z-50 shadow-2xl flex flex-col transform translate-x-full transition-transform duration-300 ease-out backdrop-blur-2xl">
-        <!-- Cart Header -->
-        <div class="p-6 border-b border-amber-500/15 flex items-center justify-between bg-slate-900/60 relative overflow-hidden">
-            <div class="absolute -right-10 -top-10 w-32 h-32 bg-amber-500/10 rounded-full blur-2xl pointer-events-none"></div>
-            <div class="flex items-center gap-3.5 relative z-10">
-                <div class="w-10 h-10 rounded-2xl gold-gradient-bg flex items-center justify-center text-slate-950 text-sm font-black shadow-lg shadow-amber-500/20">
-                    <i class="fa-solid fa-cart-shopping"></i>
-                </div>
-                <div>
-                    <h3 class="font-serif-luxury font-bold text-slate-100 text-xl tracking-wide">Keranjang VIP</h3>
-                    <p class="text-[10px] text-amber-400/80 uppercase font-bold tracking-widest">Akses Lisensi Siap Order</p>
-                </div>
-            </div>
-            <button onclick="toggleCart(false)" class="w-10 h-10 rounded-2xl bg-slate-900/80 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-amber-400 hover:border-amber-500/40 transition">
-                <i class="fa-solid fa-xmark text-lg"></i>
-            </button>
-        </div>
-
-        <!-- Cart Items List -->
-        <div id="cartItems" class="flex-grow overflow-y-auto p-6 space-y-4">
-            <!-- Items rendered dynamically -->
-        </div>
-
-        <!-- Cart Footer & Checkout Action -->
-        <div class="p-6 border-t border-amber-500/15 bg-slate-900/90 space-y-5 relative">
-            <div class="space-y-2.5 text-xs">
-                <div class="flex justify-between text-slate-400 font-medium">
-                    <span>Subtotal Produk</span>
-                    <span id="cartSubtotal" class="font-semibold text-slate-200">Rp 0</span>
-                </div>
-                <div class="flex justify-between text-slate-400 font-medium">
-                    <span>Aktivasi Akun & Garansi</span>
-                    <span class="text-emerald-400 font-bold flex items-center gap-1"><i class="fa-solid fa-shield-check text-[10px]"></i> GRATIS</span>
-                </div>
-                <div class="border-t border-slate-800/80 pt-3 flex justify-between items-baseline">
-                    <span class="text-sm font-bold text-slate-200">Total Tagihan</span>
-                    <span id="cartTotal" class="gold-gradient-text text-2xl font-black">Rp 0</span>
-                </div>
-            </div>
-            <button id="checkoutBtn" onclick="openCheckoutModal()" disabled class="w-full py-4 gold-gradient-bg hover:opacity-95 disabled:opacity-30 disabled:cursor-not-allowed text-slate-950 font-black rounded-2xl transition duration-300 shadow-xl shadow-amber-500/20 flex items-center justify-center gap-3 text-sm uppercase tracking-wider group">
-                <span>Lanjut Ke Pengisian Form</span>
-                <i class="fa-solid fa-arrow-right text-xs group-hover:translate-x-1 transition"></i>
-            </button>
-        </div>
-    </aside>
-
-    <!-- CHECKOUT & QRIS MODAL -->
+    <!-- CHECKOUT & QRIS MODAL (2-STEP ORDERING) -->
     <div id="checkoutModal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md z-50 flex items-center justify-center p-4 sm:p-6 hidden">
         <div class="glass-modal rounded-3xl max-w-xl w-full max-h-[90vh] flex flex-col shadow-2xl overflow-hidden relative animate-modal-pop">
             
@@ -322,13 +272,13 @@
                         </div>
                     </div>
 
-                    <!-- RINGKASAN ORDER -->
+                    <!-- RINGKASAN PRODUK TERPILIH -->
                     <div class="bg-slate-950/90 p-4 rounded-2xl border border-amber-500/20 space-y-2.5 shadow-inner">
                         <div class="text-[10px] font-black text-amber-400/90 uppercase tracking-widest flex items-center justify-between">
-                            <span>Rincian Item Lisensi</span>
+                            <span>Item Lisensi Dipilih</span>
                             <span class="text-[9px] text-slate-500 font-normal">febzzbug Store</span>
                         </div>
-                        <div id="modalSummaryItemsStep1" class="text-xs space-y-2 text-slate-300 max-h-28 overflow-y-auto pr-1"></div>
+                        <div id="modalSummaryItemStep1" class="text-xs space-y-1.5 text-slate-300"></div>
                         <div class="border-t border-slate-800 pt-2.5 flex justify-between items-baseline font-bold text-sm text-slate-100">
                             <span>Total Pembayaran:</span>
                             <span id="modalTotalAmountStep1" class="gold-gradient-text text-xl font-black">Rp 0</span>
@@ -382,7 +332,7 @@
         <div class="w-7 h-7 rounded-xl gold-gradient-bg text-slate-950 flex items-center justify-center text-xs font-black shadow-md shadow-amber-500/20">
             <i class="fa-solid fa-check"></i>
         </div>
-        <span id="toastMessage" class="font-semibold tracking-wide text-slate-200">Item berhasil ditambahkan</span>
+        <span id="toastMessage" class="font-semibold tracking-wide text-slate-200">Notifikasi</span>
     </div>
 
     <!-- JAVASCRIPT LOGIC -->
@@ -391,7 +341,7 @@
         let DEFAULT_QRIS_URL = "https://c.termai.cc/i147/uvqy.jpg"; // Dynamic QRIS image URL
         const WHATSAPP_NUMBER = "6285600771252"; // Seller WA number
 
-        // DEFAULT PRODUCT IMAGES - Paste your image URLs here directly if desired
+        // DEFAULT PRODUCT LOGO IMAGES
         const PRODUCT_IMAGES = {
             fbz: "https://c.termai.cc/i150/PZOA.jpg",
             villain: "https://c.termai.cc/i177/wdH5.jpg",
@@ -399,8 +349,7 @@
             lennox: "https://c.termai.cc/i120/b5PB.jpg"
         };
 
-        // Check for Image & QRIS URLs passed via link parameters:
-        // Example: ?qris=https://...&fbz_img=https://...&villain_img=https://...&syam_img=https://...&lennox_img=https://...
+        // Check for Image & QRIS URLs passed via link parameters
         const urlParams = new URLSearchParams(window.location.search);
 
         const customQrisParam = urlParams.get('qris_url') || urlParams.get('qris');
@@ -518,7 +467,7 @@
         ];
 
         // --- GLOBAL STATE ---
-        let cart = [];
+        let selectedProductForCheckout = null;
         let activePickerProductId = null;
         let activePickerType = null;
         let tempSelectedRole = null;
@@ -533,7 +482,6 @@
         // Initialize App
         document.addEventListener('DOMContentLoaded', () => {
             renderProducts(products);
-            updateCartUI();
         });
 
         // Search Filter
@@ -649,8 +597,8 @@
                             <span class="block text-[10px] text-slate-500 uppercase font-bold tracking-wider">Harga Lisensi</span>
                             <span id="priceDisplay_${product.id}" class="font-bold gold-gradient-text text-lg">${formatRupiah(currentPrice)}</span>
                         </div>
-                        <button type="button" onclick="addToCartWithVariant(${product.id})" class="gold-gradient-bg text-slate-950 hover:opacity-90 px-4 py-2.5 rounded-2xl text-xs font-black transition duration-300 flex items-center gap-2 shadow-lg shadow-amber-500/20 transform hover:-translate-y-0.5">
-                            <i class="fa-solid fa-cart-plus text-xs"></i> Beli
+                        <button type="button" onclick="directBuyProduct(${product.id})" class="gold-gradient-bg text-slate-950 hover:opacity-90 px-5 py-2.5 rounded-2xl text-xs font-black transition duration-300 flex items-center gap-2 shadow-lg shadow-amber-500/20 transform hover:-translate-y-0.5">
+                            <i class="fa-solid fa-bolt text-xs"></i> Beli Sekarang
                         </button>
                     </div>
                 `;
@@ -857,8 +805,8 @@
             closeOptionPickerModal();
         }
 
-        // --- ADD TO CART ---
-        function addToCartWithVariant(productId) {
+        // --- DIRECT CHECKOUT FLOW (2 STEPS) ---
+        function directBuyProduct(productId) {
             const product = products.find(p => p.id === productId);
             if (!product) return;
 
@@ -878,126 +826,34 @@
                 itemName = `${product.name} [${pkgData.name}]`;
             }
 
-            const cartItemId = `${productId}_${itemName}`;
-            const existingItem = cart.find(item => item.cartItemId === cartItemId);
+            selectedProductForCheckout = {
+                id: product.id,
+                name: itemName,
+                price: itemPrice
+            };
 
-            if (existingItem) {
-                existingItem.quantity += 1;
-            } else {
-                cart.push({
-                    cartItemId: cartItemId,
-                    id: product.id,
-                    name: itemName,
-                    price: itemPrice,
-                    image: product.image,
-                    quantity: 1
-                });
-            }
-
-            updateCartUI();
-            showToast(`"${itemName}" telah ditambahkan`);
+            openCheckoutModal();
         }
 
-        function updateQuantity(cartItemId, change) {
-            const index = cart.findIndex(item => item.cartItemId === cartItemId);
-            if (index !== -1) {
-                cart[index].quantity += change;
-                if (cart[index].quantity <= 0) {
-                    cart.splice(index, 1);
-                }
-            }
-            updateCartUI();
-        }
-
-        function updateCartUI() {
-            const cartItemsContainer = document.getElementById('cartItems');
-            const cartCountBadge = document.getElementById('cartCountBadge');
-            const cartSubtotal = document.getElementById('cartSubtotal');
-            const cartTotal = document.getElementById('cartTotal');
-            const checkoutBtn = document.getElementById('checkoutBtn');
-
-            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-            cartCountBadge.textContent = totalItems;
-
-            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            cartSubtotal.textContent = formatRupiah(totalPrice);
-            cartTotal.textContent = formatRupiah(totalPrice);
-
-            checkoutBtn.disabled = cart.length === 0;
-
-            if (cart.length === 0) {
-                cartItemsContainer.innerHTML = `
-                    <div class="h-full flex flex-col items-center justify-center text-center p-6 text-slate-500">
-                        <div class="w-16 h-16 rounded-2xl bg-slate-900 border border-slate-800 text-amber-500/50 flex items-center justify-center mb-3 text-2xl shadow-inner">
-                            <i class="fa-solid fa-cart-flatbed"></i>
-                        </div>
-                        <p class="text-sm font-bold text-slate-300">Keranjang Lisensi Kosong</p>
-                        <p class="text-xs text-slate-500 mt-1 max-w-[200px]">Pilih aplikasi FBZ, VILLAIN, SYAM, atau LENNOX di katalog untuk melanjutkan.</p>
-                    </div>
-                `;
-                return;
-            }
-
-            cartItemsContainer.innerHTML = cart.map(item => `
-                <div class="flex items-center gap-3.5 bg-slate-950/70 p-3.5 rounded-2xl border border-amber-500/20 shadow-md relative overflow-hidden">
-                    <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded-xl bg-slate-900 border border-slate-800" onerror="this.src='https://placehold.co/100x100/0f172a/f59e0b?text=App'">
-                    <div class="flex-grow min-w-0">
-                        <h4 class="font-serif-luxury font-bold text-slate-100 text-xs truncate">${item.name}</h4>
-                        <p class="text-xs font-extrabold gold-gradient-text mt-1">${formatRupiah(item.price)}</p>
-                    </div>
-                    <div class="flex items-center gap-2 bg-slate-900/90 border border-slate-800 rounded-xl p-1">
-                        <button onclick="updateQuantity('${item.cartItemId}', -1)" class="w-6 h-6 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center text-xs transition">
-                            <i class="fa-solid fa-minus"></i>
-                        </button>
-                        <span class="text-xs font-black text-slate-100 w-4 text-center">${item.quantity}</span>
-                        <button onclick="updateQuantity('${item.cartItemId}', 1)" class="w-6 h-6 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center text-xs transition">
-                            <i class="fa-solid fa-plus"></i>
-                        </button>
-                    </div>
-                </div>
-            `).join('');
-        }
-
-        // --- DRAWER TOGGLE ---
-        function toggleCart(open) {
-            const drawer = document.getElementById('cartDrawer');
-            const overlay = document.getElementById('cartOverlay');
-
-            if (open) {
-                overlay.classList.remove('hidden');
-                setTimeout(() => {
-                    overlay.classList.remove('opacity-0');
-                    drawer.classList.remove('translate-x-full');
-                }, 10);
-            } else {
-                drawer.classList.add('translate-x-full');
-                overlay.classList.add('opacity-0');
-                setTimeout(() => {
-                    overlay.classList.add('hidden');
-                }, 300);
-            }
-        }
-
-        // --- CHECKOUT FLOW (2 STEPS) ---
         function openCheckoutModal() {
-            toggleCart(false);
+            if (!selectedProductForCheckout) return;
+
             const modal = document.getElementById('checkoutModal');
             
             // Show Step 1 initially
             showStep1();
 
-            const summaryContainer = document.getElementById('modalSummaryItemsStep1');
+            const summaryContainer = document.getElementById('modalSummaryItemStep1');
             const totalContainer = document.getElementById('modalTotalAmountStep1');
-            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
             
-            summaryContainer.innerHTML = cart.map(item => `
-                <div class="flex justify-between">
-                    <span>${item.name} <span class="text-amber-400 font-bold">(x${item.quantity})</span></span>
-                    <span class="font-medium text-slate-200">${formatRupiah(item.price * item.quantity)}</span>
+            summaryContainer.innerHTML = `
+                <div class="flex justify-between items-center py-1">
+                    <span class="font-bold text-amber-400">${selectedProductForCheckout.name}</span>
+                    <span class="font-bold text-slate-100">${formatRupiah(selectedProductForCheckout.price)}</span>
                 </div>
-            `).join('');
+            `;
 
-            totalContainer.textContent = formatRupiah(totalPrice);
+            totalContainer.textContent = formatRupiah(selectedProductForCheckout.price);
             modal.classList.remove('hidden');
         }
 
@@ -1022,7 +878,7 @@
             document.getElementById('checkoutStep1').classList.add('hidden');
             document.getElementById('checkoutStep2').classList.remove('hidden');
 
-            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const totalPrice = selectedProductForCheckout ? selectedProductForCheckout.price : 0;
             document.getElementById('qrisTotalDisplay').textContent = formatRupiah(totalPrice);
 
             const qrisImgElem = document.getElementById('qrisImage');
@@ -1053,7 +909,9 @@
                 return;
             }
 
-            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            if (!selectedProductForCheckout) return;
+
+            const totalPrice = selectedProductForCheckout.price;
 
             let message = `*💻 ORDER SOFTWARE VIP - FEBZZBUG*\n`;
             message += `===================================\n`;
@@ -1061,12 +919,8 @@
             message += `• Username: ${username}\n`;
             message += `• Password: ${password}\n`;
             message += `===================================\n`;
-            message += `*Rincian Software & Lisensi:*\n`;
-
-            cart.forEach(item => {
-                message += `• ${item.name} (x${item.quantity}) = ${formatRupiah(item.price * item.quantity)}\n`;
-            });
-
+            message += `*Item Lisensi Dipilih:*\n`;
+            message += `• ${selectedProductForCheckout.name} = ${formatRupiah(totalPrice)}\n`;
             message += `===================================\n`;
             message += `*TOTAL PEMBAYARAN: ${formatRupiah(totalPrice)}*\n`;
             message += `*Status Pembayaran: Sudah Transfer QRIS*\n`;
@@ -1078,8 +932,6 @@
 
             window.open(waUrl, '_blank');
             closeCheckoutModal();
-            cart = [];
-            updateCartUI();
             document.getElementById('customUsername').value = '';
             document.getElementById('customPassword').value = '';
             showToast("Pesanan & bukti transfer dialihkan ke WhatsApp VIP!");
