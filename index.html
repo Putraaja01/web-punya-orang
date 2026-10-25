@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="id" class="h-full bg-slate-950 text-slate-100 selection:bg-amber-500 selection:text-slate-950">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>febzzbug - Premium App & Software Hub</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: {
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                            700: '#b45309',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts Playfair & Plus Jakarta Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .font-serif-luxury { font-family: 'Playfair Display', serif; }
+        
+        /* Custom Glowing Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #020617; }
+        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 9999px; }
+        ::-webkit-scrollbar-thumb:hover { background: #f59e0b; }
+
+        /* Glassmorphism & Luxury Glow Classes */
+        .glass-panel {
+            background: rgba(15, 23, 42, 0.78);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(245, 158, 11, 0.15);
+        }
+        .glass-card {
+            background: linear-gradient(145deg, rgba(30, 41, 59, 0.5) 0%, rgba(15, 23, 42, 0.8) 100%);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+        }
+        .glass-card:hover {
+            border-color: rgba(245, 158, 11, 0.5);
+            box-shadow: 0 15px 35px -10px rgba(245, 158, 11, 0.25);
+        }
+        .glass-modal {
+            background: linear-gradient(165deg, rgba(15, 23, 42, 0.96) 0%, rgba(2, 6, 23, 0.98) 100%);
+            backdrop-filter: blur(24px);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.9), 0 0 50px rgba(245, 158, 11, 0.15);
+        }
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #fef08a 0%, #f59e0b 50%, #d97706 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .gold-gradient-bg {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);
+        }
+        .gold-gradient-bg:hover {
+            background: linear-gradient(135deg, #fef08a 0%, #fbbf24 50%, #f59e0b 100%);
+        }
+        
+        /* Modal Keyframe Animations */
+        @keyframes modalPop {
+            0% { opacity: 0; transform: scale(0.9) translateY(16px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        .animate-modal-pop {
+            animation: modalPop 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes floatGlow {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.08); }
+        }
+        .ambient-glow {
+            animation: floatGlow 6s ease-in-out infinite;
+        }
+
+        /* Custom Selected Option Card Style */
+        .role-card-option.selected {
+            border-color: rgba(245, 158, 11, 0.8) !important;
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.15) 0%, rgba(15, 23, 42, 0.95) 100%) !important;
+            box-shadow: 0 0 20px rgba(245, 158, 11, 0.25) !important;
+        }
+    </style>
+</head>
+<body class="h-full flex flex-col justify-between bg-slate-950 text-slate-200">
+
+    <!-- NAVIGATION / HEADER -->
+    <header class="sticky top-0 z-30 glass-panel shadow-2xl">
+        <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-2">
+            <!-- Logo & Brand Title -->
+            <div class="flex items-center gap-2.5 sm:gap-3.5 min-w-0">
+                <div class="w-9 h-9 sm:w-11 sm:h-11 rounded-xl sm:rounded-2xl gold-gradient-bg text-slate-950 flex items-center justify-center font-bold text-base sm:text-xl shadow-lg shadow-amber-500/20 shrink-0">
+                    <i class="fa-solid fa-code text-slate-950"></i>
+                </div>
+                <div class="min-w-0 flex-1">
+                    <h1 class="font-serif-luxury font-extrabold text-base sm:text-2xl tracking-wide gold-gradient-text truncate leading-tight">febzzbug</h1>
+                    <p class="text-[8px] sm:text-xs text-amber-400/80 uppercase tracking-wider font-semibold truncate">Software & Digital Solutions</p>
+                </div>
+            </div>
+
+            <!-- Cart Trigger Button -->
+            <button id="cartBtn" onclick="toggleCart(true)" class="relative flex items-center gap-2 bg-slate-900/90 hover:bg-slate-800 text-amber-400 border border-amber-500/30 px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl sm:rounded-2xl transition duration-300 font-medium text-xs sm:text-sm shadow-lg group shrink-0">
+                <i class="fa-solid fa-cart-shopping text-sm group-hover:scale-110 transition duration-300"></i>
+                <span class="hidden sm:inline font-semibold">Keranjang Lisensi</span>
+                <span id="cartCountBadge" class="gold-gradient-bg text-slate-950 text-[10px] sm:text-xs font-black px-1.5 sm:px-2 py-0.5 rounded-full shadow-sm">0</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex-grow w-full">
+        
+        <!-- HERO BANNER EKSKLUSIF DIGITAL -->
+        <div class="relative overflow-hidden rounded-3xl mb-12 p-8 md:p-12 border border-amber-500/20 bg-gradient-to-r from-slate-900 via-slate-900/90 to-amber-950/40 shadow-2xl">
+            <div class="absolute -right-10 -bottom-10 w-80 h-80 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="relative z-10 max-w-2xl">
+                <span class="inline-block px-3.5 py-1 bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-semibold rounded-full uppercase tracking-widest mb-4">
+                    🚀 Next-Gen Software Store
+                </span>
+                <h2 class="text-3xl sm:text-5xl font-serif-luxury font-bold text-slate-100 leading-tight mb-3">
+                    Aplikasi & Source Code Kelas Dunia
+                </h2>
+                <p class="text-slate-400 text-sm sm:text-base leading-relaxed mb-6">
+                    Pilih aplikasi, buat Username & Password akun kustom Anda, bayar via QRIS instan, dan terima aktivasi langsung melalui WhatsApp!
+                </p>
+                <div class="flex flex-wrap items-center gap-6 text-xs text-slate-400 font-medium border-t border-slate-800/80 pt-4">
+                    <span class="flex items-center gap-1.5"><i class="fa-solid fa-user-lock text-amber-400"></i> Akun Kustom</span>
+                    <span class="flex items-center gap-1.5"><i class="fa-solid fa-qrcode text-amber-400"></i> Pembayaran QRIS Otomatis</span>
+                    <span class="flex items-center gap-1.5"><i class="fa-solid fa-headset text-amber-400"></i> Support 24/7 VIP</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hero & Search Section -->
+        <div class="mb-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+            <div>
+                <h3 class="text-2xl font-serif-luxury font-bold text-slate-100">Katalog Aplikasi Premium</h3>
+                <p class="text-slate-400 text-xs sm:text-sm mt-1">Pilih aplikasi terbaik untuk kebutuhan bisnis dan pengembangan Anda.</p>
+            </div>
+            
+            <!-- Search Bar -->
+            <div class="relative min-w-[300px]">
+                <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                <input type="text" id="searchInput" oninput="filterProducts()" placeholder="Cari aplikasi, SaaS, atau tools..." class="w-full pl-11 pr-4 py-3 bg-slate-900/90 border border-slate-800 rounded-2xl text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-amber-500/60 focus:ring-1 focus:ring-amber-500/60 shadow-xl transition">
+            </div>
+        </div>
+
+        <!-- Category Filters -->
+        <div class="flex items-center gap-2 overflow-x-auto pb-4 mb-6 scrollbar-none">
+            <button onclick="setCategory('ALL')" id="catBtn_ALL" class="category-btn active px-4 py-2 rounded-xl text-xs font-bold transition bg-amber-500 text-slate-950 shadow-lg shadow-amber-500/20">
+                Semua App
+            </button>
+            <button onclick="setCategory('FBZ')" id="catBtn_FBZ" class="category-btn px-4 py-2 rounded-xl text-xs font-bold transition bg-slate-900 text-slate-400 hover:text-slate-200 border border-slate-800">
+                FBZ Series
+            </button>
+            <button onclick="setCategory('VILLAIN')" id="catBtn_VILLAIN" class="category-btn px-4 py-2 rounded-xl text-xs font-bold transition bg-slate-900 text-slate-400 hover:text-slate-200 border border-slate-800">
+                VILLAIN Series
+            </button>
+            <button onclick="setCategory('SYAM')" id="catBtn_SYAM" class="category-btn px-4 py-2 rounded-xl text-xs font-bold transition bg-slate-900 text-slate-400 hover:text-slate-200 border border-slate-800">
+                SYAM Series
+            </button>
+            <button onclick="setCategory('LENNOX')" id="catBtn_LENNOX" class="category-btn px-4 py-2 rounded-xl text-xs font-bold transition bg-slate-900 text-slate-400 hover:text-slate-200 border border-slate-800">
+                LENNOX Series
+            </button>
+        </div>
+
+        <!-- Product Grid -->
+        <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-7">
+            <!-- Products rendered dynamically -->
+        </div>
+
+        <!-- Empty State -->
+        <div id="emptySearch" class="hidden text-center py-20">
+            <div class="w-20 h-20 bg-slate-900 border border-slate-800 text-amber-500 rounded-3xl flex items-center justify-center mx-auto mb-4 shadow-xl">
+                <i class="fa-solid fa-laptop-code text-3xl"></i>
+            </div>
+            <h3 class="text-slate-200 font-serif-luxury font-bold text-xl">Belum Ada Produk Tersedia</h3>
+            <p class="text-slate-500 text-sm mt-1">Produk dan kategori aplikasi akan segera ditambahkan.</p>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-900/50 border-t border-slate-800/80 py-8 mt-16 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 text-center text-slate-500 text-xs sm:text-sm">
+            <p class="font-serif-luxury text-slate-400 font-semibold mb-2">febzzbug Software Store &bull; Premium Digital Marketplace</p>
+            <p>&copy; 2026 All rights reserved. Built for innovators and creators.</p>
+        </div>
+    </footer>
+
+    <!-- CUSTOM LUXURY OPTION PICKER MODAL -->
+    <div id="optionPickerModal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md z-50 flex items-center justify-center p-4 sm:p-6 hidden">
+        <div class="glass-modal rounded-3xl max-w-lg w-full max-h-[85vh] flex flex-col shadow-2xl overflow-hidden relative animate-modal-pop">
+            <!-- Ambient Glow Effect -->
+            <div class="absolute -top-24 -left-24 w-60 h-60 bg-amber-500/15 rounded-full blur-3xl pointer-events-none ambient-glow"></div>
+            
+            <!-- Modal Header -->
+            <div class="p-5 border-b border-amber-500/20 flex justify-between items-center bg-slate-900/60 relative z-10">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-2xl gold-gradient-bg text-slate-950 flex items-center justify-center font-black text-sm shadow-md">
+                        <i class="fa-solid fa-crown"></i>
+                    </div>
+                    <div>
+                        <h3 id="pickerModalTitle" class="font-serif-luxury font-bold text-slate-100 text-lg tracking-wide">Pilih Opsi Lisensi</h3>
+                        <p id="pickerModalSubtitle" class="text-[11px] text-amber-400/80 font-medium">Pilih konfigurasi produk Anda</p>
+                    </div>
+                </div>
+                <button onclick="closeOptionPickerModal()" class="w-8 h-8 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-amber-400 transition">
+                    <i class="fa-solid fa-xmark text-sm"></i>
+                </button>
+            </div>
+
+            <!-- Modal Body (Grid List Options) -->
+            <div id="pickerModalList" class="p-5 overflow-y-auto space-y-3 relative z-10 max-h-[60vh]">
+                <!-- Dynamic cards rendered here -->
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="p-4 border-t border-amber-500/20 bg-slate-900/80 flex items-center justify-between relative z-10">
+                <div>
+                    <span class="block text-[10px] text-slate-400 uppercase font-bold">Total Harga:</span>
+                    <span id="pickerModalPriceDisplay" class="gold-gradient-text font-black text-lg">Rp 0</span>
+                </div>
+                <button id="pickerConfirmBtn" onclick="confirmOptionSelection()" class="px-5 py-2.5 gold-gradient-bg text-slate-950 font-black rounded-xl text-xs uppercase tracking-wider shadow-lg shadow-amber-500/20 hover:opacity-95 transition">
+                    Simpan Pilihan
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- CART SIDEBAR DRAWER -->
+    <div id="cartOverlay" onclick="toggleCart(false)" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-40 hidden transition-opacity opacity-0"></div>
+    
+    <aside id="cartDrawer" class="fixed top-0 right-0 h-full w-full max-w-md bg-slate-950/95 border-l border-amber-500/20 z-50 shadow-2xl flex flex-col transform translate-x-full transition-transform duration-300 ease-out backdrop-blur-2xl">
+        <!-- Cart Header -->
+        <div class="p-6 border-b border-amber-500/15 flex items-center justify-between bg-slate-900/60 relative overflow-hidden">
+            <div class="absolute -right-10 -top-10 w-32 h-32 bg-amber-500/10 rounded-full blur-2xl pointer-events-none"></div>
+            <div class="flex items-center gap-3.5 relative z-10">
+                <div class="w-10 h-10 rounded-2xl gold-gradient-bg flex items-center justify-center text-slate-950 text-sm font-black shadow-lg shadow-amber-500/20">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </div>
+                <div>
+                    <h3 class="font-serif-luxury font-bold text-slate-100 text-xl tracking-wide">Keranjang VIP</h3>
+                    <p class="text-[10px] text-amber-400/80 uppercase font-bold tracking-widest">Akses Lisensi Siap Order</p>
+                </div>
+            </div>
+            <button onclick="toggleCart(false)" class="w-10 h-10 rounded-2xl bg-slate-900/80 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-amber-400 hover:border-amber-500/40 transition">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+        </div>
+
+        <!-- Cart Items List -->
+        <div id="cartItems" class="flex-grow overflow-y-auto p-6 space-y-4">
+            <!-- Items rendered dynamically -->
+        </div>
+
+        <!-- Cart Footer & Checkout Action -->
+        <div class="p-6 border-t border-amber-500/15 bg-slate-900/90 space-y-5 relative">
+            <div class="space-y-2.5 text-xs">
+                <div class="flex justify-between text-slate-400 font-medium">
+                    <span>Subtotal Produk</span>
+                    <span id="cartSubtotal" class="font-semibold text-slate-200">Rp 0</span>
+                </div>
+                <div class="flex justify-between text-slate-400 font-medium">
+                    <span>Aktivasi Akun & Garansi</span>
+                    <span class="text-emerald-400 font-bold flex items-center gap-1"><i class="fa-solid fa-shield-check text-[10px]"></i> GRATIS</span>
+                </div>
+                <div class="border-t border-slate-800/80 pt-3 flex justify-between items-baseline">
+                    <span class="text-sm font-bold text-slate-200">Total Tagihan</span>
+                    <span id="cartTotal" class="gold-gradient-text text-2xl font-black">Rp 0</span>
+                </div>
+            </div>
+            <button id="checkoutBtn" onclick="openCheckoutModal()" disabled class="w-full py-4 gold-gradient-bg hover:opacity-95 disabled:opacity-30 disabled:cursor-not-allowed text-slate-950 font-black rounded-2xl transition duration-300 shadow-xl shadow-amber-500/20 flex items-center justify-center gap-3 text-sm uppercase tracking-wider group">
+                <span>Lanjut Ke Form Credential & QRIS</span>
+                <i class="fa-solid fa-arrow-right text-xs group-hover:translate-x-1 transition"></i>
+            </button>
+        </div>
+    </aside>
+
+    <!-- CHECKOUT & QRIS MODAL -->
+    <div id="checkoutModal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md z-50 flex items-center justify-center p-4 sm:p-6 hidden">
+        <div class="glass-modal rounded-3xl max-w-xl w-full max-h-[90vh] flex flex-col shadow-2xl overflow-hidden relative animate-modal-pop">
+            
+            <!-- Ambient Glow Effect -->
+            <div class="absolute -top-24 -left-24 w-60 h-60 bg-amber-500/15 rounded-full blur-3xl pointer-events-none ambient-glow"></div>
+            <div class="absolute -bottom-24 -right-24 w-60 h-60 bg-amber-600/15 rounded-full blur-3xl pointer-events-none ambient-glow"></div>
+
+            <!-- Modal Header -->
+            <div class="p-6 border-b border-amber-500/20 flex justify-between items-center bg-slate-900/50 relative z-10">
+                <div class="flex items-center gap-3.5">
+                    <div class="w-11 h-11 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-amber-400 flex items-center justify-center font-bold text-lg shadow-inner">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-serif-luxury font-bold text-slate-100 text-xl tracking-wide">Pemesanan & QRIS VIP</h3>
+                        <p class="text-xs text-amber-400/80">Langkah 2 & 3: Isi Akun & Lakukan Pembayaran QRIS</p>
+                    </div>
+                </div>
+                <button onclick="closeCheckoutModal()" class="w-9 h-9 rounded-xl bg-slate-800/80 border border-slate-700/80 flex items-center justify-center text-slate-400 hover:text-white hover:bg-slate-700 transition">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Modal Form Body -->
+            <form id="orderForm" onsubmit="submitOrder(event)" class="p-6 overflow-y-auto space-y-5 relative z-10">
+                
+                <!-- LANGKAH 2: FORM CREDENTIAL -->
+                <div class="bg-slate-900/60 p-4 rounded-2xl border border-amber-500/20 space-y-4">
+                    <div class="text-xs font-black text-amber-400 uppercase tracking-wider flex items-center gap-2 border-b border-slate-800 pb-2">
+                        <i class="fa-solid fa-user-gear text-amber-400"></i>
+                        <span>Langkah 2: Akun Kustom</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                        <div>
+                            <label class="block text-[10px] font-extrabold text-amber-400 uppercase tracking-widest mb-1.5 flex items-center gap-1">
+                                <i class="fa-solid fa-user text-[10px]"></i> Username Diinginkan *
+                            </label>
+                            <input type="text" id="customUsername" required placeholder="Contoh: febzz_pro" class="w-full px-3.5 py-2.5 bg-slate-950/80 border border-amber-500/30 rounded-xl text-xs text-slate-100 placeholder-slate-600 focus:border-amber-500 focus:ring-1 focus:ring-amber-500 focus:outline-none transition shadow-inner">
+                        </div>
+
+                        <div>
+                            <label class="block text-[10px] font-extrabold text-amber-400 uppercase tracking-widest mb-1.5 flex items-center gap-1">
+                                <i class="fa-solid fa-key text-[10px]"></i> Password Diinginkan *
+                            </label>
+                            <input type="password" id="customPassword" required placeholder="••••••••" class="w-full px-3.5 py-2.5 bg-slate-950/80 border border-amber-500/30 rounded-xl text-xs text-slate-100 placeholder-slate-600 focus:border-amber-500 focus:ring-1 focus:ring-amber-500 focus:outline-none transition shadow-inner">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LANGKAH 3: DISPLAY PEMBAYARAN QRIS -->
+                <div class="bg-slate-900/60 p-4 rounded-2xl border border-amber-500/30 space-y-4">
+                    <div class="text-xs font-black text-amber-400 uppercase tracking-wider flex items-center justify-between border-b border-slate-800 pb-2">
+                        <span class="flex items-center gap-2">
+                            <i class="fa-solid fa-qrcode text-amber-400"></i>
+                            <span>Langkah 3: Scan QRIS Untuk Membayar</span>
+                        </span>
+                        <span class="text-[10px] bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full border border-emerald-500/30 font-bold">All E-Wallet & Bank</span>
+                    </div>
+
+                    <div class="flex flex-col items-center justify-center p-4 bg-slate-950 rounded-2xl border border-slate-800 text-center">
+                        <div class="p-3 bg-white rounded-2xl shadow-xl mb-3">
+                            <img id="qrisImage" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=FEBZZBUG_PAYMENT" alt="QRIS Code" class="w-40 h-40 object-contain mx-auto" onerror="this.src='https://placehold.co/200x200/ffffff/000000?text=QRIS+FEBZZBUG'">
+                        </div>
+                        <p class="text-xs font-bold text-slate-200">Scan QRIS Di Atas Pakai Gopay, Dana, OVO, ShopeePay, atau Mobile Banking</p>
+                        <p class="text-[11px] text-amber-400 font-black mt-1">Total yang harus dibayar: <span id="qrisTotalDisplay" class="text-sm underline">Rp 0</span></p>
+                    </div>
+                </div>
+
+                <!-- LANGKAH 4: RINGKASAN & KONFIRMASI WHATSAPP -->
+                <div class="bg-slate-950/90 p-4 rounded-2xl border border-amber-500/20 space-y-2.5 shadow-inner">
+                    <div class="text-[10px] font-black text-amber-400/90 uppercase tracking-widest flex items-center justify-between">
+                        <span>Langkah 4: Rincian Order</span>
+                        <span class="text-[9px] text-slate-500 font-normal">Sistem Otomatis febzzbug</span>
+                    </div>
+                    <div id="modalSummaryItems" class="text-xs space-y-2 text-slate-300 max-h-28 overflow-y-auto pr-1"></div>
+                    <div class="border-t border-slate-800 pt-2.5 flex justify-between items-baseline font-bold text-sm text-slate-100">
+                        <span>Total Pembayaran:</span>
+                        <span id="modalTotalAmount" class="gold-gradient-text text-xl font-black">Rp 0</span>
+                    </div>
+                </div>
+
+                <button type="submit" class="w-full py-4 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black rounded-2xl transition duration-300 shadow-xl shadow-emerald-950/50 flex items-center justify-center gap-2.5 text-sm uppercase tracking-wider transform hover:-translate-y-0.5">
+                    <i class="fa-brands fa-whatsapp text-lg"></i>
+                    <span>Konfirmasi & Kirim Bukti Transfer ke WhatsApp</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast" class="fixed bottom-8 left-1/2 -translate-x-1/2 glass-modal text-slate-100 px-6 py-3.5 rounded-2xl shadow-2xl text-xs sm:text-sm flex items-center gap-3.5 transform translate-y-28 opacity-0 transition-all duration-400 z-50 pointer-events-none border border-amber-500/30">
+        <div class="w-7 h-7 rounded-xl gold-gradient-bg text-slate-950 flex items-center justify-center text-xs font-black shadow-md shadow-amber-500/20">
+            <i class="fa-solid fa-check"></i>
+        </div>
+        <span id="toastMessage" class="font-semibold tracking-wide text-slate-200">Item berhasil ditambahkan</span>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // --- ADMIN CONFIGURATION ---
+        let DEFAULT_QRIS_URL = "https://cdn.phototourl.com/member/2026-10-25-b0571492-8679-4b0f-b1e5-f22afb3f6602.jpg"; // Dynamic QRIS or custom image URL
+        const WHATSAPP_NUMBER = "6285789797426"; // Seller WA number
+
+        // Check for QRIS URL passed via link parameter: ?qris_url=https://...
+        const urlParams = new URLSearchParams(window.location.search);
+        const customQrisParam = urlParams.get('qris_url') || urlParams.get('qris');
+        if (customQrisParam) {
+            DEFAULT_QRIS_URL = decodeURIComponent(customQrisParam);
+        }
+
+        // --- MASTER PRODUCT DATA ---
+        const products = [
+            {
+                id: 1,
+                name: "FBZ PROJECT",
+                category: "FBZ",
+                description: "Aplikasi Premium FBZ PROJECT dengan akses role kustom, fitur lengkap, dan jaminan update lisensi.",
+                image: "https://placehold.co/600x400/0f172a/f59e0b?text=FBZ+PROJECT+APK",
+                badge: "OFFICIAL APK",
+                rating: "5.0",
+                price: 10000,
+                selectedRole: "ROLE MEMBER",
+                selectedDuration: "30 DAYS",
+                roles: [
+                    {
+                        role: "ROLE MEMBER",
+                        durations: [
+                            { duration: "30 DAYS", price: 10000 },
+                            { duration: "PERMANENT", price: 15000 }
+                        ]
+                    },
+                    {
+                        role: "ROLE VIP",
+                        durations: [
+                            { duration: "30 DAYS", price: 15000 },
+                            { duration: "PERMANENT", price: 20000 }
+                        ]
+                    },
+                    {
+                        role: "ROLE RESELLER",
+                        durations: [
+                            { duration: "PERMANENT", price: 30000 }
+                        ]
+                    },
+                    {
+                        role: "ROLE ADMIN",
+                        durations: [
+                            { duration: "PERMANENT", price: 40000 }
+                        ]
+                    },
+                    {
+                        role: "ROLE PANTHER",
+                        durations: [
+                            { duration: "PERMANENT", price: 50000 }
+                        ]
+                    },
+                    {
+                        role: "ROLE OWNER",
+                        durations: [
+                            { duration: "PERMANENT", price: 70000 }
+                        ]
+                    }
+                ]
+            },
+            {
+                id: 2,
+                name: "VILLAIN",
+                category: "VILLAIN",
+                description: "Aplikasi Eksklusif VILLAIN dengan performa maksimal dan berbagai pilihan paket lisensi fleksibel.",
+                image: "https://placehold.co/600x400/0f172a/f59e0b?text=VILLAIN+APK",
+                badge: "VIP APK",
+                rating: "4.9",
+                price: 1000,
+                selectedPackage: "1 Hari",
+                packages: [
+                    { name: "1 Hari", price: 1000 },
+                    { name: "1 Minggu", price: 5000 },
+                    { name: "1 Bulan", price: 15000 },
+                    { name: "Full Up", price: 25000 },
+                    { name: "Reseller", price: 40000 },
+                    { name: "Partner", price: 50000 }
+                ]
+            },
+            {
+                id: 3,
+                name: "SYAM",
+                category: "SYAM",
+                description: "Aplikasi & Script SYAM dengan trial hemat hingga pilihan role Full Update untuk kebutuhan maksimal.",
+                image: "https://placehold.co/600x400/0f172a/f59e0b?text=SYAM+APK+%26+SCRIPT",
+                badge: "PREMIUM APK",
+                rating: "4.8",
+                price: 2000,
+                selectedPackage: "Trial 1 Day",
+                packages: [
+                    { name: "Trial 1 Day", price: 2000 },
+                    { name: "Trial 7 Day", price: 10000 },
+                    { name: "Trial 30 Day", price: 20000 },
+                    { name: "Role Full Update", price: 40000 }
+                ]
+            },
+            {
+                id: 4,
+                name: "LENNOX",
+                category: "LENNOX",
+                description: "Aplikasi Premium LENNOX dengan performa tinggi, fitur canggih, dan lisensi permanen.",
+                image: "https://placehold.co/600x400/0f172a/f59e0b?text=LENNOX+APK",
+                badge: "EXCLUSIVE APK",
+                rating: "5.0",
+                price: 50000,
+                selectedPackage: "ROLE MEMBER - PERMANEN",
+                packages: [
+                    { name: "ROLE MEMBER - PERMANEN", price: 50000 }
+                ]
+            }
+        ];
+
+        // --- GLOBAL STATE ---
+        let cart = [];
+        let currentCategory = 'ALL';
+        let activePickerProductId = null;
+        let activePickerType = null; // 'ROLE', 'DURATION', or 'PACKAGE'
+        let tempSelectedRole = null;
+        let tempSelectedDuration = null;
+        let tempSelectedPackage = null;
+
+        // Helper: Format Rupiah
+        function formatRupiah(amount) {
+            return 'Rp ' + Number(amount || 0).toLocaleString('id-ID');
+        }
+
+        // Initialize App
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProducts(products);
+            updateCartUI();
+        });
+
+        // Category Filter
+        function setCategory(cat) {
+            currentCategory = cat;
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.classList.remove('bg-amber-500', 'text-slate-950', 'shadow-lg', 'shadow-amber-500/20');
+                btn.classList.add('bg-slate-900', 'text-slate-400');
+            });
+            const activeBtn = document.getElementById(`catBtn_${cat}`);
+            if (activeBtn) {
+                activeBtn.classList.remove('bg-slate-900', 'text-slate-400');
+                activeBtn.classList.add('bg-amber-500', 'text-slate-950', 'shadow-lg', 'shadow-amber-500/20');
+            }
+            filterProducts();
+        }
+
+        // Search Filter
+        function filterProducts() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = products.filter(product => {
+                const matchesSearch = product.name.toLowerCase().includes(searchTerm) || 
+                                     product.description.toLowerCase().includes(searchTerm);
+                const matchesCategory = currentCategory === 'ALL' || product.category === currentCategory;
+                return matchesSearch && matchesCategory;
+            });
+            renderProducts(filtered);
+        }
+
+        // Helper: Get Current Product Price
+        function getProductPrice(product) {
+            if (product.roles) {
+                const rData = product.roles.find(r => r.role === product.selectedRole) || product.roles[0];
+                const dData = rData.durations.find(d => d.duration === product.selectedDuration) || rData.durations[0];
+                return dData.price;
+            } else if (product.packages) {
+                const pData = product.packages.find(p => p.name === product.selectedPackage) || product.packages[0];
+                return pData.price;
+            }
+            return product.price;
+        }
+
+        // --- RENDER PRODUCTS GRID ---
+        function renderProducts(items) {
+            const grid = document.getElementById('productGrid');
+            const emptyState = document.getElementById('emptySearch');
+            grid.innerHTML = '';
+
+            if (!items || items.length === 0) {
+                emptyState.classList.remove('hidden');
+                return;
+            } else {
+                emptyState.classList.add('hidden');
+            }
+
+            items.forEach(product => {
+                const card = document.createElement('div');
+                card.id = `productCard_${product.id}`;
+                card.className = "glass-card rounded-3xl overflow-hidden transition-all duration-300 flex flex-col justify-between group";
+                
+                const currentPrice = getProductPrice(product);
+
+                card.innerHTML = `
+                    <div>
+                        <div class="relative h-52 overflow-hidden bg-slate-900">
+                            <img src="${product.image}" alt="${product.name}" 
+                                 class="w-full h-full object-cover group-hover:scale-110 transition duration-500 opacity-90 group-hover:opacity-100"
+                                 onerror="this.src='https://placehold.co/500x300/0f172a/f59e0b?text=febzzbug+Software'">
+                            <span class="absolute top-3.5 left-3.5 gold-gradient-bg text-slate-950 text-[10px] font-black px-2.5 py-1 rounded-full uppercase tracking-wider shadow-md">
+                                ${product.badge}
+                            </span>
+                            <div class="absolute bottom-3 right-3 bg-slate-950/80 backdrop-blur-md px-2.5 py-1 rounded-xl border border-slate-800 text-xs font-semibold text-amber-400 flex items-center gap-1">
+                                <i class="fa-solid fa-star text-amber-400 text-[10px]"></i>
+                                <span>${product.rating}</span>
+                            </div>
+                        </div>
+                        <div class="p-5">
+                            <h3 class="font-serif-luxury font-bold text-slate-100 text-lg mb-1.5 group-hover:text-amber-400 transition">${product.name}</h3>
+                            <p class="text-slate-400 text-xs line-clamp-2 leading-relaxed mb-4">${product.description}</p>
+                            
+                            ${product.roles ? `
+                            <div class="space-y-2.5 pt-3 border-t border-slate-800/80">
+                                <div>
+                                    <label class="block text-[10px] font-bold text-amber-400 uppercase tracking-wider mb-1 flex items-center gap-1">
+                                        <i class="fa-solid fa-user-shield text-[10px]"></i> Role Access:
+                                    </label>
+                                    <button type="button" onclick="openOptionPickerModal(${product.id}, 'ROLE')" class="w-full bg-slate-950/90 border border-amber-500/30 hover:border-amber-500 rounded-2xl px-3.5 py-2.5 text-xs text-slate-100 flex items-center justify-between transition group/btn shadow-inner">
+                                        <span class="font-bold flex items-center gap-2">
+                                            <i class="fa-solid fa-crown text-amber-400 text-[11px]"></i>
+                                            <span id="roleLabel_${product.id}">${product.selectedRole}</span>
+                                        </span>
+                                        <i class="fa-solid fa-chevron-right text-slate-500 text-[10px] group-hover/btn:translate-x-0.5 transition"></i>
+                                    </button>
+                                </div>
+                                <div>
+                                    <label class="block text-[10px] font-bold text-amber-400 uppercase tracking-wider mb-1 flex items-center gap-1">
+                                        <i class="fa-solid fa-clock text-[10px]"></i> Durasi Lisensi:
+                                    </label>
+                                    <button type="button" onclick="openOptionPickerModal(${product.id}, 'DURATION')" class="w-full bg-slate-950/90 border border-amber-500/30 hover:border-amber-500 rounded-2xl px-3.5 py-2.5 text-xs text-slate-100 flex items-center justify-between transition group/btn shadow-inner">
+                                        <span class="font-bold flex items-center gap-2">
+                                            <i class="fa-solid fa-hourglass-half text-amber-400 text-[11px]"></i>
+                                            <span id="durationLabel_${product.id}">${product.selectedDuration}</span>
+                                        </span>
+                                        <i class="fa-solid fa-chevron-right text-slate-500 text-[10px] group-hover/btn:translate-x-0.5 transition"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            ` : ''}
+
+                            ${product.packages ? `
+                            <div class="space-y-2.5 pt-3 border-t border-slate-800/80">
+                                <div>
+                                    <label class="block text-[10px] font-bold text-amber-400 uppercase tracking-wider mb-1 flex items-center gap-1">
+                                        <i class="fa-solid fa-box text-[10px]"></i> Paket Lisensi:
+                                    </label>
+                                    <button type="button" onclick="openOptionPickerModal(${product.id}, 'PACKAGE')" class="w-full bg-slate-950/90 border border-amber-500/30 hover:border-amber-500 rounded-2xl px-3.5 py-2.5 text-xs text-slate-100 flex items-center justify-between transition group/btn shadow-inner">
+                                        <span class="font-bold flex items-center gap-2">
+                                            <i class="fa-solid fa-gem text-amber-400 text-[11px]"></i>
+                                            <span id="packageLabel_${product.id}">${product.selectedPackage}</span>
+                                        </span>
+                                        <i class="fa-solid fa-chevron-right text-slate-500 text-[10px] group-hover/btn:translate-x-0.5 transition"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            ` : ''}
+                        </div>
+                    </div>
+                    <div class="p-5 pt-0 flex items-center justify-between mt-auto">
+                        <div>
+                            <span class="block text-[10px] text-slate-500 uppercase font-bold tracking-wider">Harga Lisensi</span>
+                            <span id="priceDisplay_${product.id}" class="font-bold gold-gradient-text text-lg">${formatRupiah(currentPrice)}</span>
+                        </div>
+                        <button type="button" onclick="addToCartWithVariant(${product.id})" class="gold-gradient-bg text-slate-950 hover:opacity-90 px-4 py-2.5 rounded-2xl text-xs font-black transition duration-300 flex items-center gap-2 shadow-lg shadow-amber-500/20 transform hover:-translate-y-0.5">
+                            <i class="fa-solid fa-cart-plus text-xs"></i> Beli
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // --- OPTION PICKER MODAL LOGIC ---
+        function openOptionPickerModal(productId, type) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+
+            activePickerProductId = productId;
+            activePickerType = type;
+
+            tempSelectedRole = product.selectedRole;
+            tempSelectedDuration = product.selectedDuration;
+            tempSelectedPackage = product.selectedPackage;
+
+            renderOptionPickerModalList();
+            document.getElementById('optionPickerModal').classList.remove('hidden');
+        }
+
+        function closeOptionPickerModal() {
+            document.getElementById('optionPickerModal').classList.add('hidden');
+        }
+
+        function renderOptionPickerModalList() {
+            const product = products.find(p => p.id === activePickerProductId);
+            if (!product) return;
+
+            const title = document.getElementById('pickerModalTitle');
+            const subtitle = document.getElementById('pickerModalSubtitle');
+            const listContainer = document.getElementById('pickerModalList');
+
+            listContainer.innerHTML = '';
+
+            if (activePickerType === 'ROLE') {
+                title.textContent = `Pilih Role - ${product.name}`;
+                subtitle.textContent = "Tentukan hak akses role yang Anda butuhkan";
+
+                product.roles.forEach(r => {
+                    const isSelected = r.role === tempSelectedRole;
+                    const minPrice = r.durations[0].price;
+
+                    const optionCard = document.createElement('div');
+                    optionCard.className = `role-card-option p-4 rounded-2xl border border-slate-800 bg-slate-900/60 hover:border-amber-500/50 cursor-pointer transition flex items-center justify-between ${isSelected ? 'selected' : ''}`;
+                    optionCard.onclick = () => selectRoleOption(r.role);
+
+                    optionCard.innerHTML = `
+                        <div class="flex items-center gap-3 pointer-events-none">
+                            <div class="w-8 h-8 rounded-xl ${isSelected ? 'gold-gradient-bg text-slate-950' : 'bg-slate-800 text-amber-400'} flex items-center justify-center font-bold text-xs">
+                                <i class="fa-solid fa-crown"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-100 text-sm">${r.role}</h4>
+                                <p class="text-[10px] text-slate-400">Tersedia ${r.durations.length} opsi durasi</p>
+                            </div>
+                        </div>
+                        <div class="text-right pointer-events-none">
+                            <span class="text-xs font-black text-amber-400">Mulai ${formatRupiah(minPrice)}</span>
+                            <div class="mt-1 flex justify-end">
+                                <div class="w-4 h-4 rounded-full border ${isSelected ? 'border-amber-400 bg-amber-400' : 'border-slate-600'} flex items-center justify-center">
+                                    ${isSelected ? '<i class="fa-solid fa-check text-[9px] text-slate-950 font-black"></i>' : ''}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    listContainer.appendChild(optionCard);
+                });
+            } else if (activePickerType === 'DURATION') {
+                title.textContent = `Pilih Durasi - ${tempSelectedRole || product.selectedRole}`;
+                subtitle.textContent = "Masa aktif penggunaan lisensi aplikasi";
+
+                const roleData = product.roles.find(r => r.role === (tempSelectedRole || product.selectedRole)) || product.roles[0];
+                
+                roleData.durations.forEach(d => {
+                    const isSelected = d.duration === tempSelectedDuration;
+
+                    const optionCard = document.createElement('div');
+                    optionCard.className = `role-card-option p-4 rounded-2xl border border-slate-800 bg-slate-900/60 hover:border-amber-500/50 cursor-pointer transition flex items-center justify-between ${isSelected ? 'selected' : ''}`;
+                    optionCard.onclick = () => selectDurationOption(d.duration);
+
+                    optionCard.innerHTML = `
+                        <div class="flex items-center gap-3 pointer-events-none">
+                            <div class="w-8 h-8 rounded-xl ${isSelected ? 'gold-gradient-bg text-slate-950' : 'bg-slate-800 text-amber-400'} flex items-center justify-center font-bold text-xs">
+                                <i class="fa-solid fa-hourglass-half"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-100 text-sm">${d.duration}</h4>
+                                <p class="text-[10px] text-emerald-400 font-semibold">Instant Key Delivery</p>
+                            </div>
+                        </div>
+                        <div class="text-right pointer-events-none">
+                            <span class="text-sm font-black gold-gradient-text">${formatRupiah(d.price)}</span>
+                            <div class="mt-1 flex justify-end">
+                                <div class="w-4 h-4 rounded-full border ${isSelected ? 'border-amber-400 bg-amber-400' : 'border-slate-600'} flex items-center justify-center">
+                                    ${isSelected ? '<i class="fa-solid fa-check text-[9px] text-slate-950 font-black"></i>' : ''}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    listContainer.appendChild(optionCard);
+                });
+            } else if (activePickerType === 'PACKAGE') {
+                title.textContent = `Pilih Paket - ${product.name}`;
+                subtitle.textContent = "Pilih masa berlaku lisensi eksklusif";
+
+                product.packages.forEach(p => {
+                    const isSelected = p.name === tempSelectedPackage;
+
+                    const optionCard = document.createElement('div');
+                    optionCard.className = `role-card-option p-4 rounded-2xl border border-slate-800 bg-slate-900/60 hover:border-amber-500/50 cursor-pointer transition flex items-center justify-between ${isSelected ? 'selected' : ''}`;
+                    optionCard.onclick = () => selectPackageOption(p.name);
+
+                    optionCard.innerHTML = `
+                        <div class="flex items-center gap-3 pointer-events-none">
+                            <div class="w-8 h-8 rounded-xl ${isSelected ? 'gold-gradient-bg text-slate-950' : 'bg-slate-800 text-amber-400'} flex items-center justify-center font-bold text-xs">
+                                <i class="fa-solid fa-gem"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-slate-100 text-sm">${p.name}</h4>
+                                <p class="text-[10px] text-slate-400">Akses Penuh Tanpa Batas</p>
+                            </div>
+                        </div>
+                        <div class="text-right pointer-events-none">
+                            <span class="text-sm font-black gold-gradient-text">${formatRupiah(p.price)}</span>
+                            <div class="mt-1 flex justify-end">
+                                <div class="w-4 h-4 rounded-full border ${isSelected ? 'border-amber-400 bg-amber-400' : 'border-slate-600'} flex items-center justify-center">
+                                    ${isSelected ? '<i class="fa-solid fa-check text-[9px] text-slate-950 font-black"></i>' : ''}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    listContainer.appendChild(optionCard);
+                });
+            }
+
+            updatePickerModalFooter();
+        }
+
+        function selectRoleOption(role) {
+            tempSelectedRole = role;
+            const product = products.find(p => p.id === activePickerProductId);
+            if (product && product.roles) {
+                const roleData = product.roles.find(r => r.role === role);
+                if (roleData && roleData.durations.length > 0) {
+                    tempSelectedDuration = roleData.durations[0].duration;
+                }
+            }
+            renderOptionPickerModalList();
+        }
+
+        function selectDurationOption(duration) {
+            tempSelectedDuration = duration;
+            renderOptionPickerModalList();
+        }
+
+        function selectPackageOption(pkgName) {
+            tempSelectedPackage = pkgName;
+            renderOptionPickerModalList();
+        }
+
+        function updatePickerModalFooter() {
+            const product = products.find(p => p.id === activePickerProductId);
+            if (!product) return;
+
+            let price = product.price;
+            if (product.roles) {
+                const rData = product.roles.find(r => r.role === tempSelectedRole) || product.roles[0];
+                const dData = rData.durations.find(d => d.duration === tempSelectedDuration) || rData.durations[0];
+                price = dData.price;
+            } else if (product.packages) {
+                const pData = product.packages.find(p => p.name === tempSelectedPackage) || product.packages[0];
+                price = pData.price;
+            }
+
+            document.getElementById('pickerModalPriceDisplay').textContent = formatRupiah(price);
+        }
+
+        function confirmOptionSelection() {
+            const product = products.find(p => p.id === activePickerProductId);
+            if (!product) return;
+
+            if (product.roles) {
+                product.selectedRole = tempSelectedRole;
+                product.selectedDuration = tempSelectedDuration;
+
+                const roleLabel = document.getElementById(`roleLabel_${product.id}`);
+                const durationLabel = document.getElementById(`durationLabel_${product.id}`);
+                if (roleLabel) roleLabel.textContent = product.selectedRole;
+                if (durationLabel) durationLabel.textContent = product.selectedDuration;
+            } else if (product.packages) {
+                product.selectedPackage = tempSelectedPackage;
+
+                const packageLabel = document.getElementById(`packageLabel_${product.id}`);
+                if (packageLabel) packageLabel.textContent = product.selectedPackage;
+            }
+
+            const newPrice = getProductPrice(product);
+            const priceDisplay = document.getElementById(`priceDisplay_${product.id}`);
+            if (priceDisplay) priceDisplay.textContent = formatRupiah(newPrice);
+
+            closeOptionPickerModal();
+        }
+
+        // --- ADD TO CART ---
+        function addToCartWithVariant(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+
+            let itemName = product.name;
+            let itemPrice = product.price;
+
+            if (product.roles) {
+                const roleData = product.roles.find(r => r.role === product.selectedRole) || product.roles[0];
+                const durationData = roleData.durations.find(d => d.duration === product.selectedDuration) || roleData.durations[0];
+
+                itemPrice = durationData.price;
+                itemName = `${product.name} [${product.selectedRole} - ${product.selectedDuration}]`;
+            } else if (product.packages) {
+                const pkgData = product.packages.find(p => p.name === product.selectedPackage) || product.packages[0];
+
+                itemPrice = pkgData.price;
+                itemName = `${product.name} [${pkgData.name}]`;
+            }
+
+            const cartItemId = `${productId}_${itemName}`;
+            const existingItem = cart.find(item => item.cartItemId === cartItemId);
+
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    cartItemId: cartItemId,
+                    id: product.id,
+                    name: itemName,
+                    price: itemPrice,
+                    image: product.image,
+                    quantity: 1
+                });
+            }
+
+            updateCartUI();
+            showToast(`"${itemName}" telah ditambahkan`);
+        }
+
+        function updateQuantity(cartItemId, change) {
+            const index = cart.findIndex(item => item.cartItemId === cartItemId);
+            if (index !== -1) {
+                cart[index].quantity += change;
+                if (cart[index].quantity <= 0) {
+                    cart.splice(index, 1);
+                }
+            }
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const cartItemsContainer = document.getElementById('cartItems');
+            const cartCountBadge = document.getElementById('cartCountBadge');
+            const cartSubtotal = document.getElementById('cartSubtotal');
+            const cartTotal = document.getElementById('cartTotal');
+            const checkoutBtn = document.getElementById('checkoutBtn');
+
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartCountBadge.textContent = totalItems;
+
+            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            cartSubtotal.textContent = formatRupiah(totalPrice);
+            cartTotal.textContent = formatRupiah(totalPrice);
+
+            checkoutBtn.disabled = cart.length === 0;
+
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = `
+                    <div class="h-full flex flex-col items-center justify-center text-center p-6 text-slate-500">
+                        <div class="w-16 h-16 rounded-2xl bg-slate-900 border border-slate-800 text-amber-500/50 flex items-center justify-center mb-3 text-2xl shadow-inner">
+                            <i class="fa-solid fa-cart-flatbed"></i>
+                        </div>
+                        <p class="text-sm font-bold text-slate-300">Keranjang Lisensi Kosong</p>
+                        <p class="text-xs text-slate-500 mt-1 max-w-[200px]">Pilih aplikasi FBZ, VILLAIN, SYAM, atau LENNOX di katalog untuk melanjutkan.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            cartItemsContainer.innerHTML = cart.map(item => `
+                <div class="flex items-center gap-3.5 bg-slate-950/70 p-3.5 rounded-2xl border border-amber-500/20 shadow-md relative overflow-hidden">
+                    <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded-xl bg-slate-900 border border-slate-800">
+                    <div class="flex-grow min-w-0">
+                        <h4 class="font-serif-luxury font-bold text-slate-100 text-xs truncate">${item.name}</h4>
+                        <p class="text-xs font-extrabold gold-gradient-text mt-1">${formatRupiah(item.price)}</p>
+                    </div>
+                    <div class="flex items-center gap-2 bg-slate-900/90 border border-slate-800 rounded-xl p-1">
+                        <button onclick="updateQuantity('${item.cartItemId}', -1)" class="w-6 h-6 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center text-xs transition">
+                            <i class="fa-solid fa-minus"></i>
+                        </button>
+                        <span class="text-xs font-black text-slate-100 w-4 text-center">${item.quantity}</span>
+                        <button onclick="updateQuantity('${item.cartItemId}', 1)" class="w-6 h-6 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center text-xs transition">
+                            <i class="fa-solid fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // --- DRAWER TOGGLE ---
+        function toggleCart(open) {
+            const drawer = document.getElementById('cartDrawer');
+            const overlay = document.getElementById('cartOverlay');
+
+            if (open) {
+                overlay.classList.remove('hidden');
+                setTimeout(() => {
+                    overlay.classList.remove('opacity-0');
+                    drawer.classList.remove('translate-x-full');
+                }, 10);
+            } else {
+                drawer.classList.add('translate-x-full');
+                overlay.classList.add('opacity-0');
+                setTimeout(() => {
+                    overlay.classList.add('hidden');
+                }, 300);
+            }
+        }
+
+        // --- CHECKOUT & QRIS MODAL LOGIC ---
+        function openCheckoutModal() {
+            toggleCart(false);
+            const modal = document.getElementById('checkoutModal');
+            const summaryContainer = document.getElementById('modalSummaryItems');
+            const totalContainer = document.getElementById('modalTotalAmount');
+            const qrisTotalDisplay = document.getElementById('qrisTotalDisplay');
+
+            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            
+            summaryContainer.innerHTML = cart.map(item => `
+                <div class="flex justify-between">
+                    <span>${item.name} <span class="text-amber-400 font-bold">(x${item.quantity})</span></span>
+                    <span class="font-medium text-slate-200">${formatRupiah(item.price * item.quantity)}</span>
+                </div>
+            `).join('');
+
+            totalContainer.textContent = formatRupiah(totalPrice);
+            qrisTotalDisplay.textContent = formatRupiah(totalPrice);
+            
+            // Set QRIS Image Source
+            const qrisImgElem = document.getElementById('qrisImage');
+            if (DEFAULT_QRIS_URL && DEFAULT_QRIS_URL.trim() !== "") {
+                qrisImgElem.src = DEFAULT_QRIS_URL;
+            } else {
+                const qrData = encodeURIComponent(`FEBZZBUG_PAYMENT_TOTAL_${totalPrice}`);
+                qrisImgElem.src = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${qrData}`;
+            }
+
+            modal.classList.remove('hidden');
+        }
+
+        function closeCheckoutModal() {
+            document.getElementById('checkoutModal').classList.add('hidden');
+        }
+
+        // --- SUBMIT ORDER TO WHATSAPP ---
+        function submitOrder(e) {
+            e.preventDefault();
+
+            const username = document.getElementById('customUsername').value;
+            const password = document.getElementById('customPassword').value;
+
+            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+            let message = `*💻 ORDER SOFTWARE VIP - FEBZZBUG*\n`;
+            message += `===================================\n`;
+            message += `*Kredensial Akun Diinginkan:*\n`;
+            message += `• Username: ${username}\n`;
+            message += `• Password: ${password}\n`;
+            message += `===================================\n`;
+            message += `*Rincian Software & Lisensi:*\n`;
+
+            cart.forEach(item => {
+                message += `• ${item.name} (x${item.quantity}) = ${formatRupiah(item.price * item.quantity)}\n`;
+            });
+
+            message += `===================================\n`;
+            message += `*TOTAL PEMBAYARAN: ${formatRupiah(totalPrice)}*\n`;
+            message += `*Status Pembayaran: Sudah Transfer QRIS*\n`;
+            message += `===================================\n`;
+            message += `Halo Admin, saya telah melakukan pembayaran QRIS. Berikut saya sertakan bukti transfer & formulir akun kustom saya. Mohon diproses!`;
+
+            const encodedMessage = encodeURIComponent(message);
+            const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
+
+            window.open(waUrl, '_blank');
+            closeCheckoutModal();
+            cart = [];
+            updateCartUI();
+            document.getElementById('orderForm').reset();
+            showToast("Pesanan & bukti transfer dialihkan ke WhatsApp VIP!");
+        }
+
+        // --- TOAST NOTIFICATIONS ---
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            
+            toastMessage.textContent = msg;
+            toast.classList.remove('translate-y-28', 'opacity-0');
+
+            setTimeout(() => {
+                toast.classList.add('translate-y-28', 'opacity-0');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
