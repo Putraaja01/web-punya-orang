@@ -1,952 +1,717 @@
 <!DOCTYPE html>
-<html lang="id" class="h-full bg-slate-950 text-slate-100 selection:bg-amber-500 selection:text-slate-950">
+<html lang="id" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>febzzbug - Premium App & Software Hub</title>
-    <!-- Tailwind CSS CDN -->
+    <title>FEBZZ OFFICIAL - Modern Digital Store & App Hub</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Space Grotesk & Plus Jakarta Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                    },
                     colors: {
-                        gold: {
-                            400: '#fbbf24',
-                            500: '#f59e0b',
-                            600: '#d97706',
-                            700: '#b45309',
+                        cyber: {
+                            bg: '#050811',
+                            card: '#0c1322',
+                            border: '#1e293b',
+                            cyan: '#06b6d4',
+                            magenta: '#d946ef',
+                            accent: '#10b981',
                         }
                     }
                 }
             }
         }
     </script>
-    <!-- Google Fonts Playfair & Plus Jakarta Sans -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
-        .font-serif-luxury { font-family: 'Playfair Display', serif; }
-        
-        /* Custom Glowing Scrollbar */
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #020617; }
-        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 9999px; }
-        ::-webkit-scrollbar-thumb:hover { background: #f59e0b; }
+        /* Custom Glowing & Ambient FX */
+        body {
+            background-color: #050811;
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(6, 182, 212, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 85% 85%, rgba(217, 70, 239, 0.07) 0%, transparent 40%);
+            background-attachment: fixed;
+        }
 
-        /* Glassmorphism & Luxury Glow Classes */
+        /* Glassmorphism utility */
         .glass-panel {
-            background: rgba(15, 23, 42, 0.85);
+            background: rgba(12, 19, 34, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+        }
+
+        .glass-modal {
+            background: rgba(8, 13, 25, 0.92);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(245, 158, 11, 0.2);
-        }
-        .glass-card {
-            background: linear-gradient(145deg, rgba(30, 41, 59, 0.5) 0%, rgba(15, 23, 42, 0.8) 100%);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
-        }
-        .glass-card:hover {
-            border-color: rgba(245, 158, 11, 0.5);
-            box-shadow: 0 15px 35px -10px rgba(245, 158, 11, 0.25);
-        }
-        .glass-modal {
-            background: linear-gradient(165deg, rgba(15, 23, 42, 0.96) 0%, rgba(2, 6, 23, 0.98) 100%);
-            backdrop-filter: blur(24px);
-            border: 1px solid rgba(245, 158, 11, 0.3);
-            box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.9), 0 0 50px rgba(245, 158, 11, 0.15);
-        }
-        .gold-gradient-text {
-            background: linear-gradient(135deg, #fef08a 0%, #f59e0b 50%, #d97706 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .gold-gradient-bg {
-            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);
-        }
-        .gold-gradient-bg:hover {
-            background: linear-gradient(135deg, #fef08a 0%, #fbbf24 50%, #f59e0b 100%);
-        }
-        
-        /* Modal Keyframe Animations */
-        @keyframes modalPop {
-            0% { opacity: 0; transform: scale(0.9) translateY(16px); }
-            100% { opacity: 1; transform: scale(1) translateY(0); }
-        }
-        .animate-modal-pop {
-            animation: modalPop 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-        @keyframes floatGlow {
-            0%, 100% { opacity: 0.3; transform: scale(1); }
-            50% { opacity: 0.6; transform: scale(1.08); }
-        }
-        .ambient-glow {
-            animation: floatGlow 6s ease-in-out infinite;
         }
 
-        /* Custom Selected Option Card Style */
-        .role-card-option.selected {
-            border-color: rgba(245, 158, 11, 0.8) !important;
-            background: linear-gradient(135deg, rgba(245, 158, 11, 0.15) 0%, rgba(15, 23, 42, 0.95) 100%) !important;
-            box-shadow: 0 0 20px rgba(245, 158, 11, 0.25) !important;
+        .neon-glow-cyan {
+            box-shadow: 0 0 25px -5px rgba(6, 182, 212, 0.35);
+        }
+
+        .neon-glow-magenta {
+            box-shadow: 0 0 25px -5px rgba(217, 70, 239, 0.35);
+        }
+
+        /* Custom Scrollbars */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            height: 6px;
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #090e1a;
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #06b6d4;
         }
     </style>
 </head>
-<body class="h-full flex flex-col justify-between bg-slate-950 text-slate-200">
+<body class="text-slate-100 font-sans antialiased min-h-screen flex flex-col selection:bg-cyan-500 selection:text-slate-950">
 
-    <!-- NAVIGATION / HEADER -->
-    <header class="sticky top-0 z-30 glass-panel shadow-2xl">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-2">
-            <!-- Logo & Brand Title -->
-            <div class="flex items-center gap-3 min-w-0">
-                <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl gold-gradient-bg text-slate-950 flex items-center justify-center font-bold text-lg sm:text-xl shadow-lg shadow-amber-500/20 shrink-0">
-                    <i class="fa-solid fa-code text-slate-950"></i>
+    <!-- Ambient Glowing Orbs Background -->
+    <div class="fixed top-0 left-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-[120px] pointer-events-none"></div>
+    <div class="fixed bottom-10 right-10 w-96 h-96 bg-fuchsia-500/10 rounded-full blur-[140px] pointer-events-none"></div>
+
+    <!-- ========================================== -->
+    <!-- HEADER / NAVBAR                            -->
+    <!-- ========================================== -->
+    <header class="sticky top-0 z-40 glass-panel border-b border-cyan-500/20 shadow-lg shadow-cyan-950/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <div class="flex items-center space-x-3 cursor-pointer group" onclick="resetView()">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 via-teal-400 to-fuchsia-500 p-[1.5px] shadow-lg shadow-cyan-500/20 group-hover:scale-105 transition duration-300">
+                    <div class="w-full h-full bg-slate-950 rounded-[10.5px] flex items-center justify-center">
+                        <i class="fa-solid fa-bolt text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-fuchsia-400 text-lg"></i>
+                    </div>
                 </div>
-                <div class="min-w-0">
-                    <h1 class="font-serif-luxury font-extrabold text-lg sm:text-2xl tracking-wide gold-gradient-text truncate leading-tight">febzzbug</h1>
-                    <p class="text-[9px] sm:text-xs text-amber-400/80 uppercase tracking-wider font-semibold truncate">Software & Digital Solutions</p>
+                <div>
+                    <h1 class="font-display font-extrabold text-lg tracking-wider text-white flex items-center gap-1.5">
+                        FEBZZ <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-fuchsia-400">OFFICIAL</span>
+                    </h1>
+                    <p class="text-[9px] text-cyan-400 font-bold tracking-widest uppercase">Digital Store & App Hub</p>
                 </div>
             </div>
 
-            <!-- Header Badge -->
-            <div class="hidden sm:flex items-center gap-2 bg-slate-900/80 border border-amber-500/30 px-3 py-1.5 rounded-full text-xs text-amber-400 font-semibold">
-                <i class="fa-solid fa-shield-halved text-amber-400"></i>
-                <span>Toko Lisensi Resmi</span>
+            <!-- Search Bar -->
+            <div class="hidden sm:flex items-center flex-1 max-w-md mx-8">
+                <div class="relative w-full">
+                    <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-cyan-400/70 text-sm"></i>
+                    <input type="text" id="searchInput" oninput="filterProducts()" placeholder="Cari aplikasi atau role premium..." 
+                        class="w-full pl-10 pr-4 py-2 bg-slate-900/90 border border-slate-700/80 rounded-xl text-sm text-slate-100 placeholder-slate-400 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400/50 transition duration-200">
+                </div>
+            </div>
+
+            <!-- Customer Service Link -->
+            <div class="flex items-center space-x-3">
+                <a href="#" id="adminWaLinkHeader" target="_blank" class="flex items-center space-x-2 bg-gradient-to-r from-emerald-500/20 to-teal-500/20 text-emerald-300 border border-emerald-500/40 hover:border-emerald-400 hover:bg-emerald-500/30 px-3.5 py-1.5 rounded-xl text-xs font-semibold transition shadow-md shadow-emerald-950/40">
+                    <i class="fa-brands fa-whatsapp text-sm text-emerald-400"></i>
+                    <span class="hidden md:inline">Hubungi Admin</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Mobile Search Bar -->
+        <div class="sm:hidden px-4 pb-3">
+            <div class="relative w-full">
+                <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-cyan-400/70 text-sm"></i>
+                <input type="text" id="mobileSearchInput" oninput="syncAndFilter(this.value)" placeholder="Cari aplikasi..." 
+                    class="w-full pl-10 pr-4 py-2 bg-slate-900/90 border border-slate-700/80 rounded-xl text-sm text-slate-100 placeholder-slate-400 focus:outline-none focus:border-cyan-400 transition">
             </div>
         </div>
     </header>
 
-    <!-- MAIN CONTENT -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex-grow w-full">
-        
-        <!-- HERO BANNER EKSKLUSIF DIGITAL -->
-        <div class="relative overflow-hidden rounded-3xl mb-12 p-8 md:p-12 border border-amber-500/20 bg-gradient-to-r from-slate-900 via-slate-900/90 to-amber-950/40 shadow-2xl">
-            <div class="absolute -right-10 -bottom-10 w-80 h-80 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+    <!-- ========================================== -->
+    <!-- MAIN CONTENT AREA                          -->
+    <!-- ========================================== -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 relative z-10">
+
+        <!-- Banner Promosi Cyberpunk Style -->
+        <section class="mb-8 relative overflow-hidden rounded-2xl border border-cyan-500/30 bg-gradient-to-r from-slate-900/90 via-slate-900/95 to-slate-950 p-6 md:p-8 shadow-2xl shadow-cyan-950/40">
+            <!-- Glowing background accents -->
+            <div class="absolute top-0 right-0 w-80 h-80 bg-gradient-to-bl from-cyan-500/20 via-fuchsia-500/10 to-transparent rounded-full blur-2xl pointer-events-none"></div>
+            
             <div class="relative z-10 max-w-2xl">
-                <span class="inline-block px-3.5 py-1 bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-semibold rounded-full uppercase tracking-widest mb-4">
-                    🚀 Next-Gen Software Store
-                </span>
-                <h2 class="text-3xl sm:text-5xl font-serif-luxury font-bold text-slate-100 leading-tight mb-3">
-                    Aplikasi & Source Code Kelas Dunia
+                <div class="inline-flex items-center gap-2 bg-cyan-500/10 text-cyan-300 border border-cyan-500/30 text-xs font-bold px-3 py-1 rounded-lg mb-3 shadow-sm">
+                    <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
+                    PROSES OTOMATIS & SERBA CEPAT
+                </div>
+                <h2 class="text-2xl md:text-3xl font-display font-extrabold text-white tracking-wide mb-2">
+                    Katalog App & Injector <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-teal-300 to-fuchsia-400">FEBZZ OFFICIAL</span>
                 </h2>
-                <p class="text-slate-400 text-sm sm:text-base leading-relaxed mb-6">
-                    Pilih aplikasi, isi Username & Password kustom Anda, bayar via QRIS instan, dan konfirmasi langsung ke WhatsApp!
+                <p class="text-slate-300 text-sm md:text-base mb-5 leading-relaxed font-normal">
+                    Pilih aplikasi favorit Anda, tentukan role atau durasi penggunaan, dan lakukan pembayaran instan via Scan QRIS.
                 </p>
-                <div class="flex flex-wrap items-center gap-6 text-xs text-slate-400 font-medium border-t border-slate-800/80 pt-4">
-                    <span class="flex items-center gap-1.5"><i class="fa-solid fa-user-lock text-amber-400"></i> Akun Kustom</span>
-                    <span class="flex items-center gap-1.5"><i class="fa-solid fa-qrcode text-amber-400"></i> Pembayaran QRIS Otomatis</span>
-                    <span class="flex items-center gap-1.5"><i class="fa-solid fa-headset text-amber-400"></i> Support 24/7 VIP</span>
+                <div class="flex flex-wrap items-center gap-4 text-xs text-slate-300 font-medium">
+                    <div class="flex items-center gap-1.5 bg-slate-900/80 px-3 py-1.5 rounded-lg border border-slate-800">
+                        <i class="fa-solid fa-bolt text-amber-400"></i> Aktif Instant
+                    </div>
+                    <div class="flex items-center gap-1.5 bg-slate-900/80 px-3 py-1.5 rounded-lg border border-slate-800">
+                        <i class="fa-solid fa-qrcode text-cyan-400"></i> Support QRIS All E-Wallet / Bank
+                    </div>
                 </div>
             </div>
+        </section>
+
+        <!-- Product Grid Header -->
+        <div class="flex items-center justify-between mb-5">
+            <h3 class="text-lg md:text-xl font-display font-bold text-white flex items-center gap-2.5">
+                <i class="fa-solid fa-layer-group text-cyan-400"></i> Daftar Produk & Aplikasi
+            </h3>
+            <span id="productCount" class="text-xs text-cyan-300 font-semibold bg-cyan-950/60 border border-cyan-500/30 px-3 py-1 rounded-lg">7 Aplikasi</span>
         </div>
 
-        <!-- Search Bar Section -->
-        <div class="mb-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-            <div>
-                <h3 class="text-2xl font-serif-luxury font-bold text-slate-100">Katalog Aplikasi Premium</h3>
-                <p class="text-slate-400 text-xs sm:text-sm mt-1">Pilih aplikasi terbaik untuk kebutuhan bisnis dan pengembangan Anda.</p>
-            </div>
-            
-            <!-- Search Bar -->
-            <div class="relative min-w-[300px]">
-                <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
-                <input type="text" id="searchInput" oninput="filterProducts()" placeholder="Cari aplikasi, SaaS, atau tools..." class="w-full pl-11 pr-4 py-3 bg-slate-900/90 border border-slate-800 rounded-2xl text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-amber-500/60 focus:ring-1 focus:ring-amber-500/60 shadow-xl transition">
-            </div>
+        <!-- Products Grid Container -->
+        <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
+            <!-- Product Cards generated by JavaScript -->
         </div>
 
-        <!-- Product Grid -->
-        <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-7">
-            <!-- Products rendered dynamically -->
-        </div>
-
-        <!-- Empty State -->
-        <div id="emptySearch" class="hidden text-center py-20">
-            <div class="w-20 h-20 bg-slate-900 border border-slate-800 text-amber-500 rounded-3xl flex items-center justify-center mx-auto mb-4 shadow-xl">
-                <i class="fa-solid fa-laptop-code text-3xl"></i>
+        <!-- Empty State Search -->
+        <div id="noResults" class="hidden text-center py-16">
+            <div class="w-16 h-16 bg-slate-900/80 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-slate-800 text-slate-500 shadow-lg">
+                <i class="fa-solid fa-magnifying-glass text-2xl text-cyan-500/50"></i>
             </div>
-            <h3 class="text-slate-200 font-serif-luxury font-bold text-xl">Belum Ada Produk Tersedia</h3>
-            <p class="text-slate-500 text-sm mt-1">Produk dan aplikasi akan segera ditambahkan.</p>
+            <h4 class="text-base font-semibold text-slate-200">Aplikasi tidak ditemukan</h4>
+            <p class="text-xs text-slate-400 mt-1">Coba kata kunci lain atau periksa kembali nama aplikasi.</p>
         </div>
     </main>
 
-    <!-- FOOTER -->
-    <footer class="bg-slate-900/50 border-t border-slate-800/80 py-8 mt-16 backdrop-blur-md">
-        <div class="max-w-7xl mx-auto px-4 text-center text-slate-500 text-xs sm:text-sm">
-            <p class="font-serif-luxury text-slate-400 font-semibold mb-2">febzzbug Software Store &bull; Premium Digital Marketplace</p>
-            <p>&copy; 2026 All rights reserved. Built for innovators and creators.</p>
+    <!-- ========================================== -->
+    <!-- PLAY STORE APP DETAIL MODAL                -->
+    <!-- ========================================== -->
+    <div id="appModal" class="fixed inset-0 z-50 hidden overflow-y-auto bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-4">
+        <div class="relative w-full max-w-3xl glass-modal border border-cyan-500/30 rounded-2xl shadow-2xl shadow-cyan-950/50 overflow-hidden my-auto max-h-[90vh] flex flex-col">
+            
+            <!-- Modal Header / App Banner -->
+            <div class="relative p-5 sm:p-6 border-b border-slate-800/90 bg-slate-900/70 flex-shrink-0">
+                <button onclick="closeAppModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white bg-slate-800/80 hover:bg-slate-700 w-8 h-8 rounded-full flex items-center justify-center transition border border-slate-700">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+
+                <div class="flex items-start gap-4">
+                    <img id="modalAppIcon" src="" alt="App Icon" class="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl object-cover border border-cyan-500/40 shadow-xl shadow-cyan-500/10 flex-shrink-0">
+                    <div class="pr-8">
+                        <span class="inline-block bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 text-[10px] font-bold px-2.5 py-0.5 rounded-md mb-1.5 tracking-wider">OFFICIAL RELEASE</span>
+                        <h3 id="modalAppName" class="text-xl sm:text-2xl font-display font-bold text-white leading-tight"></h3>
+                        <p class="text-xs text-fuchsia-400 font-semibold mt-0.5">Developer: FEBZZ OFFICIAL</p>
+                        <p class="text-xs text-slate-300 mt-2 line-clamp-2 leading-relaxed" id="modalAppDesc"></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Body (Scrollable content) -->
+            <div class="p-5 sm:p-6 space-y-6 overflow-y-auto custom-scrollbar flex-grow">
+                
+                <!-- PLAYSTORE STYLE SCREENSHOT GALLERY -->
+                <div>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-cyan-400 mb-3 flex items-center gap-1.5">
+                        <i class="fa-solid fa-images"></i> Tangkapan Layar / Screenshot Preview
+                    </h4>
+                    <div id="modalScreenshots" class="flex gap-3 overflow-x-auto pb-2 custom-scrollbar snap-x">
+                        <!-- Screenshots generated dynamically -->
+                    </div>
+                </div>
+
+                <!-- SELECT ROLE / DURATION / VARIANT -->
+                <div>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-cyan-400 mb-3 flex items-center gap-1.5">
+                        <i class="fa-solid fa-layer-group"></i> Pilih Role & Durasi Paket
+                    </h4>
+                    <div id="modalVariants" class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                        <!-- Variant Buttons generated dynamically -->
+                    </div>
+                </div>
+
+                <!-- USER FORM INPUT -->
+                <div class="bg-slate-900/80 border border-slate-800 p-4 rounded-xl space-y-3">
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
+                        <i class="fa-solid fa-user-pen text-cyan-400"></i> Informasi Data Pemesan
+                    </h4>
+                    <div>
+                        <label class="block text-xs text-slate-400 mb-1">Nama / Nickname Pengguna</label>
+                        <input type="text" id="custName" placeholder="Masukkan nama Anda" 
+                            class="w-full bg-slate-950/80 border border-slate-700/80 rounded-xl px-3.5 py-2 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-cyan-400 transition">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-slate-400 mb-1">Password Kustom</label>
+                        <input type="text" id="custPassword" placeholder="Masukkan password kustom Anda" 
+                            class="w-full bg-slate-950/80 border border-slate-700/80 rounded-xl px-3.5 py-2 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-cyan-400 transition">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Footer / Order Action Bar -->
+            <div class="p-4 sm:p-5 bg-slate-950 border-t border-slate-800/90 flex items-center justify-between gap-4 flex-shrink-0">
+                <div>
+                    <span class="text-[11px] text-slate-400 block font-medium">Total Pembayaran</span>
+                    <span id="modalSelectedPrice" class="text-lg sm:text-xl font-display font-extrabold text-cyan-400">Rp 0</span>
+                </div>
+                <button onclick="processCheckout()" class="flex-1 max-w-xs bg-gradient-to-r from-cyan-500 via-teal-500 to-emerald-500 hover:from-cyan-400 hover:to-emerald-400 text-slate-950 font-extrabold py-2.5 px-4 rounded-xl shadow-lg shadow-cyan-500/25 text-sm flex items-center justify-center gap-2 transition active:scale-95">
+                    <i class="fa-solid fa-cart-shopping"></i> Lanjut Pembayaran
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- QRIS PAYMENT MODAL                         -->
+    <!-- ========================================== -->
+    <div id="qrisModal" class="fixed inset-0 z-50 hidden overflow-y-auto bg-slate-950/90 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="relative w-full max-w-md glass-modal border border-cyan-500/40 rounded-2xl shadow-2xl shadow-cyan-950/60 overflow-hidden p-6 text-center">
+            
+            <button onclick="closeQrisModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white bg-slate-800/80 w-8 h-8 rounded-full flex items-center justify-center border border-slate-700">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="inline-flex items-center justify-center w-12 h-12 bg-cyan-500/10 text-cyan-400 rounded-xl border border-cyan-500/30 mb-3 shadow-md shadow-cyan-500/10">
+                <i class="fa-solid fa-qrcode text-xl"></i>
+            </div>
+
+            <h3 class="text-xl font-display font-bold text-white">Pembayaran QRIS</h3>
+            <p class="text-xs text-slate-400 mt-1">Scan kode QRIS di bawah ini menggunakan e-wallet atau mobile banking Anda.</p>
+
+            <!-- QRIS Image Showcase -->
+            <div class="my-5 p-3.5 bg-white rounded-2xl shadow-2xl inline-block border-2 border-cyan-500/30">
+                <img id="qrisImage" src="" alt="QRIS Payment FEBZZ" class="w-56 h-56 object-contain mx-auto rounded-lg">
+            </div>
+
+            <!-- Summary Text Box -->
+            <div class="bg-slate-950/90 border border-slate-800 rounded-xl p-3.5 mb-5 text-left text-xs space-y-2">
+                <div class="flex justify-between">
+                    <span class="text-slate-400">Produk:</span>
+                    <span id="summaryApp" class="font-semibold text-slate-100"></span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-slate-400">Role / Paket:</span>
+                    <span id="summaryVariant" class="font-semibold text-cyan-400"></span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-slate-400">Pemesan:</span>
+                    <span id="summaryName" class="font-semibold text-slate-100"></span>
+                </div>
+                <div class="border-t border-slate-800/80 pt-2 flex justify-between font-bold text-sm">
+                    <span class="text-slate-300">Total Transfer:</span>
+                    <span id="summaryTotal" class="text-emerald-400 font-display font-extrabold"></span>
+                </div>
+            </div>
+
+            <!-- WhatsApp Direct Confirmation Button -->
+            <a id="confirmWaBtn" href="#" target="_blank" class="w-full bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-slate-950 font-extrabold py-3 px-4 rounded-xl shadow-lg shadow-emerald-500/25 flex items-center justify-center gap-2 text-sm transition active:scale-95">
+                <i class="fa-brands fa-whatsapp text-lg"></i> Konfirmasi Pembayaran via WA
+            </a>
+
+            <p class="text-[11px] text-slate-500 mt-3">
+                *Setelah scan & bayar, klik tombol di atas untuk kirim bukti ke Admin.
+            </p>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 glass-panel text-slate-100 border border-cyan-500/40 px-4 py-3 rounded-xl shadow-2xl flex items-center gap-3 text-xs max-w-sm">
+        <i id="toastIcon" class="fa-solid fa-circle-info text-cyan-400 text-base"></i>
+        <span id="toastMessage">Pesan notifikasi</span>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- FOOTER                                     -->
+    <!-- ========================================== -->
+    <footer class="glass-panel border-t border-slate-800/90 mt-12 py-6 text-center relative z-10">
+        <div class="max-w-7xl mx-auto px-4">
+            <p class="text-xs text-slate-400 font-medium">
+                &copy; 2026 <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-fuchsia-400 font-bold">FEBZZ OFFICIAL</span>. All rights reserved.
+            </p>
+            <p class="text-[11px] text-slate-500 mt-1">Platform Order Aplikasi & Service Digital Premium</p>
         </div>
     </footer>
 
-    <!-- CUSTOM LUXURY OPTION PICKER MODAL -->
-    <div id="optionPickerModal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md z-50 flex items-center justify-center p-4 sm:p-6 hidden">
-        <div class="glass-modal rounded-3xl max-w-lg w-full max-h-[85vh] flex flex-col shadow-2xl overflow-hidden relative animate-modal-pop">
-            <!-- Ambient Glow Effect -->
-            <div class="absolute -top-24 -left-24 w-60 h-60 bg-amber-500/15 rounded-full blur-3xl pointer-events-none ambient-glow"></div>
-            
-            <!-- Modal Header -->
-            <div class="p-5 border-b border-amber-500/20 flex justify-between items-center bg-slate-900/60 relative z-10">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-2xl gold-gradient-bg text-slate-950 flex items-center justify-center font-black text-sm shadow-md">
-                        <i class="fa-solid fa-crown"></i>
-                    </div>
-                    <div>
-                        <h3 id="pickerModalTitle" class="font-serif-luxury font-bold text-slate-100 text-lg tracking-wide">Pilih Opsi Lisensi</h3>
-                        <p id="pickerModalSubtitle" class="text-[11px] text-amber-400/80 font-medium">Pilih konfigurasi produk Anda</p>
-                    </div>
-                </div>
-                <button onclick="closeOptionPickerModal()" class="w-8 h-8 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-amber-400 transition">
-                    <i class="fa-solid fa-xmark text-sm"></i>
-                </button>
-            </div>
-
-            <!-- Modal Body (Grid List Options) -->
-            <div id="pickerModalList" class="p-5 overflow-y-auto space-y-3 relative z-10 max-h-[60vh]">
-                <!-- Dynamic cards rendered here -->
-            </div>
-
-            <!-- Modal Footer -->
-            <div class="p-4 border-t border-amber-500/20 bg-slate-900/80 flex items-center justify-between relative z-10">
-                <div>
-                    <span class="block text-[10px] text-slate-400 uppercase font-bold">Total Harga:</span>
-                    <span id="pickerModalPriceDisplay" class="gold-gradient-text font-black text-lg">Rp 0</span>
-                </div>
-                <button id="pickerConfirmBtn" onclick="confirmOptionSelection()" class="px-5 py-2.5 gold-gradient-bg text-slate-950 font-black rounded-xl text-xs uppercase tracking-wider shadow-lg shadow-amber-500/20 hover:opacity-95 transition">
-                    Simpan Pilihan
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- CHECKOUT & QRIS MODAL (2-STEP ORDERING) -->
-    <div id="checkoutModal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md z-50 flex items-center justify-center p-4 sm:p-6 hidden">
-        <div class="glass-modal rounded-3xl max-w-xl w-full max-h-[90vh] flex flex-col shadow-2xl overflow-hidden relative animate-modal-pop">
-            
-            <!-- Ambient Glow Effect -->
-            <div class="absolute -top-24 -left-24 w-60 h-60 bg-amber-500/15 rounded-full blur-3xl pointer-events-none ambient-glow"></div>
-            <div class="absolute -bottom-24 -right-24 w-60 h-60 bg-amber-600/15 rounded-full blur-3xl pointer-events-none ambient-glow"></div>
-
-            <!-- Modal Header -->
-            <div class="p-6 border-b border-amber-500/20 flex justify-between items-center bg-slate-900/50 relative z-10">
-                <div class="flex items-center gap-3.5">
-                    <div class="w-11 h-11 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-amber-400 flex items-center justify-center font-bold text-lg shadow-inner">
-                        <i class="fa-solid fa-shield-halved"></i>
-                    </div>
-                    <div>
-                        <h3 id="checkoutTitle" class="font-serif-luxury font-bold text-slate-100 text-xl tracking-wide">Langkah 1: Pengisian Form</h3>
-                        <p id="checkoutSubtitle" class="text-xs text-amber-400/80">Masukkan Username & Password Akun Anda</p>
-                    </div>
-                </div>
-                <button onclick="closeCheckoutModal()" class="w-9 h-9 rounded-xl bg-slate-800/80 border border-slate-700/80 flex items-center justify-center text-slate-400 hover:text-white hover:bg-slate-700 transition">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-            </div>
-
-            <!-- Modal Content Body -->
-            <div class="p-6 overflow-y-auto space-y-5 relative z-10">
-                
-                <!-- LANGKAH 1: FORMULIR AKUN KUSTOM -->
-                <div id="checkoutStep1" class="space-y-5">
-                    <div class="bg-slate-900/60 p-4 rounded-2xl border border-amber-500/20 space-y-4">
-                        <div class="text-xs font-black text-amber-400 uppercase tracking-wider flex items-center gap-2 border-b border-slate-800 pb-2">
-                            <i class="fa-solid fa-user-gear text-amber-400"></i>
-                            <span>Formulir Credential Akun</span>
-                        </div>
-
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
-                            <div>
-                                <label class="block text-[10px] font-extrabold text-amber-400 uppercase tracking-widest mb-1.5 flex items-center gap-1">
-                                    <i class="fa-solid fa-user text-[10px]"></i> Username Diinginkan *
-                                </label>
-                                <input type="text" id="customUsername" required placeholder="Contoh: febzz_pro" class="w-full px-3.5 py-2.5 bg-slate-950/80 border border-amber-500/30 rounded-xl text-xs text-slate-100 placeholder-slate-600 focus:border-amber-500 focus:ring-1 focus:ring-amber-500 focus:outline-none transition shadow-inner">
-                            </div>
-
-                            <div>
-                                <label class="block text-[10px] font-extrabold text-amber-400 uppercase tracking-widest mb-1.5 flex items-center gap-1">
-                                    <i class="fa-solid fa-key text-[10px]"></i> Password Diinginkan *
-                                </label>
-                                <input type="password" id="customPassword" required placeholder="••••••••" class="w-full px-3.5 py-2.5 bg-slate-950/80 border border-amber-500/30 rounded-xl text-xs text-slate-100 placeholder-slate-600 focus:border-amber-500 focus:ring-1 focus:ring-amber-500 focus:outline-none transition shadow-inner">
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- RINGKASAN PRODUK TERPILIH -->
-                    <div class="bg-slate-950/90 p-4 rounded-2xl border border-amber-500/20 space-y-2.5 shadow-inner">
-                        <div class="text-[10px] font-black text-amber-400/90 uppercase tracking-widest flex items-center justify-between">
-                            <span>Item Lisensi Dipilih</span>
-                            <span class="text-[9px] text-slate-500 font-normal">febzzbug Store</span>
-                        </div>
-                        <div id="modalSummaryItemStep1" class="text-xs space-y-1.5 text-slate-300"></div>
-                        <div class="border-t border-slate-800 pt-2.5 flex justify-between items-baseline font-bold text-sm text-slate-100">
-                            <span>Total Pembayaran:</span>
-                            <span id="modalTotalAmountStep1" class="gold-gradient-text text-xl font-black">Rp 0</span>
-                        </div>
-                    </div>
-
-                    <button type="button" onclick="goToStep2QRIS()" class="w-full py-4 gold-gradient-bg hover:opacity-95 text-slate-950 font-black rounded-2xl transition duration-300 shadow-xl shadow-amber-500/20 flex items-center justify-center gap-3 text-sm uppercase tracking-wider group">
-                        <span>Lanjut Ke Pembayaran QRIS</span>
-                        <i class="fa-solid fa-arrow-right text-xs group-hover:translate-x-1 transition"></i>
-                    </button>
-                </div>
-
-                <!-- LANGKAH 2: HALAMAN PEMBAYARAN QRIS & WHATSAPP -->
-                <div id="checkoutStep2" class="hidden space-y-5">
-                    <div class="bg-slate-900/60 p-4 rounded-2xl border border-amber-500/30 space-y-4">
-                        <div class="text-xs font-black text-amber-400 uppercase tracking-wider flex items-center justify-between border-b border-slate-800 pb-2">
-                            <span class="flex items-center gap-2">
-                                <i class="fa-solid fa-qrcode text-amber-400"></i>
-                                <span>Scan Kode QRIS Di Bawah Ini</span>
-                            </span>
-                            <span class="text-[10px] bg-emerald-500/20 text-emerald-400 px-2 py-0.5 rounded-full border border-emerald-500/30 font-bold">All E-Wallet & Bank</span>
-                        </div>
-
-                        <div class="flex flex-col items-center justify-center p-4 bg-slate-950 rounded-2xl border border-slate-800 text-center">
-                            <div class="p-3 bg-white rounded-2xl shadow-xl mb-3">
-                                <img id="qrisImage" src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=FEBZZBUG_PAYMENT" alt="QRIS Code" class="w-40 h-40 object-contain mx-auto" onerror="this.src='https://placehold.co/200x200/ffffff/000000?text=QRIS+FEBZZBUG'">
-                            </div>
-                            <p class="text-xs font-bold text-slate-200">Scan QRIS Di Atas Pakai Gopay, Dana, OVO, ShopeePay, atau Mobile Banking</p>
-                            <p class="text-[11px] text-amber-400 font-black mt-1">Total Tagihan: <span id="qrisTotalDisplay" class="text-sm underline">Rp 0</span></p>
-                        </div>
-                    </div>
-
-                    <div class="flex gap-3">
-                        <button type="button" onclick="backToStep1Form()" class="w-1/3 py-3.5 bg-slate-900 border border-slate-800 hover:bg-slate-800 text-slate-300 font-bold rounded-2xl text-xs transition flex items-center justify-center gap-1.5">
-                            <i class="fa-solid fa-arrow-left text-xs"></i>
-                            <span>Kembali</span>
-                        </button>
-                        <button type="button" onclick="submitOrderWhatsApp()" class="w-2/3 py-3.5 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black rounded-2xl transition duration-300 shadow-xl shadow-emerald-950/50 flex items-center justify-center gap-2 text-xs sm:text-sm uppercase tracking-wider">
-                            <i class="fa-brands fa-whatsapp text-base"></i>
-                            <span>Konfirmasi ke WA</span>
-                        </button>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
-    <!-- TOAST NOTIFICATION -->
-    <div id="toast" class="fixed bottom-8 left-1/2 -translate-x-1/2 glass-modal text-slate-100 px-6 py-3.5 rounded-2xl shadow-2xl text-xs sm:text-sm flex items-center gap-3.5 transform translate-y-28 opacity-0 transition-all duration-400 z-50 pointer-events-none border border-amber-500/30">
-        <div class="w-7 h-7 rounded-xl gold-gradient-bg text-slate-950 flex items-center justify-center text-xs font-black shadow-md shadow-amber-500/20">
-            <i class="fa-solid fa-check"></i>
-        </div>
-        <span id="toastMessage" class="font-semibold tracking-wide text-slate-200">Notifikasi</span>
-    </div>
-
-    <!-- JAVASCRIPT LOGIC -->
+    <!-- ========================================== -->
+    <!-- JAVASCRIPT LOGIC & DATA                    -->
+    <!-- ========================================== -->
     <script>
-        // --- ADMIN CONFIGURATION ---
-        let DEFAULT_QRIS_URL = "https://c.termai.cc/i147/uvqy.jpg"; // Dynamic QRIS image URL
-        const WHATSAPP_NUMBER = "6285600771252"; // Seller WA number
-
-        // DEFAULT PRODUCT LOGO IMAGES
-        const PRODUCT_IMAGES = {
-            fbz: "https://c.termai.cc/i150/PZOA.jpg",
-            villain: "https://c.termai.cc/i177/wdH5.jpg",
-            syam: "https://c.termai.cc/i113/nqa.jpg",
-            lennox: "https://c.termai.cc/i120/b5PB.jpg"
+        /* -------------------------------------------------------------------
+         * CONFIGURATION SECTION (Ganti Link QRIS & WA di sini)
+         * ------------------------------------------------------------------- */
+        const CONFIG = {
+            QRIS_URL: "https://c.termai.cc/i147/uvqy.jpg", 
+            ADMIN_WA: "6285600771252", 
         };
 
-        // Check for Image & QRIS URLs passed via link parameters
-        const urlParams = new URLSearchParams(window.location.search);
-
-        const customQrisParam = urlParams.get('qris_url') || urlParams.get('qris');
-        if (customQrisParam) DEFAULT_QRIS_URL = decodeURIComponent(customQrisParam);
-
-        if (urlParams.get('fbz_img')) PRODUCT_IMAGES.fbz = decodeURIComponent(urlParams.get('fbz_img'));
-        if (urlParams.get('villain_img')) PRODUCT_IMAGES.villain = decodeURIComponent(urlParams.get('villain_img'));
-        if (urlParams.get('syam_img')) PRODUCT_IMAGES.syam = decodeURIComponent(urlParams.get('syam_img'));
-        if (urlParams.get('lennox_img')) PRODUCT_IMAGES.lennox = decodeURIComponent(urlParams.get('lennox_img'));
-
-        // --- MASTER PRODUCT DATA ---
-        const products = [
+        /* -------------------------------------------------------------------
+         * DATA PRODUK, ROLE, HARGA, DAN SCREENSHOT (TIDAK DIUBAH SAMA SEKALI)
+         * ------------------------------------------------------------------- */
+        const productsData = [
             {
-                id: 1,
-                name: "FBZ PROJECT",
-                category: "FBZ",
-                description: "Aplikasi Premium FBZ PROJECT dengan akses role kustom, fitur lengkap, dan jaminan update lisensi.",
-                image: PRODUCT_IMAGES.fbz,
-                badge: "OFFICIAL APK",
-                rating: "5.0",
-                price: 10000,
-                selectedRole: "ROLE MEMBER",
-                selectedDuration: "30 DAYS",
-                roles: [
-                    {
-                        role: "ROLE MEMBER",
-                        durations: [
-                            { duration: "30 DAYS", price: 10000 },
-                            { duration: "PERMANENT", price: 15000 }
-                        ]
-                    },
-                    {
-                        role: "ROLE VIP",
-                        durations: [
-                            { duration: "30 DAYS", price: 15000 },
-                            { duration: "PERMANENT", price: 20000 }
-                        ]
-                    },
-                    {
-                        role: "ROLE RESELLER",
-                        durations: [
-                            { duration: "PERMANENT", price: 30000 }
-                        ]
-                    },
-                    {
-                        role: "ROLE ADMIN",
-                        durations: [
-                            { duration: "PERMANENT", price: 40000 }
-                        ]
-                    },
-                    {
-                        role: "ROLE PANTHER",
-                        durations: [
-                            { duration: "PERMANENT", price: 50000 }
-                        ]
-                    },
-                    {
-                        role: "ROLE OWNER",
-                        durations: [
-                            { duration: "PERMANENT", price: 70000 }
-                        ]
-                    }
+                id: "fbzz_project",
+                name: "FBZZ PROJECT",
+                icon: "https://c.termai.cc/i150/PZOA.jpg",
+                desc: "Aplikasi FBZZ Project terlengkap dengan berbagai pilihan role eksklusif dan akses permanen/durasi.",
+                screenshots: [
+                    "https://cdn.nekohime.site/file/sclr6vkj.jpg",
+                    "https://cdn.nekohime.site/file/sclr6vkj.jpg"
+                ],
+                variants: [
+                    { name: "ROLE MEMBER - 30 DAYS", price: 10000 },
+                    { name: "ROLE MEMBER - PERMANENT", price: 15000 },
+                    { name: "ROLE VIP - 30 DAYS", price: 15000 },
+                    { name: "ROLE VIP - PERMANENT", price: 20000 },
+                    { name: "ROLE RESSELER - PERMANENT", price: 30000 },
+                    { name: "ROLE ADMIN - PERMANENT", price: 40000 },
+                    { name: "ROLE PANTHER - PERMANENT", price: 50000 },
+                    { name: "ROLE OWNER - PERMANENT", price: 70000 }
                 ]
             },
             {
-                id: 2,
-                name: "VILLAIN",
-                category: "VILLAIN",
-                description: "Aplikasi Eksklusif VILLAIN dengan performa maksimal dan berbagai pilihan paket lisensi fleksibel.",
-                image: PRODUCT_IMAGES.villain,
-                badge: "VIP APK",
-                rating: "4.9",
-                price: 1000,
-                selectedPackage: "1 Hari",
-                packages: [
-                    { name: "1 Hari", price: 1000 },
-                    { name: "1 Minggu", price: 5000 },
-                    { name: "1 Bulan", price: 15000 },
-                    { name: "Full Up", price: 25000 },
-                    { name: "Reseller", price: 40000 },
-                    { name: "Partner", price: 50000 }
+                id: "villain_crash",
+                name: "VILLAIN CRASH",
+                icon: "https://c.termai.cc/i177/wdH5.jpg",
+                desc: "Aplikasi Villain Crash dengan kinerja stabil dan pilihan sewa fleksibel dari harian hingga partner.",
+                screenshots: [
+                    "https://c.top4top.io/p_3951v7v590.jpg",
+                    "https://c.top4top.io/p_3951v7v590.jpg"
+                ],
+                variants: [
+                    { name: "🪙 1 Hari", price: 1000 },
+                    { name: "🪙 1 Minggu", price: 5000 },
+                    { name: "🪙 1 Bulan", price: 15000 },
+                    { name: "🪙 Full Up", price: 25000 },
+                    { name: "🪙 Reseller", price: 40000 },
+                    { name: "🪙 Partner", price: 50000 }
                 ]
             },
             {
-                id: 3,
-                name: "SYAM",
-                category: "SYAM",
-                description: "Aplikasi & Script SYAM dengan trial hemat hingga pilihan role Full Update untuk kebutuhan maksimal.",
-                image: PRODUCT_IMAGES.syam,
-                badge: "PREMIUM APK",
-                rating: "4.8",
-                price: 2000,
-                selectedPackage: "Trial 1 Day",
-                packages: [
-                    { name: "Trial 1 Day", price: 2000 },
-                    { name: "Trial 7 Day", price: 10000 },
-                    { name: "Trial 30 Day", price: 20000 },
-                    { name: "Role Full Update", price: 40000 }
-                ]
-            },
-            {
-                id: 4,
+                id: "lennox",
                 name: "LENNOX",
-                category: "LENNOX",
-                description: "Aplikasi Premium LENNOX dengan performa tinggi, fitur canggih, dan lisensi permanen.",
-                image: PRODUCT_IMAGES.lennox,
-                badge: "EXCLUSIVE APK",
-                rating: "5.0",
-                price: 50000,
-                selectedPackage: "ROLE MEMBER - PERMANEN",
-                packages: [
-                    { name: "ROLE MEMBER - PERMANEN", price: 50000 }
+                icon: "https://a.top4top.io/p_3950wx83r0.jpg",
+                desc: "Aplikasi Lennox versi permanen tanpa batas waktu penggunaan. Solusi hemat untuk jangka panjang.",
+                screenshots: [
+                    "https://c.termai.cc/i104/YyVI.jpg",
+                    "https://c.termai.cc/i104/YyVI.jpg"
+                ],
+                variants: [
+                    { name: "PERMANENT", price: 50000 }
+                ]
+            },
+            {
+                id: "syam",
+                name: "APK SYAM",
+                icon: "https://c.termai.cc/i113/nqa.jpg",
+                desc: "Aplikasi dan Script Syam premium. Tersedia paket Trial murah hingga paket Full Update.",
+                screenshots: [
+                    "https://c.termai.cc/i104/xnS7tlC.jpg",
+                    "https://c.termai.cc/i104/xnS7tlC.jpg"
+                ],
+                variants: [
+                    { name: "🐻 Trial Apps - 1 Day", price: 2000 },
+                    { name: "🐻 Trial Apps - 7 Day", price: 10000 },
+                    { name: "🐻 Trial Apps - 30 Day", price: 20000 },
+                    { name: "📸 Role Apps & Script - Full Update", price: 40000 }
+                ]
+            },
+            {
+                id: "hollow_execution",
+                name: "HOLLOW EXECUTION",
+                icon: "https://c.termai.cc/i172/QXY.jpg",
+                desc: "Hollow Execution dengan variasi paket paling lengkap dari harian, bulanan hingga tangan kanan.",
+                screenshots: [
+                    "https://c.termai.cc/i165/fnw.jpg",
+                    "https://c.termai.cc/i165/fnw.jpg",
+                ],
+                variants: [
+                    { name: "Basic 1 Hari", price: 3000 },
+                    { name: "Basic 2 Hari", price: 5000 },
+                    { name: "Basic 3 Hari", price: 7000 },
+                    { name: "Basic 5 Hari", price: 10000 },
+                    { name: "Basic 7 Hari", price: 13000 },
+                    { name: "Basic 14 Hari", price: 17000 },
+                    { name: "Basic 21 Hari", price: 19000 },
+                    { name: "Basic 1 Bulan", price: 20000 },
+                    { name: "VIP 1 Bulan", price: 25000 },
+                    { name: "Basic Permanen", price: 40000 },
+                    { name: "VIP Permanen", price: 50000 },
+                    { name: "Reseller Permanen", price: 80000 },
+                    { name: "Partner Permanen", price: 100000 },
+                    { name: "Tangan Kanan Permanen", price: 130000 }
+                ]
+            },
+            {
+                id: "xfar",
+                name: "APK X-FAR",
+                icon: "https://cdn.nekohime.site/file/qgu86ysc.jpg",
+                desc: "Aplikasi X-Far terbaik dengan respons cepat, ramah pengguna, dan role admin/owner eksklusif.",
+                screenshots: [
+                    "https://c.termai.cc/i189/U2Z8wS.jpg",
+                    "https://c.termai.cc/i189/U2Z8wS.jpg"
+                ],
+                variants: [
+                    { name: "1 Hari", price: 2000 },
+                    { name: "5 Hari", price: 7000 },
+                    { name: "↔️ FULLUP", price: 20000 },
+                    { name: "↔️ *VIP", price: 30000 },
+                    { name: "↔️ *RESELLER", price: 40000 },
+                    { name: "↔️ Admin", price: 50000 },
+                    { name: "↔️ PARTNER", price: 70000 },
+                    { name: "↔️ OWNER", price: 80000 }
+                ]
+            },
+            {
+                id: "nexsus_infinity",
+                name: "NeXsus Infinity ⸙",
+                icon: "https://c.termai.cc/i125/GOWh2.jpg",
+                desc: "Aplikasi NeXsus Infinity ⸙ generasi terbaru. Nikmati fitur powerful dengan akses seumur hidup.",
+                screenshots: [
+                    "https://c.termai.cc/i129/QPB.jpg",
+                    "https://c.termai.cc/i129/QPB.jpg"
+                ],
+                variants: [
+                    { name: "ϟ Member (7 Hari)", price: 5000 },
+                    { name: "ϟ Member (Permanen)", price: 25000 },
+                    { name: "ϟ Reseller (Permanen)", price: 35000 },
+                    { name: "ϟ Admin (Permanen)", price: 50000 },
+                    { name: "ϟ Partner (Permanen)", price: 65000 },
+                    { name: "ϟ Moderator (Permanen)", price: 85000 },
+                    { name: "ϟ Owner", price: 100000 }
                 ]
             }
         ];
 
-        // --- GLOBAL STATE ---
-        let selectedProductForCheckout = null;
-        let activePickerProductId = null;
-        let activePickerType = null;
-        let tempSelectedRole = null;
-        let tempSelectedDuration = null;
-        let tempSelectedPackage = null;
+        /* -------------------------------------------------------------------
+         * STATE VARIABLES & APP LOGIC
+         * ------------------------------------------------------------------- */
+        let currentApp = null;
+        let selectedVariant = null;
 
-        // Helper: Format Rupiah
-        function formatRupiah(amount) {
-            return 'Rp ' + Number(amount || 0).toLocaleString('id-ID');
+        function formatRupiah(number) {
+            return 'Rp ' + number.toLocaleString('id-ID');
         }
 
-        // Initialize App
-        document.addEventListener('DOMContentLoaded', () => {
-            renderProducts(products);
+        window.addEventListener('DOMContentLoaded', () => {
+            renderProducts(productsData);
+            document.getElementById('adminWaLinkHeader').href = `https://wa.me/${CONFIG.ADMIN_WA}`;
+            document.getElementById('qrisImage').src = CONFIG.QRIS_URL;
         });
 
-        // Search Filter
-        function filterProducts() {
-            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-            const filtered = products.filter(product => {
-                return product.name.toLowerCase().includes(searchTerm) || 
-                       product.description.toLowerCase().includes(searchTerm);
-            });
-            renderProducts(filtered);
-        }
-
-        // Helper: Get Current Product Price
-        function getProductPrice(product) {
-            if (product.roles) {
-                const rData = product.roles.find(r => r.role === product.selectedRole) || product.roles[0];
-                const dData = rData.durations.find(d => d.duration === product.selectedDuration) || rData.durations[0];
-                return dData.price;
-            } else if (product.packages) {
-                const pData = product.packages.find(p => p.name === product.selectedPackage) || product.packages[0];
-                return pData.price;
-            }
-            return product.price;
-        }
-
-        // --- RENDER PRODUCTS GRID ---
-        function renderProducts(items) {
+        // Render Product Cards (Cyber Neon Theme)
+        function renderProducts(list) {
             const grid = document.getElementById('productGrid');
-            const emptyState = document.getElementById('emptySearch');
+            const noRes = document.getElementById('noResults');
             grid.innerHTML = '';
 
-            if (!items || items.length === 0) {
-                emptyState.classList.remove('hidden');
+            if (list.length === 0) {
+                noRes.classList.remove('hidden');
                 return;
             } else {
-                emptyState.classList.add('hidden');
+                noRes.classList.add('hidden');
             }
 
-            items.forEach(product => {
-                const card = document.createElement('div');
-                card.id = `productCard_${product.id}`;
-                card.className = "glass-card rounded-3xl overflow-hidden transition-all duration-300 flex flex-col justify-between group";
+            list.forEach(app => {
+                const minPrice = Math.min(...app.variants.map(v => v.price));
                 
-                const currentPrice = getProductPrice(product);
-
+                const card = document.createElement('div');
+                card.className = "glass-panel hover:border-cyan-400/60 rounded-2xl p-4 transition duration-300 hover:shadow-xl hover:shadow-cyan-500/15 flex flex-col justify-between group border border-slate-800/80";
                 card.innerHTML = `
                     <div>
-                        <div class="relative h-52 overflow-hidden bg-slate-900">
-                            <img src="${product.image}" alt="${product.name}" 
-                                 class="w-full h-full object-cover group-hover:scale-110 transition duration-500 opacity-90 group-hover:opacity-100"
-                                 onerror="this.src='https://placehold.co/500x300/0f172a/f59e0b?text=${encodeURIComponent(product.name)}'">
-                            <span class="absolute top-3.5 left-3.5 gold-gradient-bg text-slate-950 text-[10px] font-black px-2.5 py-1 rounded-full uppercase tracking-wider shadow-md">
-                                ${product.badge}
-                            </span>
-                            <div class="absolute bottom-3 right-3 bg-slate-950/80 backdrop-blur-md px-2.5 py-1 rounded-xl border border-slate-800 text-xs font-semibold text-amber-400 flex items-center gap-1">
-                                <i class="fa-solid fa-star text-amber-400 text-[10px]"></i>
-                                <span>${product.rating}</span>
+                        <div class="flex items-start gap-3.5 mb-3">
+                            <img src="${app.icon}" alt="${app.name}" class="w-16 h-16 rounded-2xl object-cover border border-cyan-500/30 shadow-md flex-shrink-0 group-hover:scale-105 transition duration-300">
+                            <div class="flex-1 min-w-0">
+                                <h4 class="font-display font-bold text-white text-base truncate leading-snug">${app.name}</h4>
+                                <span class="text-[10px] text-cyan-300 font-semibold bg-cyan-950/80 border border-cyan-500/30 px-2.5 py-0.5 rounded-full inline-block mt-1">
+                                    ${app.variants.length} Varian Role
+                                </span>
                             </div>
                         </div>
-                        <div class="p-5">
-                            <h3 class="font-serif-luxury font-bold text-slate-100 text-lg mb-1.5 group-hover:text-amber-400 transition">${product.name}</h3>
-                            <p class="text-slate-400 text-xs line-clamp-2 leading-relaxed mb-4">${product.description}</p>
-                            
-                            ${product.roles ? `
-                            <div class="space-y-2.5 pt-3 border-t border-slate-800/80">
-                                <div>
-                                    <label class="block text-[10px] font-bold text-amber-400 uppercase tracking-wider mb-1 flex items-center gap-1">
-                                        <i class="fa-solid fa-user-shield text-[10px]"></i> Role Access:
-                                    </label>
-                                    <button type="button" onclick="openOptionPickerModal(${product.id}, 'ROLE')" class="w-full bg-slate-950/90 border border-amber-500/30 hover:border-amber-500 rounded-2xl px-3.5 py-2.5 text-xs text-slate-100 flex items-center justify-between transition group/btn shadow-inner">
-                                        <span class="font-bold flex items-center gap-2">
-                                            <i class="fa-solid fa-crown text-amber-400 text-[11px]"></i>
-                                            <span id="roleLabel_${product.id}">${product.selectedRole}</span>
-                                        </span>
-                                        <i class="fa-solid fa-chevron-right text-slate-500 text-[10px] group-hover/btn:translate-x-0.5 transition"></i>
-                                    </button>
-                                </div>
-                                <div>
-                                    <label class="block text-[10px] font-bold text-amber-400 uppercase tracking-wider mb-1 flex items-center gap-1">
-                                        <i class="fa-solid fa-clock text-[10px]"></i> Durasi Lisensi:
-                                    </label>
-                                    <button type="button" onclick="openOptionPickerModal(${product.id}, 'DURATION')" class="w-full bg-slate-950/90 border border-amber-500/30 hover:border-amber-500 rounded-2xl px-3.5 py-2.5 text-xs text-slate-100 flex items-center justify-between transition group/btn shadow-inner">
-                                        <span class="font-bold flex items-center gap-2">
-                                            <i class="fa-solid fa-hourglass-half text-amber-400 text-[11px]"></i>
-                                            <span id="durationLabel_${product.id}">${product.selectedDuration}</span>
-                                        </span>
-                                        <i class="fa-solid fa-chevron-right text-slate-500 text-[10px] group-hover/btn:translate-x-0.5 transition"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            ` : ''}
-
-                            ${product.packages ? `
-                            <div class="space-y-2.5 pt-3 border-t border-slate-800/80">
-                                <div>
-                                    <label class="block text-[10px] font-bold text-amber-400 uppercase tracking-wider mb-1 flex items-center gap-1">
-                                        <i class="fa-solid fa-box text-[10px]"></i> Paket Lisensi:
-                                    </label>
-                                    <button type="button" onclick="openOptionPickerModal(${product.id}, 'PACKAGE')" class="w-full bg-slate-950/90 border border-amber-500/30 hover:border-amber-500 rounded-2xl px-3.5 py-2.5 text-xs text-slate-100 flex items-center justify-between transition group/btn shadow-inner">
-                                        <span class="font-bold flex items-center gap-2">
-                                            <i class="fa-solid fa-gem text-amber-400 text-[11px]"></i>
-                                            <span id="packageLabel_${product.id}">${product.selectedPackage}</span>
-                                        </span>
-                                        <i class="fa-solid fa-chevron-right text-slate-500 text-[10px] group-hover/btn:translate-x-0.5 transition"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            ` : ''}
-                        </div>
+                        <p class="text-xs text-slate-300 line-clamp-2 mb-4 leading-relaxed font-normal">${app.desc}</p>
                     </div>
-                    <div class="p-5 pt-0 flex items-center justify-between mt-auto">
+
+                    <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between">
                         <div>
-                            <span class="block text-[10px] text-slate-500 uppercase font-bold tracking-wider">Harga Lisensi</span>
-                            <span id="priceDisplay_${product.id}" class="font-bold gold-gradient-text text-lg">${formatRupiah(currentPrice)}</span>
+                            <span class="text-[10px] text-slate-400 block">Mulai dari</span>
+                            <span class="text-sm font-display font-extrabold text-emerald-400">${formatRupiah(minPrice)}</span>
                         </div>
-                        <button type="button" onclick="directBuyProduct(${product.id})" class="gold-gradient-bg text-slate-950 hover:opacity-90 px-5 py-2.5 rounded-2xl text-xs font-black transition duration-300 flex items-center gap-2 shadow-lg shadow-amber-500/20 transform hover:-translate-y-0.5">
-                            <i class="fa-solid fa-bolt text-xs"></i> Beli Sekarang
+                        <button onclick="openAppModal('${app.id}')" class="bg-gradient-to-r from-cyan-500/20 to-teal-500/20 hover:from-cyan-500 hover:to-teal-500 text-cyan-300 hover:text-slate-950 border border-cyan-500/40 px-3.5 py-1.5 rounded-xl text-xs font-bold transition duration-200 flex items-center gap-1.5 shadow-sm">
+                            <i class="fa-solid fa-arrow-right text-[10px]"></i> Detail
                         </button>
                     </div>
                 `;
                 grid.appendChild(card);
             });
+
+            document.getElementById('productCount').textContent = `${list.length} Aplikasi`;
         }
 
-        // --- OPTION PICKER MODAL LOGIC ---
-        function openOptionPickerModal(productId, type) {
-            const product = products.find(p => p.id === productId);
-            if (!product) return;
-
-            activePickerProductId = productId;
-            activePickerType = type;
-
-            tempSelectedRole = product.selectedRole;
-            tempSelectedDuration = product.selectedDuration;
-            tempSelectedPackage = product.selectedPackage;
-
-            renderOptionPickerModalList();
-            document.getElementById('optionPickerModal').classList.remove('hidden');
+        function filterProducts() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = productsData.filter(app => 
+                app.name.toLowerCase().includes(query) || 
+                app.desc.toLowerCase().includes(query)
+            );
+            renderProducts(filtered);
         }
 
-        function closeOptionPickerModal() {
-            document.getElementById('optionPickerModal').classList.add('hidden');
+        function syncAndFilter(val) {
+            document.getElementById('searchInput').value = val;
+            filterProducts();
         }
 
-        function renderOptionPickerModalList() {
-            const product = products.find(p => p.id === activePickerProductId);
-            if (!product) return;
+        function resetView() {
+            document.getElementById('searchInput').value = '';
+            document.getElementById('mobileSearchInput').value = '';
+            renderProducts(productsData);
+        }
 
-            const title = document.getElementById('pickerModalTitle');
-            const subtitle = document.getElementById('pickerModalSubtitle');
-            const listContainer = document.getElementById('pickerModalList');
+        // Open App Detail Modal
+        function openAppModal(appId) {
+            currentApp = productsData.find(a => a.id === appId);
+            if (!currentApp) return;
 
-            listContainer.innerHTML = '';
+            selectedVariant = currentApp.variants[0];
 
-            if (activePickerType === 'ROLE') {
-                title.textContent = `Pilih Role - ${product.name}`;
-                subtitle.textContent = "Tentukan hak akses role yang Anda butuhkan";
+            document.getElementById('modalAppName').textContent = currentApp.name;
+            document.getElementById('modalAppIcon').src = currentApp.icon;
+            document.getElementById('modalAppDesc').textContent = currentApp.desc;
 
-                product.roles.forEach(r => {
-                    const isSelected = r.role === tempSelectedRole;
-                    const minPrice = r.durations[0].price;
-
-                    const optionCard = document.createElement('div');
-                    optionCard.className = `role-card-option p-4 rounded-2xl border border-slate-800 bg-slate-900/60 hover:border-amber-500/50 cursor-pointer transition flex items-center justify-between ${isSelected ? 'selected' : ''}`;
-                    optionCard.onclick = () => selectRoleOption(r.role);
-
-                    optionCard.innerHTML = `
-                        <div class="flex items-center gap-3 pointer-events-none">
-                            <div class="w-8 h-8 rounded-xl ${isSelected ? 'gold-gradient-bg text-slate-950' : 'bg-slate-800 text-amber-400'} flex items-center justify-center font-bold text-xs">
-                                <i class="fa-solid fa-crown"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-slate-100 text-sm">${r.role}</h4>
-                                <p class="text-[10px] text-slate-400">Tersedia ${r.durations.length} opsi durasi</p>
-                            </div>
-                        </div>
-                        <div class="text-right pointer-events-none">
-                            <span class="text-xs font-black text-amber-400">Mulai ${formatRupiah(minPrice)}</span>
-                            <div class="mt-1 flex justify-end">
-                                <div class="w-4 h-4 rounded-full border ${isSelected ? 'border-amber-400 bg-amber-400' : 'border-slate-600'} flex items-center justify-center">
-                                    ${isSelected ? '<i class="fa-solid fa-check text-[9px] text-slate-950 font-black"></i>' : ''}
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                    listContainer.appendChild(optionCard);
+            // Render Screenshots
+            const ssContainer = document.getElementById('modalScreenshots');
+            ssContainer.innerHTML = '';
+            if (currentApp.screenshots && currentApp.screenshots.length > 0) {
+                currentApp.screenshots.forEach(src => {
+                    const img = document.createElement('img');
+                    img.src = src;
+                    img.alt = "Screenshot App";
+                    img.className = "h-44 sm:h-52 w-auto object-cover rounded-xl border border-cyan-500/30 snap-start flex-shrink-0 shadow-lg";
+                    ssContainer.appendChild(img);
                 });
-            } else if (activePickerType === 'DURATION') {
-                title.textContent = `Pilih Durasi - ${tempSelectedRole || product.selectedRole}`;
-                subtitle.textContent = "Masa aktif penggunaan lisensi aplikasi";
-
-                const roleData = product.roles.find(r => r.role === (tempSelectedRole || product.selectedRole)) || product.roles[0];
-                
-                roleData.durations.forEach(d => {
-                    const isSelected = d.duration === tempSelectedDuration;
-
-                    const optionCard = document.createElement('div');
-                    optionCard.className = `role-card-option p-4 rounded-2xl border border-slate-800 bg-slate-900/60 hover:border-amber-500/50 cursor-pointer transition flex items-center justify-between ${isSelected ? 'selected' : ''}`;
-                    optionCard.onclick = () => selectDurationOption(d.duration);
-
-                    optionCard.innerHTML = `
-                        <div class="flex items-center gap-3 pointer-events-none">
-                            <div class="w-8 h-8 rounded-xl ${isSelected ? 'gold-gradient-bg text-slate-950' : 'bg-slate-800 text-amber-400'} flex items-center justify-center font-bold text-xs">
-                                <i class="fa-solid fa-hourglass-half"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-slate-100 text-sm">${d.duration}</h4>
-                                <p class="text-[10px] text-emerald-400 font-semibold">Instant Key Delivery</p>
-                            </div>
-                        </div>
-                        <div class="text-right pointer-events-none">
-                            <span class="text-sm font-black gold-gradient-text">${formatRupiah(d.price)}</span>
-                            <div class="mt-1 flex justify-end">
-                                <div class="w-4 h-4 rounded-full border ${isSelected ? 'border-amber-400 bg-amber-400' : 'border-slate-600'} flex items-center justify-center">
-                                    ${isSelected ? '<i class="fa-solid fa-check text-[9px] text-slate-950 font-black"></i>' : ''}
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                    listContainer.appendChild(optionCard);
-                });
-            } else if (activePickerType === 'PACKAGE') {
-                title.textContent = `Pilih Paket - ${product.name}`;
-                subtitle.textContent = "Pilih masa berlaku lisensi eksklusif";
-
-                product.packages.forEach(p => {
-                    const isSelected = p.name === tempSelectedPackage;
-
-                    const optionCard = document.createElement('div');
-                    optionCard.className = `role-card-option p-4 rounded-2xl border border-slate-800 bg-slate-900/60 hover:border-amber-500/50 cursor-pointer transition flex items-center justify-between ${isSelected ? 'selected' : ''}`;
-                    optionCard.onclick = () => selectPackageOption(p.name);
-
-                    optionCard.innerHTML = `
-                        <div class="flex items-center gap-3 pointer-events-none">
-                            <div class="w-8 h-8 rounded-xl ${isSelected ? 'gold-gradient-bg text-slate-950' : 'bg-slate-800 text-amber-400'} flex items-center justify-center font-bold text-xs">
-                                <i class="fa-solid fa-gem"></i>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-slate-100 text-sm">${p.name}</h4>
-                                <p class="text-[10px] text-slate-400">Akses Penuh Tanpa Batas</p>
-                            </div>
-                        </div>
-                        <div class="text-right pointer-events-none">
-                            <span class="text-sm font-black gold-gradient-text">${formatRupiah(p.price)}</span>
-                            <div class="mt-1 flex justify-end">
-                                <div class="w-4 h-4 rounded-full border ${isSelected ? 'border-amber-400 bg-amber-400' : 'border-slate-600'} flex items-center justify-center">
-                                    ${isSelected ? '<i class="fa-solid fa-check text-[9px] text-slate-950 font-black"></i>' : ''}
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                    listContainer.appendChild(optionCard);
-                });
-            }
-
-            updatePickerModalFooter();
-        }
-
-        function selectRoleOption(role) {
-            tempSelectedRole = role;
-            const product = products.find(p => p.id === activePickerProductId);
-            if (product && product.roles) {
-                const roleData = product.roles.find(r => r.role === role);
-                if (roleData && roleData.durations.length > 0) {
-                    tempSelectedDuration = roleData.durations[0].duration;
-                }
-            }
-            renderOptionPickerModalList();
-        }
-
-        function selectDurationOption(duration) {
-            tempSelectedDuration = duration;
-            renderOptionPickerModalList();
-        }
-
-        function selectPackageOption(pkgName) {
-            tempSelectedPackage = pkgName;
-            renderOptionPickerModalList();
-        }
-
-        function updatePickerModalFooter() {
-            const product = products.find(p => p.id === activePickerProductId);
-            if (!product) return;
-
-            let price = product.price;
-            if (product.roles) {
-                const rData = product.roles.find(r => r.role === tempSelectedRole) || product.roles[0];
-                const dData = rData.durations.find(d => d.duration === tempSelectedDuration) || rData.durations[0];
-                price = dData.price;
-            } else if (product.packages) {
-                const pData = product.packages.find(p => p.name === tempSelectedPackage) || product.packages[0];
-                price = pData.price;
-            }
-
-            document.getElementById('pickerModalPriceDisplay').textContent = formatRupiah(price);
-        }
-
-        function confirmOptionSelection() {
-            const product = products.find(p => p.id === activePickerProductId);
-            if (!product) return;
-
-            if (product.roles) {
-                product.selectedRole = tempSelectedRole;
-                product.selectedDuration = tempSelectedDuration;
-
-                const roleLabel = document.getElementById(`roleLabel_${product.id}`);
-                const durationLabel = document.getElementById(`durationLabel_${product.id}`);
-                if (roleLabel) roleLabel.textContent = product.selectedRole;
-                if (durationLabel) durationLabel.textContent = product.selectedDuration;
-            } else if (product.packages) {
-                product.selectedPackage = tempSelectedPackage;
-
-                const packageLabel = document.getElementById(`packageLabel_${product.id}`);
-                if (packageLabel) packageLabel.textContent = product.selectedPackage;
-            }
-
-            const newPrice = getProductPrice(product);
-            const priceDisplay = document.getElementById(`priceDisplay_${product.id}`);
-            if (priceDisplay) priceDisplay.textContent = formatRupiah(newPrice);
-
-            closeOptionPickerModal();
-        }
-
-        // --- DIRECT CHECKOUT FLOW (2 STEPS) ---
-        function directBuyProduct(productId) {
-            const product = products.find(p => p.id === productId);
-            if (!product) return;
-
-            let itemName = product.name;
-            let itemPrice = product.price;
-
-            if (product.roles) {
-                const roleData = product.roles.find(r => r.role === product.selectedRole) || product.roles[0];
-                const durationData = roleData.durations.find(d => d.duration === product.selectedDuration) || roleData.durations[0];
-
-                itemPrice = durationData.price;
-                itemName = `${product.name} [${product.selectedRole} - ${product.selectedDuration}]`;
-            } else if (product.packages) {
-                const pkgData = product.packages.find(p => p.name === product.selectedPackage) || product.packages[0];
-
-                itemPrice = pkgData.price;
-                itemName = `${product.name} [${pkgData.name}]`;
-            }
-
-            selectedProductForCheckout = {
-                id: product.id,
-                name: itemName,
-                price: itemPrice
-            };
-
-            openCheckoutModal();
-        }
-
-        function openCheckoutModal() {
-            if (!selectedProductForCheckout) return;
-
-            const modal = document.getElementById('checkoutModal');
-            
-            // Show Step 1 initially
-            showStep1();
-
-            const summaryContainer = document.getElementById('modalSummaryItemStep1');
-            const totalContainer = document.getElementById('modalTotalAmountStep1');
-            
-            summaryContainer.innerHTML = `
-                <div class="flex justify-between items-center py-1">
-                    <span class="font-bold text-amber-400">${selectedProductForCheckout.name}</span>
-                    <span class="font-bold text-slate-100">${formatRupiah(selectedProductForCheckout.price)}</span>
-                </div>
-            `;
-
-            totalContainer.textContent = formatRupiah(selectedProductForCheckout.price);
-            modal.classList.remove('hidden');
-        }
-
-        function showStep1() {
-            document.getElementById('checkoutTitle').textContent = "Langkah 1: Pengisian Form";
-            document.getElementById('checkoutSubtitle').textContent = "Masukkan Username & Password Akun Anda";
-            document.getElementById('checkoutStep1').classList.remove('hidden');
-            document.getElementById('checkoutStep2').classList.add('hidden');
-        }
-
-        function goToStep2QRIS() {
-            const username = document.getElementById('customUsername').value.trim();
-            const password = document.getElementById('customPassword').value.trim();
-
-            if (!username || !password) {
-                showToast("Harap isi Username dan Password terlebih dahulu!");
-                return;
-            }
-
-            document.getElementById('checkoutTitle').textContent = "Langkah 2: Pembayaran QRIS";
-            document.getElementById('checkoutSubtitle').textContent = "Scan QRIS & Konfirmasi Pembayaran";
-            document.getElementById('checkoutStep1').classList.add('hidden');
-            document.getElementById('checkoutStep2').classList.remove('hidden');
-
-            const totalPrice = selectedProductForCheckout ? selectedProductForCheckout.price : 0;
-            document.getElementById('qrisTotalDisplay').textContent = formatRupiah(totalPrice);
-
-            const qrisImgElem = document.getElementById('qrisImage');
-            if (DEFAULT_QRIS_URL && DEFAULT_QRIS_URL.trim() !== "") {
-                qrisImgElem.src = DEFAULT_QRIS_URL;
             } else {
-                const qrData = encodeURIComponent(`FEBZZBUG_PAYMENT_TOTAL_${totalPrice}`);
-                qrisImgElem.src = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${qrData}`;
+                ssContainer.innerHTML = '<p class="text-xs text-slate-400 italic">Tidak ada screenshot tersedia.</p>';
             }
+
+            renderVariants();
+
+            document.getElementById('appModal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
         }
 
-        function backToStep1Form() {
-            showStep1();
+        function closeAppModal() {
+            document.getElementById('appModal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
         }
 
-        function closeCheckoutModal() {
-            document.getElementById('checkoutModal').classList.add('hidden');
+        // Render Variant Buttons inside modal
+        function renderVariants() {
+            const container = document.getElementById('modalVariants');
+            container.innerHTML = '';
+
+            currentApp.variants.forEach((v) => {
+                const isSelected = selectedVariant && selectedVariant.name === v.name;
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.onclick = () => selectVariant(v);
+                btn.className = `p-3 rounded-xl text-left border text-xs transition duration-200 flex items-center justify-between ${
+                    isSelected 
+                    ? 'bg-cyan-950/80 border-cyan-400 text-white font-bold ring-1 ring-cyan-400 shadow-md shadow-cyan-500/10' 
+                    : 'bg-slate-900/60 border-slate-800 text-slate-300 hover:border-slate-700'
+                }`;
+
+                btn.innerHTML = `
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid ${isSelected ? 'fa-circle-check text-cyan-400' : 'fa-circle text-slate-700'} text-sm"></i>
+                        <span>${v.name}</span>
+                    </div>
+                    <span class="font-display font-extrabold ${isSelected ? 'text-cyan-300' : 'text-emerald-400'}">${formatRupiah(v.price)}</span>
+                `;
+                container.appendChild(btn);
+            });
+
+            document.getElementById('modalSelectedPrice').textContent = formatRupiah(selectedVariant.price);
         }
 
-        // --- SUBMIT ORDER TO WHATSAPP ---
-        function submitOrderWhatsApp() {
-            const username = document.getElementById('customUsername').value.trim();
-            const password = document.getElementById('customPassword').value.trim();
+        function selectVariant(variant) {
+            selectedVariant = variant;
+            renderVariants();
+        }
 
-            if (!username || !password) {
-                showToast("Harap lengkapi Username & Password di Langkah 1!");
-                showStep1();
+        // Process Checkout to QRIS Modal
+        function processCheckout() {
+            const name = document.getElementById('custName').value.trim();
+            const password = document.getElementById('custPassword').value.trim();
+
+            if (!name) {
+                showToast("Harap masukkan nama Anda!", "error");
+                return;
+            }
+            if (!password) {
+                showToast("Harap masukkan password kustom!", "error");
                 return;
             }
 
-            if (!selectedProductForCheckout) return;
+            document.getElementById('summaryApp').textContent = currentApp.name;
+            document.getElementById('summaryVariant').textContent = selectedVariant.name;
+            document.getElementById('summaryName').textContent = name;
+            document.getElementById('summaryTotal').textContent = formatRupiah(selectedVariant.price);
 
-            const totalPrice = selectedProductForCheckout.price;
+            const message = `Halo Admin FEBZZ OFFICIAL, saya ingin konfirmasi pembayaran QRIS:
 
-            let message = `*💻 ORDER SOFTWARE VIP - FEBZZBUG*\n`;
-            message += `===================================\n`;
-            message += `*Kredensial Akun Diinginkan:*\n`;
-            message += `• Username: ${username}\n`;
-            message += `• Password: ${password}\n`;
-            message += `===================================\n`;
-            message += `*Item Lisensi Dipilih:*\n`;
-            message += `• ${selectedProductForCheckout.name} = ${formatRupiah(totalPrice)}\n`;
-            message += `===================================\n`;
-            message += `*TOTAL PEMBAYARAN: ${formatRupiah(totalPrice)}*\n`;
-            message += `*Status Pembayaran: Sudah Transfer QRIS*\n`;
-            message += `===================================\n`;
-            message += `Halo Admin, saya telah melakukan pembayaran QRIS. Berikut saya sertakan bukti transfer & formulir akun kustom saya. Mohon diproses!`;
+| *Detail Pesanan:*
+• Aplikasi: ${currentApp.name}
+• Role/Durasi: ${selectedVariant.name}
+• Total Harga: ${formatRupiah(selectedVariant.price)}
 
-            const encodedMessage = encodeURIComponent(message);
-            const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
+| *Data Pemesan:*
+• Nama: ${name}
+• Password Kustom: ${password}
 
-            window.open(waUrl, '_blank');
-            closeCheckoutModal();
-            document.getElementById('customUsername').value = '';
-            document.getElementById('customPassword').value = '';
-            showToast("Pesanan & bukti transfer dialihkan ke WhatsApp VIP!");
+SEGERA DI PROSES MIN`;
+
+            const encodedMsg = encodeURIComponent(message);
+            document.getElementById('confirmWaBtn').href = `https://wa.me/${CONFIG.ADMIN_WA}?text=${encodedMsg}`;
+
+            closeAppModal();
+            document.getElementById('qrisModal').classList.remove('hidden');
         }
 
-        // --- TOAST NOTIFICATIONS ---
-        function showToast(msg) {
-            const toast = document.getElementById('toast');
-            const toastMessage = document.getElementById('toastMessage');
-            
-            toastMessage.textContent = msg;
-            toast.classList.remove('translate-y-28', 'opacity-0');
+        function closeQrisModal() {
+            document.getElementById('qrisModal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
 
+        function showToast(msg, type = "info") {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toastMessage');
+            const toastIcon = document.getElementById('toastIcon');
+
+            toastMsg.textContent = msg;
+
+            if (type === "error") {
+                toastIcon.className = "fa-solid fa-circle-exclamation text-rose-400 text-base";
+            } else {
+                toastIcon.className = "fa-solid fa-circle-info text-cyan-400 text-base";
+            }
+
+            toast.classList.remove('translate-y-20', 'opacity-0');
             setTimeout(() => {
-                toast.classList.add('translate-y-28', 'opacity-0');
+                toast.classList.add('translate-y-20', 'opacity-0');
             }, 3000);
         }
     </script>
