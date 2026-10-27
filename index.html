@@ -8,8 +8,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts: Space Grotesk & Plus Jakarta Sans -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts: Syne, Space Grotesk & Plus Jakarta Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -18,15 +18,31 @@
                     fontFamily: {
                         sans: ['Plus Jakarta Sans', 'sans-serif'],
                         display: ['Space Grotesk', 'sans-serif'],
+                        brand: ['Syne', 'sans-serif'],
                     },
                     colors: {
-                        cyber: {
-                            bg: '#050811',
-                            card: '#0c1322',
+                        luxe: {
+                            bg: '#030712',
+                            card: '#0a0f1d',
                             border: '#1e293b',
                             cyan: '#06b6d4',
+                            gold: '#fbbf24',
                             magenta: '#d946ef',
-                            accent: '#10b981',
+                            emerald: '#10b981',
+                        }
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'shimmer': 'shimmer 2.5s infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        shimmer: {
+                            '100%': { transform: 'translateX(100%)' },
                         }
                     }
                 }
@@ -34,112 +50,130 @@
         }
     </script>
     <style>
-        /* Custom Glowing & Ambient FX */
+        /* Ambient Animated Mesh Background */
         body {
-            background-color: #050811;
+            background-color: #030712;
             background-image: 
-                radial-gradient(circle at 15% 15%, rgba(6, 182, 212, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 85% 85%, rgba(217, 70, 239, 0.07) 0%, transparent 40%);
+                radial-gradient(circle at 10% 10%, rgba(6, 182, 212, 0.12) 0%, transparent 45%),
+                radial-gradient(circle at 90% 20%, rgba(217, 70, 239, 0.10) 0%, transparent 45%),
+                radial-gradient(circle at 50% 80%, rgba(251, 191, 36, 0.06) 0%, transparent 50%);
             background-attachment: fixed;
         }
 
-        /* Glassmorphism utility */
+        /* Glassmorphism Ultra Deluxe */
         .glass-panel {
-            background: rgba(12, 19, 34, 0.75);
+            background: rgba(10, 15, 29, 0.75);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-card {
+            background: rgba(13, 20, 36, 0.65);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.07);
         }
 
         .glass-modal {
-            background: rgba(8, 13, 25, 0.92);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            background: rgba(6, 10, 20, 0.94);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
         }
 
-        .neon-glow-cyan {
-            box-shadow: 0 0 25px -5px rgba(6, 182, 212, 0.35);
+        /* Glow & Shimmer Effects */
+        .neon-border-glow:hover {
+            border-color: rgba(6, 182, 212, 0.6);
+            box-shadow: 0 0 30px -5px rgba(6, 182, 212, 0.3);
         }
 
-        .neon-glow-magenta {
-            box-shadow: 0 0 25px -5px rgba(217, 70, 239, 0.35);
+        .gold-border-glow:hover {
+            border-color: rgba(251, 191, 36, 0.6);
+            box-shadow: 0 0 30px -5px rgba(251, 191, 36, 0.3);
+        }
+
+        .shimmer-btn {
+            position: relative;
+            overflow: hidden;
+        }
+        .shimmer-btn::after {
+            position: absolute;
+            top: 0; right: 0; bottom: 0; left: 0;
+            transform: translateX(-100%);
+            background-image: linear-gradient(
+                90deg,
+                rgba(255, 255, 255, 0) 0,
+                rgba(255, 255, 255, 0.2) 20%,
+                rgba(255, 255, 255, 0.5) 60%,
+                rgba(255, 255, 255, 0)
+            );
+            animation: shimmer 3s infinite;
+            content: '';
         }
 
         /* Custom Scrollbars */
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-        .no-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-        .custom-scrollbar::-webkit-scrollbar {
-            height: 6px;
-            width: 6px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: #090e1a;
-            border-radius: 10px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #1e293b;
-            border-radius: 10px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: #06b6d4;
-        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .custom-scrollbar::-webkit-scrollbar { height: 6px; width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #060a14; border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #06b6d4; }
     </style>
 </head>
 <body class="text-slate-100 font-sans antialiased min-h-screen flex flex-col selection:bg-cyan-500 selection:text-slate-950">
 
-    <!-- Ambient Glowing Orbs Background -->
-    <div class="fixed top-0 left-1/4 w-96 h-96 bg-cyan-500/10 rounded-full blur-[120px] pointer-events-none"></div>
-    <div class="fixed bottom-10 right-10 w-96 h-96 bg-fuchsia-500/10 rounded-full blur-[140px] pointer-events-none"></div>
+    <!-- Ambient Glowing Decorative Blobs -->
+    <div class="fixed top-0 left-1/4 w-[500px] h-[500px] bg-cyan-500/10 rounded-full blur-[150px] pointer-events-none animate-pulse-slow"></div>
+    <div class="fixed bottom-10 right-10 w-[500px] h-[500px] bg-fuchsia-500/10 rounded-full blur-[160px] pointer-events-none animate-pulse-slow"></div>
+    <div class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-amber-500/5 rounded-full blur-[180px] pointer-events-none"></div>
 
     <!-- ========================================== -->
     <!-- HEADER / NAVBAR                            -->
     <!-- ========================================== -->
-    <header class="sticky top-0 z-40 glass-panel border-b border-cyan-500/20 shadow-lg shadow-cyan-950/30">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    <header class="sticky top-0 z-40 glass-panel border-b border-cyan-500/20 shadow-2xl shadow-cyan-950/40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
             <!-- Brand Logo -->
-            <div class="flex items-center space-x-3 cursor-pointer group" onclick="resetView()">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500 via-teal-400 to-fuchsia-500 p-[1.5px] shadow-lg shadow-cyan-500/20 group-hover:scale-105 transition duration-300">
-                    <div class="w-full h-full bg-slate-950 rounded-[10.5px] flex items-center justify-center">
-                        <i class="fa-solid fa-bolt text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-fuchsia-400 text-lg"></i>
+            <div class="flex items-center space-x-3.5 cursor-pointer group" onclick="resetView()">
+                <div class="relative w-11 h-11 rounded-2xl bg-gradient-to-tr from-cyan-500 via-amber-400 to-fuchsia-500 p-[2px] shadow-xl shadow-cyan-500/20 group-hover:scale-105 transition duration-300">
+                    <div class="w-full h-full bg-slate-950 rounded-[14px] flex items-center justify-center">
+                        <i class="fa-solid fa-bolt text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-cyan-400 to-fuchsia-400 text-xl"></i>
                     </div>
                 </div>
                 <div>
-                    <h1 class="font-display font-extrabold text-lg tracking-wider text-white flex items-center gap-1.5">
-                        FEBZZ <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-fuchsia-400">OFFICIAL</span>
+                    <h1 class="font-brand font-extrabold text-xl tracking-wider text-white flex items-center gap-1.5">
+                        FEBZZ <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-teal-300 to-amber-300">OFFICIAL</span>
                     </h1>
-                    <p class="text-[9px] text-cyan-400 font-bold tracking-widest uppercase">Digital Store & App Hub</p>
+                    <div class="flex items-center gap-2">
+                        <span class="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                        <p class="text-[10px] text-cyan-400 font-extrabold tracking-widest uppercase">Digital Store & App Hub</p>
+                    </div>
                 </div>
             </div>
 
-            <!-- Search Bar -->
-            <div class="hidden sm:flex items-center flex-1 max-w-md mx-8">
+            <!-- Search Bar (Desktop) -->
+            <div class="hidden md:flex items-center flex-1 max-w-md mx-8">
                 <div class="relative w-full">
-                    <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-cyan-400/70 text-sm"></i>
-                    <input type="text" id="searchInput" oninput="filterProducts()" placeholder="Cari aplikasi atau role premium..." 
-                        class="w-full pl-10 pr-4 py-2 bg-slate-900/90 border border-slate-700/80 rounded-xl text-sm text-slate-100 placeholder-slate-400 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400/50 transition duration-200">
+                    <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-cyan-400/70 text-sm"></i>
+                    <input type="text" id="searchInput" oninput="filterProducts()" placeholder="Cari aplikasi, injector, atau role VIP..." 
+                        class="w-full pl-11 pr-4 py-2.5 bg-slate-950/80 border border-slate-700/80 rounded-2xl text-sm text-slate-100 placeholder-slate-400 focus:outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/30 transition duration-300 shadow-inner">
                 </div>
             </div>
 
-            <!-- Customer Service Link -->
+            <!-- Right Controls / CS Link -->
             <div class="flex items-center space-x-3">
-                <a href="#" id="adminWaLinkHeader" target="_blank" class="flex items-center space-x-2 bg-gradient-to-r from-emerald-500/20 to-teal-500/20 text-emerald-300 border border-emerald-500/40 hover:border-emerald-400 hover:bg-emerald-500/30 px-3.5 py-1.5 rounded-xl text-xs font-semibold transition shadow-md shadow-emerald-950/40">
+                <a href="#" id="adminWaLinkHeader" target="_blank" class="shimmer-btn flex items-center space-x-2 bg-gradient-to-r from-emerald-500/20 via-teal-500/20 to-cyan-500/20 text-emerald-300 border border-emerald-500/50 hover:border-emerald-400 hover:bg-emerald-500/30 px-4 py-2 rounded-xl text-xs font-extrabold transition duration-300 shadow-lg shadow-emerald-950/50">
                     <i class="fa-brands fa-whatsapp text-sm text-emerald-400"></i>
-                    <span class="hidden md:inline">Hubungi Admin</span>
+                    <span class="hidden sm:inline">Hubungi Admin WA</span>
                 </a>
             </div>
         </div>
 
         <!-- Mobile Search Bar -->
-        <div class="sm:hidden px-4 pb-3">
+        <div class="md:hidden px-4 pb-3">
             <div class="relative w-full">
                 <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-cyan-400/70 text-sm"></i>
                 <input type="text" id="mobileSearchInput" oninput="syncAndFilter(this.value)" placeholder="Cari aplikasi..." 
-                    class="w-full pl-10 pr-4 py-2 bg-slate-900/90 border border-slate-700/80 rounded-xl text-sm text-slate-100 placeholder-slate-400 focus:outline-none focus:border-cyan-400 transition">
+                    class="w-full pl-10 pr-4 py-2 bg-slate-950/80 border border-slate-700/80 rounded-xl text-sm text-slate-100 placeholder-slate-400 focus:outline-none focus:border-cyan-400 transition">
             </div>
         </div>
     </header>
@@ -149,85 +183,131 @@
     <!-- ========================================== -->
     <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 relative z-10">
 
-        <!-- Banner Promosi Cyberpunk Style -->
-        <section class="mb-8 relative overflow-hidden rounded-2xl border border-cyan-500/30 bg-gradient-to-r from-slate-900/90 via-slate-900/95 to-slate-950 p-6 md:p-8 shadow-2xl shadow-cyan-950/40">
+        <!-- MEWAH RUNNING TEXT (MARQUEE TICKER) -->
+        <div class="mb-6 glass-panel border border-cyan-500/30 rounded-2xl p-2.5 flex items-center gap-3 shadow-xl shadow-cyan-950/40 overflow-hidden backdrop-blur-xl">
+            <div class="bg-gradient-to-r from-cyan-500 via-teal-500 to-emerald-500 text-slate-950 font-black text-[11px] px-3 py-1.5 rounded-xl flex items-center gap-1.5 shrink-0 shadow-md tracking-wider">
+                <i class="fa-solid fa-bullhorn text-xs animate-bounce"></i> OFFICIAL INFO
+            </div>
+            <marquee behavior="scroll" direction="left" scrollamount="6" class="text-xs font-semibold text-slate-200 tracking-wide">
+                🔥 Selamat Datang di <strong class="text-cyan-400 font-extrabold">FEBZZ OFFICIAL STORE</strong>! • Nikmati Layanan Order Aplikasi & Injector Premium Proses Otomatis & Serba Cepat • Support QRIS All E-Wallet & Mobile Banking • Silakan Hubungi Admin WhatsApp Jika Membutuhkan Bantuan 🔥
+            </marquee>
+        </div>
+
+        <!-- LUXURY BANNER PROMOSI (CYBER-LUXE STYLE) -->
+        <section class="mb-8 relative overflow-hidden rounded-3xl border border-cyan-500/30 bg-gradient-to-br from-slate-900/90 via-slate-950 to-slate-950 p-6 md:p-10 shadow-2xl shadow-cyan-950/50">
             <!-- Glowing background accents -->
-            <div class="absolute top-0 right-0 w-80 h-80 bg-gradient-to-bl from-cyan-500/20 via-fuchsia-500/10 to-transparent rounded-full blur-2xl pointer-events-none"></div>
-            
-            <div class="relative z-10 max-w-2xl">
-                <div class="inline-flex items-center gap-2 bg-cyan-500/10 text-cyan-300 border border-cyan-500/30 text-xs font-bold px-3 py-1 rounded-lg mb-3 shadow-sm">
-                    <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
-                    PROSES OTOMATIS & SERBA CEPAT
+            <div class="absolute -top-20 -right-20 w-96 h-96 bg-gradient-to-br from-cyan-500/25 via-fuchsia-500/15 to-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute -bottom-20 -left-20 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="relative z-10 max-w-3xl">
+                <div class="inline-flex items-center gap-2 bg-gradient-to-r from-cyan-500/20 to-fuchsia-500/20 text-cyan-300 border border-cyan-500/40 text-xs font-bold px-3.5 py-1.5 rounded-full mb-4 shadow-inner">
+                    <span class="w-2 h-2 rounded-full bg-cyan-400 animate-ping"></span>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-amber-300 font-extrabold uppercase tracking-widest text-[10px]">VERIFIED DIGITAL APP HUB</span>
                 </div>
-                <h2 class="text-2xl md:text-3xl font-display font-extrabold text-white tracking-wide mb-2">
-                    Katalog App & Injector <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-teal-300 to-fuchsia-400">FEBZZ OFFICIAL</span>
+                <h2 class="text-3xl md:text-4xl lg:text-5xl font-brand font-extrabold text-white tracking-wide mb-3 leading-tight">
+                    Katalog Premium <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-amber-300 to-fuchsia-400">FEBZZ OFFICIAL</span>
                 </h2>
-                <p class="text-slate-300 text-sm md:text-base mb-5 leading-relaxed font-normal">
-                    Pilih aplikasi favorit Anda, tentukan role atau durasi penggunaan, dan lakukan pembayaran instan via Scan QRIS.
+                <p class="text-slate-300 text-sm md:text-base mb-6 leading-relaxed font-normal">
+                    Pilih aplikasi favorit Anda, tentukan role atau durasi penggunaan, dan lakukan pembayaran instan via Scan QRIS dengan proses otomatis.
                 </p>
-                <div class="flex flex-wrap items-center gap-4 text-xs text-slate-300 font-medium">
-                    <div class="flex items-center gap-1.5 bg-slate-900/80 px-3 py-1.5 rounded-lg border border-slate-800">
-                        <i class="fa-solid fa-bolt text-amber-400"></i> Aktif Instant
+                <div class="flex flex-wrap items-center gap-3 text-xs text-slate-200 font-semibold">
+                    <div class="flex items-center gap-2 bg-slate-900/90 px-4 py-2 rounded-xl border border-slate-700 shadow-md">
+                        <i class="fa-solid fa-bolt text-amber-400 text-sm"></i> Instant Activation
                     </div>
-                    <div class="flex items-center gap-1.5 bg-slate-900/80 px-3 py-1.5 rounded-lg border border-slate-800">
-                        <i class="fa-solid fa-qrcode text-cyan-400"></i> Support QRIS All E-Wallet / Bank
+                    <div class="flex items-center gap-2 bg-slate-900/90 px-4 py-2 rounded-xl border border-slate-700 shadow-md">
+                        <i class="fa-solid fa-qrcode text-cyan-400 text-sm"></i> QRIS All Bank & E-Wallet
+                    </div>
+                    <div class="flex items-center gap-2 bg-slate-900/90 px-4 py-2 rounded-xl border border-slate-700 shadow-md">
+                        <i class="fa-solid fa-shield-halved text-emerald-400 text-sm"></i> 100% Guaranteed Safe
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Product Grid Header -->
-        <div class="flex items-center justify-between mb-5">
-            <h3 class="text-lg md:text-xl font-display font-bold text-white flex items-center gap-2.5">
-                <i class="fa-solid fa-layer-group text-cyan-400"></i> Daftar Produk & Aplikasi
+        <!-- LUXURY STATS COUNTER BAR -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-3.5 mb-8">
+            <div class="glass-card p-4 rounded-2xl border border-slate-800 text-center hover:border-cyan-500/40 transition duration-300">
+                <i class="fa-solid fa-rocket text-cyan-400 text-xl mb-1"></i>
+                <div class="text-xl font-display font-extrabold text-white">10,000+</div>
+                <div class="text-[11px] text-slate-400">Transaksi Sukses</div>
+            </div>
+            <div class="glass-card p-4 rounded-2xl border border-slate-800 text-center hover:border-amber-500/40 transition duration-300">
+                <i class="fa-solid fa-bolt text-amber-400 text-xl mb-1"></i>
+                <div class="text-xl font-display font-extrabold text-white">99.9%</div>
+                <div class="text-[11px] text-slate-400">Proses Otomatis</div>
+            </div>
+            <div class="glass-card p-4 rounded-2xl border border-slate-800 text-center hover:border-fuchsia-500/40 transition duration-300">
+                <i class="fa-solid fa-box-open text-fuchsia-400 text-xl mb-1"></i>
+                <div class="text-xl font-display font-extrabold text-white">11 Apps</div>
+                <div class="text-[11px] text-slate-400">Katalog Lengkap</div>
+            </div>
+            <div class="glass-card p-4 rounded-2xl border border-slate-800 text-center hover:border-emerald-500/40 transition duration-300">
+                <i class="fa-solid fa-headset text-emerald-400 text-xl mb-1"></i>
+                <div class="text-xl font-display font-extrabold text-white">24/7</div>
+                <div class="text-[11px] text-slate-400">Bantuan Admin</div>
+            </div>
+        </div>
+
+        <!-- ALL PRODUCTS HEADER & COUNT -->
+        <div class="flex items-center justify-between mb-6">
+            <h3 class="font-brand font-extrabold text-lg sm:text-xl text-white flex items-center gap-2">
+                <i class="fa-solid fa-boxes-stacked text-cyan-400"></i> Semua Produk
             </h3>
-            <span id="productCount" class="text-xs text-cyan-300 font-semibold bg-cyan-950/60 border border-cyan-500/30 px-3 py-1 rounded-lg">7 Aplikasi</span>
+            <span id="productCount" class="text-xs text-cyan-300 font-bold bg-cyan-950/80 border border-cyan-500/30 px-3.5 py-1.5 rounded-xl shadow-sm">
+                11 Aplikasi Tersedia
+            </span>
         </div>
 
         <!-- Products Grid Container -->
-        <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
-            <!-- Product Cards generated by JavaScript -->
+        <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 md:gap-6">
+            <!-- Product Cards generated dynamically by JavaScript -->
         </div>
 
         <!-- Empty State Search -->
-        <div id="noResults" class="hidden text-center py-16">
-            <div class="w-16 h-16 bg-slate-900/80 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-slate-800 text-slate-500 shadow-lg">
-                <i class="fa-solid fa-magnifying-glass text-2xl text-cyan-500/50"></i>
+        <div id="noResults" class="hidden text-center py-20">
+            <div class="w-20 h-20 bg-slate-900/90 rounded-3xl flex items-center justify-center mx-auto mb-4 border border-slate-800 text-slate-500 shadow-2xl">
+                <i class="fa-solid fa-magnifying-glass text-3xl text-cyan-500/60"></i>
             </div>
-            <h4 class="text-base font-semibold text-slate-200">Aplikasi tidak ditemukan</h4>
-            <p class="text-xs text-slate-400 mt-1">Coba kata kunci lain atau periksa kembali nama aplikasi.</p>
+            <h4 class="text-lg font-bold text-slate-200">Aplikasi Tidak Ditemukan</h4>
+            <p class="text-xs text-slate-400 mt-1">Coba kata kunci lain atau periksa kembali penulisan nama aplikasi.</p>
         </div>
     </main>
 
     <!-- ========================================== -->
-    <!-- PLAY STORE APP DETAIL MODAL                -->
+    <!-- PLAY STORE APP DETAIL MODAL (LUXURY)       -->
     <!-- ========================================== -->
-    <div id="appModal" class="fixed inset-0 z-50 hidden overflow-y-auto bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-3 sm:p-4">
-        <div class="relative w-full max-w-3xl glass-modal border border-cyan-500/30 rounded-2xl shadow-2xl shadow-cyan-950/50 overflow-hidden my-auto max-h-[90vh] flex flex-col">
+    <div id="appModal" class="fixed inset-0 z-50 hidden overflow-y-auto bg-slate-950/90 backdrop-blur-xl flex items-center justify-center p-3 sm:p-5">
+        <div class="relative w-full max-w-2xl glass-modal border border-cyan-500/40 rounded-3xl shadow-2xl shadow-cyan-950/80 overflow-hidden my-auto max-h-[90vh] flex flex-col">
             
             <!-- Modal Header / App Banner -->
-            <div class="relative p-5 sm:p-6 border-b border-slate-800/90 bg-slate-900/70 flex-shrink-0">
-                <button onclick="closeAppModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white bg-slate-800/80 hover:bg-slate-700 w-8 h-8 rounded-full flex items-center justify-center transition border border-slate-700">
-                    <i class="fa-solid fa-xmark"></i>
+            <div class="relative p-4 sm:p-5 border-b border-slate-800/90 bg-gradient-to-r from-slate-900/95 via-slate-900 to-slate-950 flex-shrink-0">
+                <button onclick="closeAppModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white bg-slate-800/80 hover:bg-slate-700 w-8 h-8 rounded-full flex items-center justify-center transition border border-slate-700 shadow-md">
+                    <i class="fa-solid fa-xmark text-sm"></i>
                 </button>
 
-                <div class="flex items-start gap-4">
-                    <img id="modalAppIcon" src="" alt="App Icon" class="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl object-cover border border-cyan-500/40 shadow-xl shadow-cyan-500/10 flex-shrink-0">
-                    <div class="pr-8">
-                        <span class="inline-block bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 text-[10px] font-bold px-2.5 py-0.5 rounded-md mb-1.5 tracking-wider">OFFICIAL RELEASE</span>
-                        <h3 id="modalAppName" class="text-xl sm:text-2xl font-display font-bold text-white leading-tight"></h3>
-                        <p class="text-xs text-fuchsia-400 font-semibold mt-0.5">Developer: FEBZZ OFFICIAL</p>
-                        <p class="text-xs text-slate-300 mt-2 line-clamp-2 leading-relaxed" id="modalAppDesc"></p>
+                <div class="flex items-center gap-4">
+                    <div class="relative flex-shrink-0">
+                        <img id="modalAppIcon" src="" alt="App Icon" class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl object-cover border-2 border-cyan-500/50 shadow-lg shadow-cyan-500/20">
+                        <span class="absolute -bottom-1 -right-1 bg-gradient-to-r from-amber-500 to-amber-400 text-slate-950 text-[8px] font-black px-1.5 py-0.5 rounded shadow-md">OFFICIAL</span>
+                    </div>
+                    <div class="pr-8 flex-1 min-w-0">
+                        <div class="flex items-center gap-2 mb-0.5">
+                            <span class="bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 text-[9px] font-extrabold px-2 py-0.5 rounded tracking-wider">VERIFIED RELEASE</span>
+                            <span class="text-[9px] text-emerald-400 font-bold flex items-center gap-1"><i class="fa-solid fa-circle-check"></i> Instan</span>
+                        </div>
+                        <h3 id="modalAppName" class="text-lg sm:text-xl font-brand font-extrabold text-white leading-tight truncate"></h3>
+                        <p class="text-[11px] text-amber-400 font-bold"></p>
                     </div>
                 </div>
+                <p class="text-xs text-slate-300 mt-2 line-clamp-2 leading-relaxed" id="modalAppDesc"></p>
             </div>
 
             <!-- Modal Body (Scrollable content) -->
-            <div class="p-5 sm:p-6 space-y-6 overflow-y-auto custom-scrollbar flex-grow">
+            <div class="p-4 sm:p-5 space-y-5 overflow-y-auto custom-scrollbar flex-grow">
                 
                 <!-- PLAYSTORE STYLE SCREENSHOT GALLERY -->
                 <div>
-                    <h4 class="text-xs font-bold uppercase tracking-wider text-cyan-400 mb-3 flex items-center gap-1.5">
+                    <h4 class="text-xs font-extrabold uppercase tracking-wider text-cyan-400 mb-2.5 flex items-center gap-2">
                         <i class="fa-solid fa-images"></i> Tangkapan Layar / Screenshot Preview
                     </h4>
                     <div id="modalScreenshots" class="flex gap-3 overflow-x-auto pb-2 custom-scrollbar snap-x">
@@ -237,7 +317,7 @@
 
                 <!-- SELECT ROLE / DURATION / VARIANT -->
                 <div>
-                    <h4 class="text-xs font-bold uppercase tracking-wider text-cyan-400 mb-3 flex items-center gap-1.5">
+                    <h4 class="text-xs font-extrabold uppercase tracking-wider text-amber-400 mb-2.5 flex items-center gap-2">
                         <i class="fa-solid fa-layer-group"></i> Pilih Role & Durasi Paket
                     </h4>
                     <div id="modalVariants" class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
@@ -246,19 +326,19 @@
                 </div>
 
                 <!-- USER FORM INPUT -->
-                <div class="bg-slate-900/80 border border-slate-800 p-4 rounded-xl space-y-3">
-                    <h4 class="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
-                        <i class="fa-solid fa-user-pen text-cyan-400"></i> Informasi Data Pemesan
+                <div class="bg-slate-900/90 border border-slate-800 p-4 rounded-2xl space-y-3 shadow-inner">
+                    <h4 class="text-xs font-extrabold uppercase tracking-wider text-slate-200 flex items-center gap-2">
+                        <i class="fa-solid fa-user-pen text-cyan-400"></i> Data Pemesan Aplikasi
                     </h4>
                     <div>
-                        <label class="block text-xs text-slate-400 mb-1">Nama / Nickname Pengguna</label>
-                        <input type="text" id="custName" placeholder="Masukkan nama Anda" 
-                            class="w-full bg-slate-950/80 border border-slate-700/80 rounded-xl px-3.5 py-2 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-cyan-400 transition">
+                        <label class="block text-xs font-bold text-slate-400 mb-1">Nama / Nickname Pengguna</label>
+                        <input type="text" id="custName" placeholder="Masukkan nama Anda..." 
+                            class="w-full bg-slate-950 border border-slate-700/80 rounded-xl px-3.5 py-2 text-xs sm:text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400/50 transition">
                     </div>
                     <div>
-                        <label class="block text-xs text-slate-400 mb-1">Password Kustom</label>
-                        <input type="text" id="custPassword" placeholder="Masukkan password kustom Anda" 
-                            class="w-full bg-slate-950/80 border border-slate-700/80 rounded-xl px-3.5 py-2 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-cyan-400 transition">
+                        <label class="block text-xs font-bold text-slate-400 mb-1">Password Kustom</label>
+                        <input type="text" id="custPassword" placeholder="Masukkan password kustom Anda..." 
+                            class="w-full bg-slate-950 border border-slate-700/80 rounded-xl px-3.5 py-2 text-xs sm:text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400/50 transition">
                     </div>
                 </div>
             </div>
@@ -266,71 +346,75 @@
             <!-- Modal Footer / Order Action Bar -->
             <div class="p-4 sm:p-5 bg-slate-950 border-t border-slate-800/90 flex items-center justify-between gap-4 flex-shrink-0">
                 <div>
-                    <span class="text-[11px] text-slate-400 block font-medium">Total Pembayaran</span>
-                    <span id="modalSelectedPrice" class="text-lg sm:text-xl font-display font-extrabold text-cyan-400">Rp 0</span>
+                    <span class="text-[10px] text-slate-400 block font-bold uppercase tracking-wider">Total Pembayaran</span>
+                    <span id="modalSelectedPrice" class="text-lg sm:text-xl font-display font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-amber-300">Rp 0</span>
                 </div>
-                <button onclick="processCheckout()" class="flex-1 max-w-xs bg-gradient-to-r from-cyan-500 via-teal-500 to-emerald-500 hover:from-cyan-400 hover:to-emerald-400 text-slate-950 font-extrabold py-2.5 px-4 rounded-xl shadow-lg shadow-cyan-500/25 text-sm flex items-center justify-center gap-2 transition active:scale-95">
-                    <i class="fa-solid fa-cart-shopping"></i> Lanjut Pembayaran
+                <button onclick="processCheckout()" class="shimmer-btn flex-1 max-w-xs bg-gradient-to-r from-cyan-500 via-teal-500 to-emerald-500 hover:from-cyan-400 hover:to-emerald-400 text-slate-950 font-black py-2.5 px-4 rounded-xl shadow-xl shadow-cyan-500/30 text-xs sm:text-sm flex items-center justify-center gap-2 transition active:scale-95">
+                    <i class="fa-solid fa-shield-halved"></i> Lanjut Pembayaran
                 </button>
             </div>
         </div>
     </div>
 
     <!-- ========================================== -->
-    <!-- QRIS PAYMENT MODAL                         -->
+    <!-- QRIS PAYMENT MODAL (LUXURY FINTECH STYLE)  -->
     <!-- ========================================== -->
-    <div id="qrisModal" class="fixed inset-0 z-50 hidden overflow-y-auto bg-slate-950/90 backdrop-blur-md flex items-center justify-center p-4">
-        <div class="relative w-full max-w-md glass-modal border border-cyan-500/40 rounded-2xl shadow-2xl shadow-cyan-950/60 overflow-hidden p-6 text-center">
+    <div id="qrisModal" class="fixed inset-0 z-50 hidden overflow-y-auto bg-slate-950/95 backdrop-blur-xl flex items-center justify-center p-4">
+        <div class="relative w-full max-w-md glass-modal border border-cyan-500/40 rounded-3xl shadow-2xl shadow-cyan-950/80 overflow-hidden p-6 text-center">
             
             <button onclick="closeQrisModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white bg-slate-800/80 w-8 h-8 rounded-full flex items-center justify-center border border-slate-700">
                 <i class="fa-solid fa-xmark"></i>
             </button>
 
-            <div class="inline-flex items-center justify-center w-12 h-12 bg-cyan-500/10 text-cyan-400 rounded-xl border border-cyan-500/30 mb-3 shadow-md shadow-cyan-500/10">
-                <i class="fa-solid fa-qrcode text-xl"></i>
+            <!-- Countdown Timer Header -->
+            <div class="bg-cyan-950/60 border border-cyan-500/30 text-cyan-300 px-3.5 py-1.5 rounded-full inline-flex items-center gap-2 text-xs font-bold mb-3 shadow-inner">
+                <i class="fa-solid fa-clock animate-spin text-amber-400"></i> Waktu Pembayaran: <span id="qrisTimer" class="font-display text-white">15:00</span>
             </div>
 
-            <h3 class="text-xl font-display font-bold text-white">Pembayaran QRIS</h3>
-            <p class="text-xs text-slate-400 mt-1">Scan kode QRIS di bawah ini menggunakan e-wallet atau mobile banking Anda.</p>
+            <h3 class="text-2xl font-brand font-extrabold text-white">Pembayaran QRIS</h3>
+            <p class="text-xs text-slate-400 mt-1">Scan kode QRIS resmi di bawah ini menggunakan GoPay, OVO, DANA, ShopeePay, atau Bank.</p>
 
             <!-- QRIS Image Showcase -->
-            <div class="my-5 p-3.5 bg-white rounded-2xl shadow-2xl inline-block border-2 border-cyan-500/30">
-                <img id="qrisImage" src="" alt="QRIS Payment FEBZZ" class="w-56 h-56 object-contain mx-auto rounded-lg">
+            <div class="my-5 p-4 bg-white rounded-3xl shadow-2xl inline-block border-2 border-cyan-500/40 relative group">
+                <img id="qrisImage" src="" alt="QRIS Payment FEBZZ" class="w-60 h-60 object-contain mx-auto rounded-xl">
+                <div class="mt-2 text-[10px] text-slate-600 font-extrabold tracking-widest uppercase flex items-center justify-center gap-1">
+                    <i class="fa-solid fa-qrcode text-cyan-600"></i> QRIS NATIONAL STANDARD
+                </div>
             </div>
 
             <!-- Summary Text Box -->
-            <div class="bg-slate-950/90 border border-slate-800 rounded-xl p-3.5 mb-5 text-left text-xs space-y-2">
+            <div class="bg-slate-950/90 border border-slate-800 rounded-2xl p-4 mb-5 text-left text-xs space-y-2.5 shadow-inner">
                 <div class="flex justify-between">
-                    <span class="text-slate-400">Produk:</span>
-                    <span id="summaryApp" class="font-semibold text-slate-100"></span>
+                    <span class="text-slate-400">Aplikasi:</span>
+                    <span id="summaryApp" class="font-bold text-slate-100"></span>
                 </div>
                 <div class="flex justify-between">
                     <span class="text-slate-400">Role / Paket:</span>
-                    <span id="summaryVariant" class="font-semibold text-cyan-400"></span>
+                    <span id="summaryVariant" class="font-bold text-cyan-400"></span>
                 </div>
                 <div class="flex justify-between">
                     <span class="text-slate-400">Pemesan:</span>
-                    <span id="summaryName" class="font-semibold text-slate-100"></span>
+                    <span id="summaryName" class="font-bold text-slate-100"></span>
                 </div>
-                <div class="border-t border-slate-800/80 pt-2 flex justify-between font-bold text-sm">
+                <div class="border-t border-slate-800 pt-2 flex justify-between font-extrabold text-sm">
                     <span class="text-slate-300">Total Transfer:</span>
-                    <span id="summaryTotal" class="text-emerald-400 font-display font-extrabold"></span>
+                    <span id="summaryTotal" class="text-amber-300 font-display font-black"></span>
                 </div>
             </div>
 
             <!-- WhatsApp Direct Confirmation Button -->
-            <a id="confirmWaBtn" href="#" target="_blank" class="w-full bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-slate-950 font-extrabold py-3 px-4 rounded-xl shadow-lg shadow-emerald-500/25 flex items-center justify-center gap-2 text-sm transition active:scale-95">
+            <a id="confirmWaBtn" href="#" target="_blank" class="shimmer-btn w-full bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 hover:from-emerald-400 hover:to-cyan-400 text-slate-950 font-black py-3.5 px-4 rounded-2xl shadow-xl shadow-emerald-500/25 flex items-center justify-center gap-2 text-sm transition active:scale-95">
                 <i class="fa-brands fa-whatsapp text-lg"></i> Konfirmasi Pembayaran via WA
             </a>
 
-            <p class="text-[11px] text-slate-500 mt-3">
-                *Setelah scan & bayar, klik tombol di atas untuk kirim bukti ke Admin.
+            <p class="text-[11px] text-slate-500 mt-3.5">
+                *Setelah scan & transfer, klik tombol di atas untuk mengirimkan bukti ke Admin.
             </p>
         </div>
     </div>
 
     <!-- Toast Notification -->
-    <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 glass-panel text-slate-100 border border-cyan-500/40 px-4 py-3 rounded-xl shadow-2xl flex items-center gap-3 text-xs max-w-sm">
+    <div id="toast" class="fixed bottom-5 right-5 z-50 transform translate-y-20 opacity-0 transition-all duration-300 glass-panel text-slate-100 border border-cyan-500/40 px-4 py-3 rounded-2xl shadow-2xl flex items-center gap-3 text-xs max-w-sm">
         <i id="toastIcon" class="fa-solid fa-circle-info text-cyan-400 text-base"></i>
         <span id="toastMessage">Pesan notifikasi</span>
     </div>
@@ -338,12 +422,12 @@
     <!-- ========================================== -->
     <!-- FOOTER                                     -->
     <!-- ========================================== -->
-    <footer class="glass-panel border-t border-slate-800/90 mt-12 py-6 text-center relative z-10">
-        <div class="max-w-7xl mx-auto px-4">
+    <footer class="glass-panel border-t border-slate-800/90 mt-16 py-8 text-center relative z-10">
+        <div class="max-w-7xl mx-auto px-4 space-y-2">
             <p class="text-xs text-slate-400 font-medium">
-                &copy; 2026 <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-fuchsia-400 font-bold">FEBZZ OFFICIAL</span>. All rights reserved.
+                &copy; 2026 <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-amber-300 to-fuchsia-400 font-black">FEBZZ OFFICIAL</span>. All rights reserved.
             </p>
-            <p class="text-[11px] text-slate-500 mt-1">Platform Order Aplikasi & Service Digital Premium</p>
+            <p class="text-[11px] text-slate-500">Platform Order Aplikasi & Service Digital Injector Premium No. 1</p>
         </div>
     </footer>
 
@@ -360,12 +444,14 @@
         };
 
         /* -------------------------------------------------------------------
-         * DATA PRODUK, ROLE, HARGA, DAN SCREENSHOT (TIDAK DIUBAH SAMA SEKALI)
+         * DATA 11 PRODUK LENGKAP DENGAN LOGO MASING-MASING
          * ------------------------------------------------------------------- */
         const productsData = [
             {
                 id: "fbzz_project",
                 name: "FBZZ PROJECT",
+                category: "vip",
+                badge: "HOT",
                 icon: "https://c.termai.cc/i150/PZOA.jpg",
                 desc: "Aplikasi FBZZ Project terlengkap dengan berbagai pilihan role eksklusif dan akses permanen/durasi.",
                 screenshots: [
@@ -386,6 +472,8 @@
             {
                 id: "villain_crash",
                 name: "VILLAIN CRASH",
+                category: "crash",
+                badge: "BESTSELLER",
                 icon: "https://c.termai.cc/i177/wdH5.jpg",
                 desc: "Aplikasi Villain Crash dengan kinerja stabil dan pilihan sewa fleksibel dari harian hingga partner.",
                 screenshots: [
@@ -404,6 +492,8 @@
             {
                 id: "lennox",
                 name: "LENNOX",
+                category: "member",
+                badge: "PERMANENT",
                 icon: "https://a.top4top.io/p_3950wx83r0.jpg",
                 desc: "Aplikasi Lennox versi permanen tanpa batas waktu penggunaan. Solusi hemat untuk jangka panjang.",
                 screenshots: [
@@ -417,6 +507,8 @@
             {
                 id: "syam",
                 name: "APK SYAM",
+                category: "member",
+                badge: "POPULAR",
                 icon: "https://c.termai.cc/i113/nqa.jpg",
                 desc: "Aplikasi dan Script Syam premium. Tersedia paket Trial murah hingga paket Full Update.",
                 screenshots: [
@@ -433,6 +525,8 @@
             {
                 id: "hollow_execution",
                 name: "HOLLOW EXECUTION",
+                category: "crash",
+                badge: "COMPLETE",
                 icon: "https://c.termai.cc/i171/yqX.jpg",
                 desc: "Hollow Execution dengan variasi paket paling lengkap dari harian, bulanan hingga tangan kanan.",
                 screenshots: [
@@ -459,6 +553,8 @@
             {
                 id: "xfar",
                 name: "APK X-FAR",
+                category: "vip",
+                badge: "TOP ROLE",
                 icon: "https://c.termai.cc/i172/QXY.jpg",
                 desc: "Aplikasi X-Far terbaik dengan respons cepat, ramah pengguna, dan role admin/owner eksklusif.",
                 screenshots: [
@@ -479,6 +575,8 @@
             {
                 id: "nexsus_infinity",
                 name: "NeXsus Infinity ⸙",
+                category: "vip",
+                badge: "NEW",
                 icon: "https://c.termai.cc/i125/GOWh2.jpg",
                 desc: "Aplikasi NeXsus Infinity ⸙ generasi terbaru. Nikmati fitur powerful dengan akses seumur hidup.",
                 screenshots: [
@@ -494,6 +592,87 @@
                     { name: "ϟ Moderator (Permanen)", price: 85000 },
                     { name: "ϟ Owner", price: 100000 }
                 ]
+            },
+            {
+                id: "gojo_crasher",
+                name: "GOJO CRASHER",
+                category: "crash",
+                badge: "HOT",
+                icon: "https://cdn.phototourl.com/member/2026-10-27-c20a6562-839e-4592-bb23-b41e45acbf3a.jpg",
+                desc: "Aplikasi Gojo Crasher dengan performa tinggi serta pilihan role harian, permanen, hingga reseller.",
+                screenshots: [
+                    "https://cdn.phototourl.com/member/2026-10-27-a8899237-49b3-4bae-8081-cf5117115b22.jpg",
+                    "https://cdn.phototourl.com/member/2026-10-27-a8899237-49b3-4bae-8081-cf5117115b22.jpg"
+                ],
+                variants: [
+                    { name: "MEMBER HARIAN", price: 3000 },
+                    { name: "MEMBER PERMANEN", price: 30000 },
+                    { name: "RESELLER", price: 60000 }
+                ]
+            },
+            {
+                id: "nova_crash",
+                name: "NOVA CRASH",
+                category: "crash",
+                badge: "RECOMMENDED",
+                icon: "https://cdn.phototourl.com/member/2026-10-27-8965915a-263b-4383-b4cd-3f4f62d2829a.jpg",
+                desc: "Aplikasi Nova Crash dengan performa tinggi dan berbagai pilihan role sewa fleksibel.",
+                screenshots: [
+                    "https://cdn.phototourl.com/member/2026-10-27-e60f5541-8bc6-48f1-88e0-13c6486334d4.jpg",
+                    "https://cdn.phototourl.com/member/2026-10-27-e60f5541-8bc6-48f1-88e0-13c6486334d4.jpg"
+                ],
+                variants: [
+                    { name: "➡️ 1 Hari", price: 3000 },
+                    { name: "➡️ 1 Bulan", price: 15000 },
+                    { name: "🦋 Role Fullup", price: 20000 },
+                    { name: "🦋 Role Reseller", price: 35000 },
+                    { name: "🦋 Role Partner", price: 45000 }
+                ]
+            },
+            {
+                id: "xverse_project",
+                name: "X-VERSE PROJECT",
+                category: "vip",
+                badge: "ULTIMATE",
+                icon: "https://cdn.phototourl.com/member/2026-10-27-b5d12980-4faa-492e-97bb-08900339475e.jpg",
+                desc: "Aplikasi X-Verse Project lengkap dengan paket member harian hingga role Owner.",
+                screenshots: [
+                    "https://cdn.phototourl.com/member/2026-10-27-5d05e88c-25c0-4c1a-86be-3c0d0a16e841.jpg",
+                    "https://cdn.phototourl.com/member/2026-10-27-5d05e88c-25c0-4c1a-86be-3c0d0a16e841.jpg"
+                ],
+                variants: [
+                    { name: "🫂 Member (1 Day)", price: 2000 },
+                    { name: "🫂 Member (3 Day)", price: 4000 },
+                    { name: "🫂 Member (7 Day)", price: 7000 },
+                    { name: "🫂 Member (30 Day)", price: 10000 },
+                    { name: "🫂 Member (Permanen)", price: 20000 },
+                    { name: "🛒 Reseller", price: 25000 },
+                    { name: "💎 VIP", price: 30000 },
+                    { name: "🧊 Admin", price: 40000 },
+                    { name: "🔝 High Admin", price: 50000 },
+                    { name: "👑 Owner", price: 70000 }
+                ]
+            },
+            {
+                id: "sonic_crash",
+                name: "SONIC CRASH",
+                category: "crash",
+                badge: "FAST",
+                icon: "https://cdn.phototourl.com/member/2026-10-27-cbe0c8fc-28f1-48e3-9fc6-d69955e777c7.jpg",
+                desc: "Aplikasi Sonic Crash unggulan dengan akses fleksibel dari member hingga Moderator.",
+                screenshots: [
+                    "https://cdn.phototourl.com/member/2026-10-27-45fd2cde-1859-47c0-8228-b7cbaa279735.jpg",
+                    "https://cdn.phototourl.com/member/2026-10-27-45fd2cde-1859-47c0-8228-b7cbaa279735.jpg"
+                ],
+                variants: [
+                    { name: "Member (1 Bulan)", price: 15000 },
+                    { name: "Member (Permanen)", price: 25000 },
+                    { name: "VIP (Permanen)", price: 35000 },
+                    { name: "Reseller", price: 45000 },
+                    { name: "Admin", price: 55000 },
+                    { name: "Partner", price: 75000 },
+                    { name: "Moderator", price: 85000 }
+                ]
             }
         ];
 
@@ -502,6 +681,8 @@
          * ------------------------------------------------------------------- */
         let currentApp = null;
         let selectedVariant = null;
+        let activeCategory = 'all';
+        let countdownInterval = null;
 
         function formatRupiah(number) {
             return 'Rp ' + number.toLocaleString('id-ID');
@@ -513,7 +694,7 @@
             document.getElementById('qrisImage').src = CONFIG.QRIS_URL;
         });
 
-        // Render Product Cards (Cyber Neon Theme)
+        // Render Product Cards (Cyber-Luxe Theme)
         function renderProducts(list) {
             const grid = document.getElementById('productGrid');
             const noRes = document.getElementById('noResults');
@@ -530,43 +711,48 @@
                 const minPrice = Math.min(...app.variants.map(v => v.price));
                 
                 const card = document.createElement('div');
-                card.className = "glass-panel hover:border-cyan-400/60 rounded-2xl p-4 transition duration-300 hover:shadow-xl hover:shadow-cyan-500/15 flex flex-col justify-between group border border-slate-800/80";
+                card.className = "glass-card hover:border-cyan-400/60 neon-border-glow rounded-3xl p-4 sm:p-5 transition duration-300 hover:scale-[1.02] flex flex-col justify-between group border border-slate-800 relative overflow-hidden";
                 card.innerHTML = `
+                    <div class="absolute top-3 right-3 bg-gradient-to-r from-amber-500/20 to-cyan-500/20 text-amber-300 border border-amber-500/30 text-[9px] font-black px-2.5 py-0.5 rounded-full tracking-wider shadow-sm">
+                        ${app.badge || 'PRO'}
+                    </div>
+
                     <div>
-                        <div class="flex items-start gap-3.5 mb-3">
-                            <img src="${app.icon}" alt="${app.name}" class="w-16 h-16 rounded-2xl object-cover border border-cyan-500/30 shadow-md flex-shrink-0 group-hover:scale-105 transition duration-300">
-                            <div class="flex-1 min-w-0">
-                                <h4 class="font-display font-bold text-white text-base truncate leading-snug">${app.name}</h4>
-                                <span class="text-[10px] text-cyan-300 font-semibold bg-cyan-950/80 border border-cyan-500/30 px-2.5 py-0.5 rounded-full inline-block mt-1">
-                                    ${app.variants.length} Varian Role
+                        <div class="flex items-start gap-4 mb-3.5">
+                            <img src="${app.icon}" alt="${app.name}" class="w-16 h-16 sm:w-18 sm:h-18 rounded-2xl object-cover border border-cyan-500/40 shadow-xl shadow-cyan-500/10 flex-shrink-0 group-hover:rotate-2 transition duration-300">
+                            <div class="flex-1 min-w-0 pr-6">
+                                <h4 class="font-brand font-extrabold text-white text-base sm:text-lg truncate leading-snug">${app.name}</h4>
+                                <span class="text-[10px] text-cyan-300 font-extrabold bg-cyan-950/90 border border-cyan-500/30 px-2.5 py-0.5 rounded-md inline-block mt-1 shadow-sm">
+                                    ${app.variants.length} Role Option
                                 </span>
                             </div>
                         </div>
-                        <p class="text-xs text-slate-300 line-clamp-2 mb-4 leading-relaxed font-normal">${app.desc}</p>
+                        <p class="text-xs text-slate-300 line-clamp-2 mb-5 leading-relaxed font-normal">${app.desc}</p>
                     </div>
 
-                    <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between">
+                    <div class="pt-3.5 border-t border-slate-800/90 flex items-center justify-between">
                         <div>
-                            <span class="text-[10px] text-slate-400 block">Mulai dari</span>
-                            <span class="text-sm font-display font-extrabold text-emerald-400">${formatRupiah(minPrice)}</span>
+                            <span class="text-[10px] text-slate-400 block font-semibold uppercase tracking-wider">Mulai dari</span>
+                            <span class="text-sm font-display font-black text-amber-300">${formatRupiah(minPrice)}</span>
                         </div>
-                        <button onclick="openAppModal('${app.id}')" class="bg-gradient-to-r from-cyan-500/20 to-teal-500/20 hover:from-cyan-500 hover:to-teal-500 text-cyan-300 hover:text-slate-950 border border-cyan-500/40 px-3.5 py-1.5 rounded-xl text-xs font-bold transition duration-200 flex items-center gap-1.5 shadow-sm">
-                            <i class="fa-solid fa-arrow-right text-[10px]"></i> Detail
+                        <button onclick="openAppModal('${app.id}')" class="shimmer-btn bg-gradient-to-r from-cyan-500/20 to-emerald-500/20 hover:from-cyan-500 hover:to-emerald-500 text-cyan-300 hover:text-slate-950 border border-cyan-500/40 px-4 py-2 rounded-xl text-xs font-black transition duration-300 flex items-center gap-1.5 shadow-md">
+                            <i class="fa-solid fa-bolt text-[10px]"></i> Detail & Beli
                         </button>
                     </div>
                 `;
                 grid.appendChild(card);
             });
 
-            document.getElementById('productCount').textContent = `${list.length} Aplikasi`;
+            document.getElementById('productCount').textContent = `${list.length} Aplikasi Tersedia`;
         }
 
         function filterProducts() {
             const query = document.getElementById('searchInput').value.toLowerCase();
-            const filtered = productsData.filter(app => 
+            let filtered = productsData.filter(app => 
                 app.name.toLowerCase().includes(query) || 
                 app.desc.toLowerCase().includes(query)
             );
+
             renderProducts(filtered);
         }
 
@@ -578,7 +764,7 @@
         function resetView() {
             document.getElementById('searchInput').value = '';
             document.getElementById('mobileSearchInput').value = '';
-            renderProducts(productsData);
+            filterProducts();
         }
 
         // Open App Detail Modal
@@ -600,7 +786,7 @@
                     const img = document.createElement('img');
                     img.src = src;
                     img.alt = "Screenshot App";
-                    img.className = "h-44 sm:h-52 w-auto object-cover rounded-xl border border-cyan-500/30 snap-start flex-shrink-0 shadow-lg";
+                    img.className = "h-32 sm:h-40 w-auto object-cover rounded-xl border border-cyan-500/40 snap-start flex-shrink-0 shadow-lg hover:opacity-90 transition cursor-pointer";
                     ssContainer.appendChild(img);
                 });
             } else {
@@ -628,18 +814,18 @@
                 const btn = document.createElement('button');
                 btn.type = 'button';
                 btn.onclick = () => selectVariant(v);
-                btn.className = `p-3 rounded-xl text-left border text-xs transition duration-200 flex items-center justify-between ${
+                btn.className = `p-3.5 rounded-2xl text-left border text-xs transition duration-200 flex items-center justify-between ${
                     isSelected 
-                    ? 'bg-cyan-950/80 border-cyan-400 text-white font-bold ring-1 ring-cyan-400 shadow-md shadow-cyan-500/10' 
-                    : 'bg-slate-900/60 border-slate-800 text-slate-300 hover:border-slate-700'
+                    ? 'bg-cyan-950/90 border-cyan-400 text-white font-extrabold ring-1 ring-cyan-400 shadow-lg shadow-cyan-500/20' 
+                    : 'bg-slate-900/80 border-slate-800 text-slate-300 hover:border-slate-700'
                 }`;
 
                 btn.innerHTML = `
-                    <div class="flex items-center gap-2">
+                    <div class="flex items-center gap-2.5">
                         <i class="fa-solid ${isSelected ? 'fa-circle-check text-cyan-400' : 'fa-circle text-slate-700'} text-sm"></i>
                         <span>${v.name}</span>
                     </div>
-                    <span class="font-display font-extrabold ${isSelected ? 'text-cyan-300' : 'text-emerald-400'}">${formatRupiah(v.price)}</span>
+                    <span class="font-display font-black ${isSelected ? 'text-amber-300' : 'text-emerald-400'}">${formatRupiah(v.price)}</span>
                 `;
                 container.appendChild(btn);
             });
@@ -688,14 +874,36 @@ SEGERA DI PROSES MIN`;
             document.getElementById('confirmWaBtn').href = `https://wa.me/${CONFIG.ADMIN_WA}?text=${encodedMsg}`;
 
             closeAppModal();
+            startQrisTimer();
             document.getElementById('qrisModal').classList.remove('hidden');
         }
 
         function closeQrisModal() {
+            if (countdownInterval) clearInterval(countdownInterval);
             document.getElementById('qrisModal').classList.add('hidden');
             document.body.style.overflow = 'auto';
         }
 
+        // 15-Minute Countdown Timer for QRIS Payment
+        function startQrisTimer() {
+            if (countdownInterval) clearInterval(countdownInterval);
+            let time = 15 * 60; // 15 minutes
+            const timerEl = document.getElementById('qrisTimer');
+
+            countdownInterval = setInterval(() => {
+                const mins = Math.floor(time / 60);
+                const secs = time % 60;
+                timerEl.textContent = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+
+                if (time <= 0) {
+                    clearInterval(countdownInterval);
+                    timerEl.textContent = "00:00 - Kadaluarsa";
+                }
+                time--;
+            }, 1000);
+        }
+
+        // Toast Notification System
         function showToast(msg, type = "info") {
             const toast = document.getElementById('toast');
             const toastMsg = document.getElementById('toastMessage');
